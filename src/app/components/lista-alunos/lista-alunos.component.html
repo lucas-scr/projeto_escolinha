@@ -1,0 +1,12 @@
+<div class="lista_alunos">
+    <ol>
+        <li *ngFor="let aluno of listaAlunos">
+            <label class="input_value_name">Aluno: {{aluno.getNome}} </label>
+            <label class="input_value_old">Idade: {{aluno.idade}} </label>
+            <label class="input_value_dataNascimento">Data de nascimento: {{aluno.dataNascimento | date:'dd/MM/yyyy'}} </label>
+            <label class="input_value_diasSemana"> Dias da semana: 
+                <div class="chip_value_dia"  *ngFor="let dia of aluno.dias ?? []">{{dia}}</div>
+            </label>
+        </li>
+    </ol>
+</div>
