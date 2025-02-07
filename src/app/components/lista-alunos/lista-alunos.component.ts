@@ -3,13 +3,18 @@ import { ServiceAlunos } from '../../services/service_alunos';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Aluno } from '../../model/Alunos';
+import { ButtonModule } from 'primeng/button';
+import { DataViewModule } from 'primeng/dataview';
 
 
 @Component({
   selector: 'app-lista-alunos',
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ButtonModule,
+    DataViewModule
+  
 
   ],
   templateUrl: './lista-alunos.component.html',
