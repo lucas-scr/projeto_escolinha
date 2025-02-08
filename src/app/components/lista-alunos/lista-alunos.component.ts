@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { ServiceAlunos } from '../../services/service_alunos';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -11,6 +11,8 @@ import { ChipModule } from 'primeng/chip';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
+import { InputTextModule } from 'primeng/inputtext';
+
 
 
 
@@ -28,7 +30,8 @@ import { InputIconModule } from 'primeng/inputicon';
     ChipModule,
     FloatLabelModule,
     IconFieldModule,
-    InputIconModule
+    InputIconModule,
+    InputTextModule
 
 
   ],
@@ -44,4 +47,14 @@ export class ListaAlunosComponent {
     this.listaAlunos = serviceAluno.listarAlunos();
   }
 
+  filtrarLista(event: any){
+    if(this.filtroNome.length > 0){
+      this.listaAlunos = this.serviceAluno.listarAlunos().filter(aluno => 
+        aluno.nome
+        .toLowerCase()
+        .startsWith(this.filtroNome.toLowerCase()))
+    }else{
+      this.listaAlunos = this.serviceAluno.listarAlunos();
+    }
+  }
 }

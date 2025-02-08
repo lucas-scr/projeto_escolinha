@@ -1,16 +1,20 @@
 
 
+<h2>Alunos</h2>
 <p-dataview [value]="listaAlunos" [rows]="5" [paginator]="true">
     <ng-template #header>
-        <div>
-            <h3>Lista de alunos</h3>
-            <p-floatlabel>
-                <input id="username" pInputText [(ngModel)]="filtroNome" />
-                <label for="username">Username</label>
-            </p-floatlabel>
-    
-
+        <div class="list_header">
+            <div class="list_filtros">
+                <p-floatlabel variant="on">
+                    <input pInputText id="on_label" [(ngModel)]="filtroNome" (input)="filtrarLista($event)" autocomplete="off" />
+                    <label for="on_label">Pesquisar por nome</label>
+                </p-floatlabel>
+            </div>
+            <div class="list_botoes">
+                <p-button label="Novo Aluno" icon="pi pi-plus" iconPos="left" />
+            </div>
         </div>
+
     </ng-template>
     <ng-template #list let-items>
         <div>

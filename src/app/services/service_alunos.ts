@@ -21,7 +21,8 @@ export class ServiceAlunos {
             new Aluno("Mariana Souza", 8, new Date("2016-09-23"), false, "F"),
             new Aluno("Rafael Oliveira", 7, new Date("2017-11-05"), true, "M"),
             new Aluno("Isabela Mendes", 9, new Date("2015-07-19"), false, "F"),
-            new Aluno("Pedro Ferreira", 6, new Date("2018-02-28"), true, "M")
+            new Aluno("Pedro Ferreira", 6, new Date("2018-02-28"), true, "M"),
+            new Aluno("Pedro Teixeira", 6, new Date("2018-02-28"), true, "M")
         ]
 
         this.listaAlunos[0].dias = ["Segunda", "Terça"];
@@ -33,6 +34,7 @@ export class ServiceAlunos {
         this.listaAlunos[6].dias = ["Segunda", "Sexta"];
         this.listaAlunos[7].dias = ["Segunda", "Sexta"];
         this.listaAlunos[8].dias = ["Segunda", "Sexta"];
+        this.listaAlunos[9].dias = ["Segunda", "quarta"];
 
     
         console.log(this.listaAlunos)

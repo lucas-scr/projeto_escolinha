@@ -44,8 +44,20 @@
 
 .list_sexo_m{
     background-color: #A2D9F0;
+    font-size: 1.5rem;
 }
 
 .list_sexo_f{
     background-color: #f0a2ec;
+    font-size: 1.5rem;
+}
+
+.list_header{
+    display: flex;
+    align-items: center;
+
+}
+.list_filtros{
+    flex-grow:1;
+    align-self:auto;
 }
