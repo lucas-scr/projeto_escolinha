@@ -1,12 +1,23 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ListaAlunosComponent } from './components/lista-alunos/lista-alunos.component';
+import { MenuLateralComponent } from './components/menu-lateral/menu-lateral.component';
+import { AvatarModule } from 'primeng/avatar';
+import { OverlayBadgeModule } from 'primeng/overlaybadge';
+import { PrimeIcons, MenuItem } from 'primeng/api';
+import { CardModule } from 'primeng/card';
+
+
 
 @Component({
   selector: 'app-root',
   imports: [
     RouterOutlet,
-    ListaAlunosComponent
+    ListaAlunosComponent,
+    MenuLateralComponent,
+    AvatarModule,
+    OverlayBadgeModule,
+    CardModule
 
   ],
   templateUrl: './app.component.html',
