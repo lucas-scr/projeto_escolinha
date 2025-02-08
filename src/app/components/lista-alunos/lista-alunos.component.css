@@ -1,0 +1,51 @@
+.list_item_row{
+    display: flex;
+    align-items: center;
+}
+.list_dias{
+    display: flex;
+}
+
+.list_dias_semana{
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center;
+    height: 30px;
+}
+
+.item_nascimento{
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center;    
+    height: 30px;
+}
+
+.list_principal_nome{
+    font-size: 1.2rem;
+    font-weight: bold;
+    height: 30px;
+}
+
+.item_labels{
+    padding: 7px;
+    margin-left: 10px;
+}
+
+
+.item_list_chip{
+    height: 25px;
+    margin: 3px;
+    font-size: 14px;
+}
+
+.label_item_list{
+    font-size: 14px;
+}
+
+.list_sexo_m{
+    background-color: #A2D9F0;
+}
+
+.list_sexo_f{
+    background-color: #f0a2ec;
+}

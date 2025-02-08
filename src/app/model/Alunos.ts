@@ -7,12 +7,16 @@ import { Pessoa } from "../interfaces/pessoa";
     private _dataNascimento: Date;
     private _dias: String[];
     private _autorizacaoDeImagem: Boolean;
+    private _iniciaisNome: String;
+    private _sexo: String;
 
-    constructor(nome: String, idade: Number, dataNascimento: Date, autorizacaoDeImagem: Boolean, diasDaSemana?: String[]){
+    constructor(nome: String, idade: Number, dataNascimento: Date, autorizacaoDeImagem: Boolean, sexo: String ,diasDaSemana?: String[]){
         this.nome = nome;
         this._idade = idade;
         this._dataNascimento = dataNascimento;
         this._autorizacaoDeImagem = autorizacaoDeImagem;
+        this._iniciaisNome = this.gerarIniciais(nome);
+        this._sexo = sexo;
     }
 
     get getNome(): String{
@@ -56,5 +60,40 @@ import { Pessoa } from "../interfaces/pessoa";
 
     set autorizacaoDeImagem(autorizao: boolean){
         this._autorizacaoDeImagem  = autorizao;
+    }
+
+    
+    get iniciaisNome():String{
+        return this._iniciaisNome
+    }
+
+    set iniciaisNome(iniciais: String){
+        if (iniciais.length > 2) {
+            throw new Error("Inicial maior que dois caracteres");
+        }
+          this._iniciaisNome = iniciais;
+    }
+
+    get sexo():String{
+        return this._sexo;
+    }
+
+    set sexo(sexo: String){
+        if (sexo.length > 1 || sexo !== "M" || sexo !== "F") {
+            throw new Error("Informe M ou F");
+        }
+          this._sexo = sexo.toUpperCase();
+    }
+
+
+    gerarIniciais(nome: String):String{
+        let partes = nome.trim().split(/\s+/);
+        if (partes.length < 2) {
+            let inicialApenasUmNome = partes[0][0].toUpperCase();
+            return inicialApenasUmNome;
+        }
+        let inicialPrimeiroNome = partes[0][0].toUpperCase();
+        let inicialUltimoNome = partes [partes.length -1][0].toUpperCase();
+        return  inicialPrimeiroNome + inicialUltimoNome;
     }
 }

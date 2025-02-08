@@ -31,8 +31,16 @@ export class MenuLateralComponent implements OnInit  {
         label: "Aula",
         items: [
           {
+            label: 'Início',
+            icon: 'pi pi-home',
+          },
+          {
           label: 'Alunos',
           icon: 'pi pi-user',
+        },
+        {
+          label: 'Contratos',
+          icon: 'pi pi-file-check',
         },
         {
           label: 'Responsáveis',

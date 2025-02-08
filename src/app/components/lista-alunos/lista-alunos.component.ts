@@ -5,6 +5,15 @@ import { FormsModule } from '@angular/forms';
 import { Aluno } from '../../model/Alunos';
 import { ButtonModule } from 'primeng/button';
 import { DataViewModule } from 'primeng/dataview';
+import { AvatarModule } from 'primeng/avatar';
+import { DividerModule } from 'primeng/divider';
+import { ChipModule } from 'primeng/chip';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+
+
+
 
 
 @Component({
@@ -13,8 +22,14 @@ import { DataViewModule } from 'primeng/dataview';
     CommonModule,
     FormsModule,
     ButtonModule,
-    DataViewModule
-  
+    DataViewModule,
+    AvatarModule,
+    DividerModule,
+    ChipModule,
+    FloatLabelModule,
+    IconFieldModule,
+    InputIconModule
+
 
   ],
   templateUrl: './lista-alunos.component.html',
@@ -23,6 +38,7 @@ import { DataViewModule } from 'primeng/dataview';
 export class ListaAlunosComponent {
 
   listaAlunos: Aluno[] = [];
+  filtroNome: String;
 
   constructor(private serviceAluno: ServiceAlunos){
     this.listaAlunos = serviceAluno.listarAlunos();

@@ -4,7 +4,6 @@ import { ListaAlunosComponent } from './components/lista-alunos/lista-alunos.com
 import { MenuLateralComponent } from './components/menu-lateral/menu-lateral.component';
 import { AvatarModule } from 'primeng/avatar';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
-import { PrimeIcons, MenuItem } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 
 
@@ -12,7 +11,6 @@ import { CardModule } from 'primeng/card';
 @Component({
   selector: 'app-root',
   imports: [
-    RouterOutlet,
     ListaAlunosComponent,
     MenuLateralComponent,
     AvatarModule,
