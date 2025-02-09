@@ -60,4 +60,9 @@
 .list_filtros{
     flex-grow:1;
     align-self:auto;
+    padding-left: 0px;
+}
+
+.section_filtros{
+    padding: 0px;
 }
