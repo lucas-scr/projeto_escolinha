@@ -57,12 +57,11 @@
     align-items: center;
 
 }
-.list_filtros{
-    flex-grow:1;
-    align-self:auto;
-    padding-left: 0px;
+.list_principle_header{
+    display: flex;
+    margin-bottom: 15px;
 }
 
-.section_filtros{
-    padding: 0px;
+.list_header_title{
+    flex-grow: 1;
 }

@@ -1,20 +1,25 @@
 
 
-<h2>Alunos</h2>
-<div class="list_filtros">
 
+<div class="list_principle_header">
+    <diV  class="list_header_title">
+        <h2>Alunos</h2>
+        <span style="font-size: 14px">Lista de alunos cadastrados</span>
+    </diV>
     <div class="list_botoes">
         <p-button label="Novo Aluno" icon="pi pi-plus" iconPos="left" />
     </div>
 </div>
+<p-floatlabel variant="on">
+    <p-iconfield>
+        <p-inputicon class="pi pi-search" />
+        <input pInputText id="filtro" [(ngModel)]="filtroNome" (input)="filtrarLista($event)" autocomplete="off" />
+    </p-iconfield>
+    <label for="filtro">Pesquisar</label>
+</p-floatlabel>
+<p-divider />
 
 <p-dataview [value]="listaAlunos" [rows]="5" [paginator]="true">
-    <ng-template #header>
-        <p-floatlabel variant="on">
-            <input pInputText id="filtro" [(ngModel)]="filtroNome" (input)="filtrarLista($event)" autocomplete="off" class="input_filtro" />
-            <label for="filtro">Pesquisar por nome</label>
-        </p-floatlabel>
-    </ng-template>
     <ng-template #list let-items>
         <div>
             <div class="col-span-12" *ngFor="let item of items; let first = first" class="col-span-12" >
