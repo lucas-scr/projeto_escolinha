@@ -35,10 +35,6 @@ export class ServiceAlunos {
         this.listaAlunos[7].dias = ["Segunda", "Sexta"];
         this.listaAlunos[8].dias = ["Segunda", "Sexta"];
         this.listaAlunos[9].dias = ["Segunda", "quarta"];
-
-    
-        console.log(this.listaAlunos)
-
     }
 
     adicionarAlunosNalista(aluno: Aluno){

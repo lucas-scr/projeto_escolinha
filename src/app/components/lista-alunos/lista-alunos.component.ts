@@ -13,6 +13,7 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
+import { Router, RouterLink } from '@angular/router';
 
 
 
@@ -31,7 +32,8 @@ import { CardModule } from 'primeng/card';
     IconFieldModule,
     InputIconModule,
     InputTextModule,
-    CardModule
+    CardModule,
+    RouterLink
 
 
   ],
