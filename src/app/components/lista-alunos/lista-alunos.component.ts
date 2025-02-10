@@ -12,8 +12,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
-
-
+import { CardModule } from 'primeng/card';
 
 
 
@@ -31,7 +30,8 @@ import { InputTextModule } from 'primeng/inputtext';
     FloatLabelModule,
     IconFieldModule,
     InputIconModule,
-    InputTextModule
+    InputTextModule,
+    CardModule
 
 
   ],
