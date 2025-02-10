@@ -34,8 +34,11 @@
 
 .item_list_chip{
     height: 25px;
+    color:rgb(51, 51, 51);
     margin: 3px;
     font-size: 14px;
+    font-weight: bold;
+    border: 1px solid rgba(87, 85, 85, 0.8); 
 }
 
 .label_item_list{
@@ -43,13 +46,18 @@
 }
 
 .list_sexo_m{
-    background-color: #A2D9F0;
+    background-color: #a2d9f059;
     font-size: 1.5rem;
+    border: 1px solid #64afec; 
+    color: #4ba2e9;
 }
 
 .list_sexo_f{
-    background-color: #f0a2ec;
+    background-color: #f0a2ec4d;
+    color: #eb7fe5;
     font-size: 1.5rem;
+    border-color: #eb7fe5;
+    border: 1px solid
 }
 
 .list_header{
