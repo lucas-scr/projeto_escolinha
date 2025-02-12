@@ -13,12 +13,17 @@
             </div>
         </div>
 
-        <div class="cadastro_input_calendar">
-            <label class="calendar_label" for="dataNascimento">Data de nascimento</label>
+        <div class="cadastro_input">
+            <p-floatlabel variant="on">
             <p-datepicker  id="dataNascimento" [(ngModel)]="dataNascimento"  required name="dataNascimento" dateFormat="dd/mm/yy"   [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" />
+            <label class="calendar_label" for="dataNascimento">Data de nascimento</label>
+        </p-floatlabel>
+        <div *ngIf="formAluno.controls['dataNascimento']?.invalid && formAluno.controls['dataNascimento']?.touched">
+            <small>Este campo é obrigatório</small>
+        </div>
         </div>
 
-        <div class="cadastro_input_radiogroup">
+        <div class="cadastro_input">
            <label class="label_radiogroup" for="sexoAluno">Sexo</label>
         <div id="sexoAluno" class="radio_button">
             <div class="flex items-center">

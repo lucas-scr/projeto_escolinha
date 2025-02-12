@@ -55,7 +55,9 @@ export class CadastroAlunosComponent {
   }
 
   onSubmit(){
-
+    this.aluno = new Aluno(this.nome,this.dataNascimento, this.autorizacaoDeImagem, this.sexo);
+    this.serviceAlunos.adicionarAlunosNalista(this.aluno);
+    console.log(Aluno)
   }
 
 }

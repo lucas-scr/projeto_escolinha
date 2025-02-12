@@ -4,6 +4,7 @@ import { MenuModule } from 'primeng/menu';
 import { BadgeModule } from 'primeng/badge';
 import { RippleModule } from 'primeng/ripple';
 import { AvatarModule } from 'primeng/avatar';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-menu-lateral',
@@ -11,7 +12,8 @@ import { AvatarModule } from 'primeng/avatar';
     MenuModule,
     BadgeModule,
     RippleModule,
-    AvatarModule
+    AvatarModule,
+    RouterLink
 
   ],
   templateUrl: './menu-lateral.component.html',
@@ -33,10 +35,12 @@ export class MenuLateralComponent implements OnInit  {
           {
             label: 'Início',
             icon: 'pi pi-home',
+            route: ''
           },
           {
           label: 'Alunos',
           icon: 'pi pi-user',
+          route: '/alunos'
         },
         {
           label: 'Contratos',

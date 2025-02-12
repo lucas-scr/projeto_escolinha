@@ -3,16 +3,15 @@ import { Pessoa } from "../interfaces/pessoa";
  export class Aluno implements Pessoa {
 
     nome: String;
-    private _idade: Number;
+    private _idade?: Number;
     private _dataNascimento: Date;
     private _dias: String[];
     private _autorizacaoDeImagem: Boolean;
     private _iniciaisNome: String;
     private _sexo: String;
 
-    constructor(nome: String, idade: Number, dataNascimento: Date, autorizacaoDeImagem: Boolean, sexo: String ,diasDaSemana?: String[]){
+    constructor(nome: String, dataNascimento: Date, autorizacaoDeImagem: Boolean, sexo: String ,diasDaSemana?: String[]){
         this.nome = nome;
-        this._idade = idade;
         this._dataNascimento = dataNascimento;
         this._autorizacaoDeImagem = autorizacaoDeImagem;
         this._iniciaisNome = this.gerarIniciais(nome);
@@ -40,6 +39,7 @@ import { Pessoa } from "../interfaces/pessoa";
     }
 
     set setNome(nome: String){
+        if (!nome.trim()) throw new Error("Nome não pode ser vazio!");
         this.nome = nome;
     }
 
@@ -96,4 +96,6 @@ import { Pessoa } from "../interfaces/pessoa";
         let inicialUltimoNome = partes [partes.length -1][0].toUpperCase();
         return  inicialPrimeiroNome + inicialUltimoNome;
     }
+
+
 }

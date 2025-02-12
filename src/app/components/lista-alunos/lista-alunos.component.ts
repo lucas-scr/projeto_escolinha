@@ -34,8 +34,6 @@ import { Router, RouterLink } from '@angular/router';
     InputTextModule,
     CardModule,
     RouterLink
-
-
   ],
   templateUrl: './lista-alunos.component.html',
   styleUrl: './lista-alunos.component.css'

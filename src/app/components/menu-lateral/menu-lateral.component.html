@@ -3,7 +3,7 @@
         <span class="text-primary font-bold">{{ item.label }}</span>
     </ng-template>
     <ng-template #item let-item>
-        <a pRipple class="flex items-center p-menu-item-link">
+        <a [routerLink]="item.route" pRipple class="flex items-center p-menu-item-link">
             <span [class]="item.icon"></span>
             <span class="ml-2">{{ item.label }}</span>        </a>
     </ng-template>
