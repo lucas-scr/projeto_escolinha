@@ -1,4 +1,4 @@
-import { Component, OnInit ,OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit ,OnChanges, SimpleChanges, Input, OnDestroy } from '@angular/core';
 import { ServiceAlunos } from '../../services/service_alunos';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -39,7 +39,8 @@ import { Menu } from 'primeng/menu';
     CardModule,
     RouterLink,
     MenuModule,
-    Menu
+    Menu,
+
   ],
   templateUrl: './lista-alunos.component.html',
   styleUrl: './lista-alunos.component.css'
@@ -49,11 +50,11 @@ export class ListaAlunosComponent implements OnInit {
   listaAlunos: Aluno[] = [];
   filtroNome: String;
 
-  alunoId: Number
+  alunoId: Number;
 
   opcoesDeAcoes: MenuItem[] | undefined;
 
-  constructor(private serviceAluno: ServiceAlunos){
+  constructor(private serviceAluno: ServiceAlunos, private router: Router){
     this.listaAlunos = serviceAluno.listarAlunos();
   }
 
@@ -69,29 +70,31 @@ export class ListaAlunosComponent implements OnInit {
   }
 
   ngOnInit(){
+    this.opcoesDeAcoes = [
+      { 
+          label: 'Opções',
+          items: [
+            {
+              label: 'Detalhar',
+              icon: 'pi pi-eye',
+              route: ''
 
-  }
-
-  getOpcoesDeAcoes(aluno: Aluno): MenuItem[] {
-    return [
-      {
-        label: 'Detalhar',
-        icon: 'pi pi-eye',
-      },
-      {
-        label: 'Editar',
-        icon: 'pi pi-pencil',
-        routerLink: ['/editar-aluno/', aluno.id]
-      },
-      {
-        label: 'Remover',
-        icon: 'pi pi-trash',
+          },
+              {
+                  label: 'Editar',
+                  icon: 'pi pi-pencil',
+                    route: '/editar-aluno/'
+                },
+              {
+                  label: 'Remover',
+                  icon: 'pi pi-trash',
+                  route: ''
+              }
+          ]
       }
-    ];
+    ]
   }
 
-  capturarId(alunoId: Number){
-    console.log(alunoId)
-    this.alunoId = alunoId
-  }
+
+
 }

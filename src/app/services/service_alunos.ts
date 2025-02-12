@@ -107,8 +107,8 @@ export class ServiceAlunos {
         console.log(this.listaAlunos);
     }
 
-    findBydId(id:Number): Aluno{
-        const alunoEncontrado = this.listaAlunos.find(item => item.id === id)
-        return alunoEncontrado
+    findBydId(id: Number): Aluno{
+        const alunoEncontrado = this.listaAlunos.find(item => item.id == id);
+        return alunoEncontrado;
     }
 }

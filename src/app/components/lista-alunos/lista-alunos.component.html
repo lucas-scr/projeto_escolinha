@@ -38,7 +38,6 @@
                             
                             <div class="item_nascimento">
                                 <i class="pi pi-gift" style="font-size: 1rem"> </i>
-
                                 <span class="label_item_list" style="margin-left: 5px">  {{item.dataNascimento | date:'dd/MM/yyyy' }}</span>
                                 <span class="label_item_list" style="margin-left: 5px">  ( {{ item.idade }} anos) </span>
                             </div>
@@ -55,15 +54,28 @@
                             </div>
                         </div>   
                         <div class="list_acoes">
-                            <div class="menu_acoes">
-                                <p-menu  #menu [model]="getOpcoesDeAcoes(item)"  [popup]="true" />
-                                <p-button (click)="menu.toggle($event)"  icon="pi pi-ellipsis-v"></p-button>
+                            <div class="menu_acoes"  > 
+                                <p-menu  #menu [model]="opcoesDeAcoes"  [popup]="true" >
+                                    <ng-template #item let-opcao>
+                                        <ng-container *ngIf="opcao.route; else elseBlock">
+                                            <a [routerLink]="[opcao.route, item.id]" class="p-menu-item-link">
+                                                <span [class]="opcao.icon"></span>
+                                                <span class="ml-2">{{ opcao.label }}</span>
+                                            </a>
+                                        </ng-container>
+                                        <ng-template #elseBlock>
+                                            <a [href]="opcao.url" [routerLink]="[opcao.route, item.id]" class="p-menu-item-link">
+                                                <span [class]="opcao.icon"></span>
+                                                <span class="ml-2">{{ opcao.label }}</span>
+                                            </a>
+                                        </ng-template>
+                                    </ng-template>
+                                </p-menu>
+                                <p-button (click)="menu.toggle($event)" icon="pi pi-ellipsis-v"></p-button>
                             </div>
                         </div>  
                     </div>
-
                 </div>
-
                 <p-divider />
             </div>
         </div>
