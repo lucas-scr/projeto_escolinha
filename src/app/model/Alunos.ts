@@ -1,7 +1,7 @@
 import { Pessoa } from "../interfaces/pessoa";
 
  export class Aluno implements Pessoa {
-
+    private _id: Number;
     nome: String;
     private _idade?: Number;
     private _dataNascimento: Date;
@@ -96,6 +96,15 @@ import { Pessoa } from "../interfaces/pessoa";
         let inicialUltimoNome = partes [partes.length -1][0].toUpperCase();
         return  inicialPrimeiroNome + inicialUltimoNome;
     }
+
+    get id():Number{
+        return this._id;
+    }
+
+    set id(id: Number){
+       this._id = id;
+    }
+
 
 
 }

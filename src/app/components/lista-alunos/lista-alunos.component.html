@@ -38,6 +38,7 @@
                             
                             <div class="item_nascimento">
                                 <i class="pi pi-gift" style="font-size: 1rem"> </i>
+
                                 <span class="label_item_list" style="margin-left: 5px">  {{item.dataNascimento | date:'dd/MM/yyyy' }}</span>
                                 <span class="label_item_list" style="margin-left: 5px">  ( {{ item.idade }} anos) </span>
                             </div>
@@ -52,12 +53,17 @@
                                     *ngFor="let dia of item.dias" [label]="dia" />
                                 </div>
                             </div>
-                        </div>                       
+                        </div>   
+                        <div class="list_acoes">
+                            <div class="menu_acoes">
+                                <p-menu  #menu [model]="getOpcoesDeAcoes(item)"  [popup]="true" />
+                                <p-button (click)="menu.toggle($event)"  icon="pi pi-ellipsis-v"></p-button>
+                            </div>
+                        </div>  
                     </div>
-                </div>
-                <div class="list_acoes">
 
                 </div>
+
                 <p-divider />
             </div>
         </div>

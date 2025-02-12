@@ -45,11 +45,22 @@ export class ServiceAlunos {
         this.listaAlunos[7].idade = 8;
         this.listaAlunos[8].idade = 8;
         this.listaAlunos[9].idade = 8;
+
+        this.listaAlunos[0].id = 1;
+        this.listaAlunos[1].id = 2;
+        this.listaAlunos[2].id = 3;
+        this.listaAlunos[3].id = 4;
+        this.listaAlunos[4].id = 5;
+        this.listaAlunos[5].id = 6;
+        this.listaAlunos[6].id = 7;
+        this.listaAlunos[7].id = 8;
+        this.listaAlunos[8].id = 9;
+        this.listaAlunos[9].id = 10;
     }
 
     adicionarAlunosNalista(aluno: Aluno){
-    
-        aluno.idade = this.calcularIdade(aluno.dataNascimento)
+        aluno.idade = this.calcularIdade(aluno.dataNascimento);
+        aluno.id = this.capturarUltimoId(this.listaAlunos);
         this.listaAlunos.push(aluno);
     }
 
@@ -75,5 +86,29 @@ export class ServiceAlunos {
             idade--;
         }
         return idade;
+    }
+
+    capturarUltimoId(lista: Aluno[]): Number{
+        const ultimoId = lista.length + 1;
+        console.log("id gerado", ultimoId)
+        return ultimoId;
+    }
+
+    AtualizarAlunoNalista(aluno: Aluno){
+        this.listaAlunos = this.listaAlunos.map(item => {
+            if(item.id = aluno.id){
+              return  item = aluno;
+            } else{
+                return item;
+            }
+
+         } );
+
+        console.log(this.listaAlunos);
+    }
+
+    findBydId(id:Number): Aluno{
+        const alunoEncontrado = this.listaAlunos.find(item => item.id === id)
+        return alunoEncontrado
     }
 }

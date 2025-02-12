@@ -1,4 +1,4 @@
-import { Component, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit ,OnChanges, SimpleChanges } from '@angular/core';
 import { ServiceAlunos } from '../../services/service_alunos';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -14,6 +14,10 @@ import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import { Router, RouterLink } from '@angular/router';
+import { MenuModule } from 'primeng/menu';
+import { MenuItem } from 'primeng/api';
+import { Menu } from 'primeng/menu';
+
 
 
 
@@ -33,15 +37,21 @@ import { Router, RouterLink } from '@angular/router';
     InputIconModule,
     InputTextModule,
     CardModule,
-    RouterLink
+    RouterLink,
+    MenuModule,
+    Menu
   ],
   templateUrl: './lista-alunos.component.html',
   styleUrl: './lista-alunos.component.css'
 })
-export class ListaAlunosComponent {
+export class ListaAlunosComponent implements OnInit {
 
   listaAlunos: Aluno[] = [];
   filtroNome: String;
+
+  alunoId: Number
+
+  opcoesDeAcoes: MenuItem[] | undefined;
 
   constructor(private serviceAluno: ServiceAlunos){
     this.listaAlunos = serviceAluno.listarAlunos();
@@ -56,5 +66,32 @@ export class ListaAlunosComponent {
     }else{
       this.listaAlunos = this.serviceAluno.listarAlunos();
     }
+  }
+
+  ngOnInit(){
+
+  }
+
+  getOpcoesDeAcoes(aluno: Aluno): MenuItem[] {
+    return [
+      {
+        label: 'Detalhar',
+        icon: 'pi pi-eye',
+      },
+      {
+        label: 'Editar',
+        icon: 'pi pi-pencil',
+        routerLink: ['/editar-aluno/', aluno.id]
+      },
+      {
+        label: 'Remover',
+        icon: 'pi pi-trash',
+      }
+    ];
+  }
+
+  capturarId(alunoId: Number){
+    console.log(alunoId)
+    this.alunoId = alunoId
   }
 }

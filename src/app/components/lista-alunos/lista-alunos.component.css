@@ -1,6 +1,7 @@
 .list_item_row{
     display: flex;
     align-items: center;
+    
 }
 .list_dias{
     display: flex;
@@ -29,6 +30,8 @@
 .item_labels{
     padding: 7px;
     margin-left: 10px;
+    flex-grow: 1;
+
 }
 
 
@@ -73,3 +76,8 @@
 .list_header_title{
     flex-grow: 1;
 }
+
+.list_acoes{
+    align-self:flex-start;
+}
+
