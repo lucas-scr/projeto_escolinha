@@ -1,11 +1,11 @@
 <p-card header="Alterar dado do aluno">
     <ng-template #title>
-        Alterar dado do aluno
+        Detalhes do aluno
     </ng-template>
     <form #formAluno="ngForm">
         <div class="cadastro_input">
             <p-floatlabel variant="on">
-                <input id="username" pInputText [(ngModel)]="aluno.nome"  required name="nome"  >
+                <input id="username" pInputText [(ngModel)]="aluno.nome" disabled required name="nome"  >
                 <label for="username">Nome do aluno</label>
             </p-floatlabel>
             <div *ngIf="formAluno.controls['nome']?.invalid && formAluno.controls['nome']?.touched">

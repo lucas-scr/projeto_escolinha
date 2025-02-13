@@ -77,22 +77,25 @@ export class ListaAlunosComponent implements OnInit {
             {
               label: 'Detalhar',
               icon: 'pi pi-eye',
-              route: ''
+              route: '/detalhar-aluno/'
 
           },
               {
                   label: 'Editar',
                   icon: 'pi pi-pencil',
-                    route: '/editar-aluno/'
+                  route: '/editar-aluno/'
                 },
               {
                   label: 'Remover',
                   icon: 'pi pi-trash',
-                  route: ''
               }
           ]
       }
     ]
+  }
+
+  removerAlunoDaLista(id: Number){
+    this.serviceAluno.removerAlunoDaLista(id);
   }
 
 

@@ -64,8 +64,8 @@ export class ServiceAlunos {
         this.listaAlunos.push(aluno);
     }
 
-    removerAlunoDaLista(aluno: Aluno){
-     const index = this.listaAlunos.findIndex(alunoLista => alunoLista === aluno)
+    removerAlunoDaLista(id: Number){
+     const index = this.listaAlunos.findIndex(alunoLista => alunoLista.id === id)
 
      if(index !== -1) {
         this.listaAlunos.splice(index, 1);
