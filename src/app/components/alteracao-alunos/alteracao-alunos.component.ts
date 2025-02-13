@@ -7,7 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
-import { ActivatedRoute, Route, RouterLink } from '@angular/router';
+import { ActivatedRoute, Route, Router, RouterLink } from '@angular/router';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { IftaLabelModule } from 'primeng/iftalabel';
 import { Aluno } from '../../model/Alunos';
@@ -41,28 +41,50 @@ export class AlteracaoAlunosComponent implements OnInit {
 
   alunoId: Number | undefined;
 
+  nome: String;
+  dataNascimento: Date;
   sexo: String;
   autorizacaoDeImagem: Boolean = false;
-  aluno: Aluno;
-
+  alunoAtualizado: Aluno;
+  
   constructor(private serviceAlunos: ServiceAlunos, private route: ActivatedRoute){
-    
+    this.capturarId();
+    this.carregarDados (this.serviceAlunos.findBydId(this.alunoId))
+    console.log(this.serviceAlunos.findBydId(this.alunoId))
+
   }
 
   onSubmit(){
-    // this.aluno = new Aluno(this.aluno.nome,this.aluno.dataNascimento, this.autorizacaoDeImagem, this.sexo);
-   // this.serviceAlunos.atualizarDadosAluno(this.aluno);
-    console.log(Aluno)
+    this.serviceAlunos.AtualizarAlunoNalista(this.salvarDadosAlterado())
+    history.back();
   }
 
   ngOnInit() {
-    this.capturarId();
-    this.aluno = this.serviceAlunos.findBydId(this.alunoId)
-  }
 
+  }
   capturarId(){
     this.route.params.subscribe(params => {
-      this.alunoId = params['id'];
+      if(params != undefined){
+        this.alunoId = params['id'];
+      }else{
+        throw console.error("Aluno não identificado");
+      }
       })
+  }
+
+  carregarDados(alunoCarregado:Aluno){
+    this.nome = alunoCarregado.nome;
+    this.dataNascimento = alunoCarregado.dataNascimento; 
+    this.sexo = alunoCarregado.sexo;
+    this.autorizacaoDeImagem = alunoCarregado.autorizacaoDeImagem;
+  }
+
+  salvarDadosAlterado(): Aluno{
+    this.alunoAtualizado = this.serviceAlunos.findBydId(this.alunoId)
+    this.alunoAtualizado.nome = this.nome;
+    this.alunoAtualizado.dataNascimento = this.dataNascimento;
+    this.alunoAtualizado.sexo = this.sexo;
+    this.alunoAtualizado.autorizacaoDeImagem = this.autorizacaoDeImagem;
+    return this.alunoAtualizado;
   }
 }

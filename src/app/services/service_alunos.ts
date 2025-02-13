@@ -90,7 +90,6 @@ export class ServiceAlunos {
 
     capturarUltimoId(lista: Aluno[]): Number{
         const ultimoId = lista.length + 1;
-        console.log("id gerado", ultimoId)
         return ultimoId;
     }
 
@@ -103,8 +102,6 @@ export class ServiceAlunos {
             }
 
          } );
-
-        console.log(this.listaAlunos);
     }
 
     findBydId(id: Number): Aluno{

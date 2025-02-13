@@ -58,7 +58,7 @@ import { Pessoa } from "../interfaces/pessoa";
         this._dias = diasAdicionados;
     }
 
-    set autorizacaoDeImagem(autorizao: boolean){
+    set autorizacaoDeImagem(autorizao: Boolean){
         this._autorizacaoDeImagem  = autorizao;
     }
 
@@ -79,7 +79,7 @@ import { Pessoa } from "../interfaces/pessoa";
     }
 
     set sexo(sexo: String){
-        if (sexo.length > 1 || sexo !== "M" || sexo !== "F") {
+        if (sexo.length < 1 || (sexo !== "M" && sexo !== "F")) {
             throw new Error("Informe M ou F");
         }
           this._sexo = sexo.toUpperCase();
