@@ -1,22 +1,11 @@
 import { Component, OnInit ,OnChanges, SimpleChanges, Input, OnDestroy, ViewChild } from '@angular/core';
-import { ServiceAlunos } from '../../services/service_alunos';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { PrimengImports } from '../../shared/primengImports.module';
 import { Aluno } from '../../model/Alunos';
-import { ButtonModule } from 'primeng/button';
-import { DataViewModule } from 'primeng/dataview';
-import { AvatarModule } from 'primeng/avatar';
-import { DividerModule } from 'primeng/divider';
-import { ChipModule } from 'primeng/chip';
-import { FloatLabelModule } from 'primeng/floatlabel';
-import { IconFieldModule } from 'primeng/iconfield';
-import { InputIconModule } from 'primeng/inputicon';
-import { InputTextModule } from 'primeng/inputtext';
-import { CardModule } from 'primeng/card';
-import { Router, RouterLink } from '@angular/router';
-import { MenuModule } from 'primeng/menu';
-import { MenuItem } from 'primeng/api';
+import { ServiceAlunos } from '../../services/service_alunos';
+import { MenuItem, MessageService } from 'primeng/api';
 import { Menu } from 'primeng/menu';
+import { Router } from '@angular/router';
+
 
 
 
@@ -25,25 +14,14 @@ import { Menu } from 'primeng/menu';
 @Component({
   selector: 'app-lista-alunos',
   imports: [
-    CommonModule,
-    FormsModule,
-    ButtonModule,
-    DataViewModule,
-    AvatarModule,
-    DividerModule,
-    ChipModule,
-    FloatLabelModule,
-    IconFieldModule,
-    InputIconModule,
-    InputTextModule,
-    CardModule,
-    RouterLink,
-    MenuModule,
-    Menu,
+    PrimengImports,
 
   ],
   templateUrl: './lista-alunos.component.html',
-  styleUrl: './lista-alunos.component.css'
+  styleUrl: './lista-alunos.component.css',
+  providers: [
+    MessageService
+  ]
 })
 export class ListaAlunosComponent implements OnInit {
 
@@ -56,7 +34,7 @@ export class ListaAlunosComponent implements OnInit {
 
   opcoesDeAcoes: MenuItem[] | undefined;
 
-  constructor(private serviceAluno: ServiceAlunos, private router: Router){
+  constructor(private serviceAluno: ServiceAlunos, private router: Router, private messageService: MessageService){
     this.listaAlunos = serviceAluno.listarAlunos();
   }
 
@@ -79,18 +57,18 @@ export class ListaAlunosComponent implements OnInit {
             {
               label: 'Detalhar',
               icon: 'pi pi-eye',
-               route: '/detalhar-aluno/'
+              command: () => this.router.navigate(['/detalhar-aluno', this.alunoId])
           },
               {
                   label: 'Editar',
                   icon: 'pi pi-pencil',
-                  route: '/editar-aluno/'
+                  command: () => this.router.navigate(['/editar-aluno', this.alunoId])
+
                 },
               {
                   label: 'Remover',
                   icon: 'pi pi-trash',
-                  command:() => this.removerAlunoDaLista(this.alunoId),
-                  route: '/alunos'
+                  command:() => this.removerAlunoDaLista(this.alunoId)
               }
           ]
       }
@@ -99,14 +77,17 @@ export class ListaAlunosComponent implements OnInit {
 
   removerAlunoDaLista(id: Number){
     this.serviceAluno.removerAlunoDaLista(id);
-    
+    this.showMessage("success", "Título", "Item removido com sucesso");
+  
   }
 
   abrirMenu(event: Event, aluno: any) {
-    console.log(this.alunoId, aluno)
     this.alunoId = aluno
-    console.log("novo id", this.alunoId)
     this.menu.toggle(event); // Exibe o menu no local correto
+  }
+
+  showMessage(tipoMensagem: String, titulo: String,mensagem: String){
+    this.messageService.add({ severity: `${tipoMensagem}`, summary: `${titulo}`, detail: `${mensagem}`, life: 3000 });
   }
   
 }

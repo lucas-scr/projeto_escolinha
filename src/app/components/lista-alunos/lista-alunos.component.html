@@ -64,7 +64,7 @@
                                             </a>
                                         </ng-container>
                                         <ng-template #elseBlock>
-                                            <a [href]="opcao.url" [routerLink]="[opcao.route, item.id]" class="p-menu-item-link">
+                                            <a [href]="opcao.url" class="p-menu-item-link">
                                                 <span [class]="opcao.icon"></span>
                                                 <span class="ml-2">{{ opcao.label }}</span>
                                             </a>
@@ -83,3 +83,5 @@
 </p-dataview>
 
 </p-card>
+
+<p-toast />
