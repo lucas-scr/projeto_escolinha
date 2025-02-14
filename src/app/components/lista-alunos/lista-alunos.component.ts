@@ -1,4 +1,4 @@
-import { Component, OnInit ,OnChanges, SimpleChanges, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit ,OnChanges, SimpleChanges, Input, OnDestroy, ViewChild } from '@angular/core';
 import { ServiceAlunos } from '../../services/service_alunos';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -50,7 +50,9 @@ export class ListaAlunosComponent implements OnInit {
   listaAlunos: Aluno[] = [];
   filtroNome: String;
 
-  alunoId: Number;
+  @ViewChild('menu') menu!: Menu
+
+  alunoId: Number = 2;
 
   opcoesDeAcoes: MenuItem[] | undefined;
 
@@ -77,8 +79,7 @@ export class ListaAlunosComponent implements OnInit {
             {
               label: 'Detalhar',
               icon: 'pi pi-eye',
-              route: '/detalhar-aluno/'
-
+               route: '/detalhar-aluno/'
           },
               {
                   label: 'Editar',
@@ -88,6 +89,8 @@ export class ListaAlunosComponent implements OnInit {
               {
                   label: 'Remover',
                   icon: 'pi pi-trash',
+                  command:() => this.removerAlunoDaLista(this.alunoId),
+                  route: '/alunos'
               }
           ]
       }
@@ -96,8 +99,14 @@ export class ListaAlunosComponent implements OnInit {
 
   removerAlunoDaLista(id: Number){
     this.serviceAluno.removerAlunoDaLista(id);
+    
   }
 
-
-
+  abrirMenu(event: Event, aluno: any) {
+    console.log(this.alunoId, aluno)
+    this.alunoId = aluno
+    console.log("novo id", this.alunoId)
+    this.menu.toggle(event); // Exibe o menu no local correto
+  }
+  
 }

@@ -55,10 +55,10 @@
                         </div>   
                         <div class="list_acoes">
                             <div class="menu_acoes"  > 
-                                <p-menu  #menu [model]="opcoesDeAcoes"  [popup]="true" >
-                                    <ng-template #item let-opcao>
-                                        <ng-container *ngIf="opcao.route; else elseBlock">
-                                            <a [routerLink]="[opcao.route, item.id]" class="p-menu-item-link">
+                                <p-menu  #menu [model]="opcoesDeAcoes"   [popup]="true" >
+                                    <ng-template #item let-opcao >
+                                        <ng-container *ngIf="opcao.route; else elseBlock" >
+                                            <a   class="p-menu-item-link" [routerLink]='[opcao.route, item.id]'>
                                                 <span [class]="opcao.icon"></span>
                                                 <span class="ml-2">{{ opcao.label }}</span>
                                             </a>
@@ -71,7 +71,7 @@
                                         </ng-template>
                                     </ng-template>
                                 </p-menu>
-                                <p-button (click)="menu.toggle($event)" icon="pi pi-ellipsis-v"></p-button>
+                                <p-button (click)="abrirMenu($event, item.id)" icon="pi pi-ellipsis-v"></p-button>
                             </div>
                         </div>  
                     </div>
