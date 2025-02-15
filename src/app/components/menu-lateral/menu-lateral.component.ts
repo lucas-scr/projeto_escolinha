@@ -8,70 +8,63 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-menu-lateral',
-  imports: [
-    MenuModule,
-    BadgeModule,
-    RippleModule,
-    AvatarModule,
-    RouterLink
-
-  ],
+  imports: [MenuModule, BadgeModule, RippleModule, AvatarModule, RouterLink],
   templateUrl: './menu-lateral.component.html',
-  styleUrl: './menu-lateral.component.css'
+  styleUrl: './menu-lateral.component.css',
 })
-
-export class MenuLateralComponent implements OnInit  {
-
+export class MenuLateralComponent implements OnInit {
   menu: MenuItem[] | undefined;
 
-  ngOnInit(){
+  ngOnInit() {
     this.menu = [
       {
-        separator: true
+        separator: true,
       },
       {
-        label: "Aula",
         items: [
           {
             label: 'Início',
             icon: 'pi pi-home',
-            route: ''
+            route: '',
           },
-          {
-          label: 'Alunos',
-          icon: 'pi pi-user',
-          route: '/alunos'
-        },
-        {
-          label: 'Contratos',
-          icon: 'pi pi-file-check',
-          route: '/contratos'
-        },
-        {
-          label: 'Responsáveis',
-          icon: 'pi pi-plus',
-        },
-        {
-          label: 'Atividades',
-          icon: 'pi pi-book',
-        }
-      ]
+        ],
       },
       {
-        label: "Administrativo",
+        label: 'Aula',
         items: [
           {
-          label: 'Pagamentos',
-          icon: 'pi pi-dollar',
-        },
-        {
-          label: 'Cronograma',
-          icon: 'pi pi-calendar-clock',
-        }
-      ]
-      }
-    ]
-
+            label: 'Alunos',
+            icon: 'pi pi-user',
+            route: '/alunos',
+          },
+          {
+            label: 'Contratos',
+            icon: 'pi pi-file-check',
+            route: '/contratos',
+          },
+          {
+            label: 'Responsáveis',
+            icon: 'pi pi-plus',
+          },
+          {
+            label: 'Atividades',
+            icon: 'pi pi-book',
+          },
+        ],
+      },
+      {
+        label: 'Administrativo',
+        items: [
+          {
+            label: 'Pagamentos',
+            icon: 'pi pi-dollar',
+          },
+          {
+            label: 'Cronograma',
+            icon: 'pi pi-calendar-clock',
+          },
+        ],
+      },
+    ];
   }
-
 }

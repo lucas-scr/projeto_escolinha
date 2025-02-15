@@ -21,16 +21,31 @@
     justify-content: flex-start;
     align-items: center;
     padding: 10px;
+    margin-bottom: 3%;
 }
 
 nav{
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 1%;
-    background-color: aqua;
     margin: 2px;
+    color: aliceblue;
+}
+
+nav:hover{
+    background-color: #8a97a5;
+    transition: all 0.3s ease; /* A transição será suave em 0.3 segundos */
+    transform: scale(1.1);
+}
+
+.tela_sistema{
+    display: flex;
+}
+
+.container{
+    width: 100%;
 }

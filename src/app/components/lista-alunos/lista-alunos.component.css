@@ -81,3 +81,19 @@
     align-self:flex-start;
 }
 
+
+
+::ng-deep .menu_acoes .p-button {
+    color: rgb(114, 113, 113);
+    border-radius: 50%;
+    width: 35px;
+    height: 30px;
+    border: 0px solid;
+    background-color: #ffff;
+}
+
+::ng-deep .menu_acoes .p-button:hover {
+    color: rgb(145, 145, 145);
+    border: 0px solid;
+    background-color: #d6d6d6;
+}

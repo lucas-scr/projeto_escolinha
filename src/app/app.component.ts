@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common'; // Importe o CommonModule
 import { RouterOutlet } from '@angular/router';
 import { MenuLateralComponent } from './components/menu-lateral/menu-lateral.component';
 import { AvatarModule } from 'primeng/avatar';
@@ -14,7 +15,8 @@ import { CardModule } from 'primeng/card';
     AvatarModule,
     OverlayBadgeModule,
     CardModule,
-    RouterOutlet
+    RouterOutlet,
+    CommonModule
 
   ],
   templateUrl: './app.component.html',
@@ -22,4 +24,10 @@ import { CardModule } from 'primeng/card';
 })
 export class AppComponent {
   title = 'projeto_escolinha';
+
+  menuLateral: Boolean = true;
+
+  menuToggle(){
+    this.menuLateral = !this.menuLateral;
+  }
 }

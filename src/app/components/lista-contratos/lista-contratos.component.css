@@ -2,13 +2,19 @@
     font-size: 14px;
 }
 
-::ng-deep .p-button {
+::ng-deep .menu_acoes .p-button {
     color: rgb(114, 113, 113);
     border-radius: 50%;
     width: 35px;
     height: 30px;
-    border: 1px solid;
+    border: 0px solid;
     background-color: #ffff;
+}
+
+::ng-deep .menu_acoes .p-button:hover {
+    color: rgb(145, 145, 145);
+    border: 0px solid;
+    background-color: #d6d6d6;
 }
 
 
@@ -18,7 +24,33 @@
 
 ::ng-deep .p-datatable .p-datatable-header input{
     margin-bottom: 1rem;
-    margin-top: 1rem;
+    margin-top: 15px;
     width: 30%;
 }
 
+.list_principle_header{
+    display: flex;
+}
+.list_header_title{
+    flex-grow: 1;
+}
+
+::ng-deep .list_botoes .p-button{
+    width: 100%;
+
+}
+
+::ng-deep .menu_acoes .p-button {
+    color: rgb(114, 113, 113);
+    border-radius: 50%;
+    width: 35px;
+    height: 30px;
+    border: 0px solid;
+    background-color: #ffff;
+}
+
+::ng-deep .menu_acoes .p-button:hover {
+    color: rgb(145, 145, 145);
+    border: 0px solid;
+    background-color: #d6d6d6;
+}

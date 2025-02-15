@@ -1,4 +1,4 @@
-import { Component, isStandalone } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { ServiceAlunos } from '../../services/service_alunos';
 import { FormsModule } from '@angular/forms';
@@ -36,22 +36,25 @@ import { CheckboxModule } from 'primeng/checkbox';
     DatePickerModule,
     RadioButtonModule,
     CheckboxModule,
-    RouterLink
-
+    RouterLink,
   ],
   templateUrl: './cadastro-alunos.component.html',
   styleUrl: './cadastro-alunos.component.css',
 
 })
-export class CadastroAlunosComponent {
+export class CadastroAlunosComponent implements OnInit {
 
   sexo: String = "M";
   nome: String;
   dataNascimento: Date = new Date()
   autorizacaoDeImagem: Boolean = false;
-  aluno: Aluno;
+  aluno: Aluno;  
 
-  constructor(private serviceAlunos: ServiceAlunos){
+  constructor(private serviceAlunos: ServiceAlunos,){
+  }
+
+  ngOnInit(){
+
   }
 
   onSubmit(){
