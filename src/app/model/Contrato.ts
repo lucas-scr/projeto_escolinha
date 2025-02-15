@@ -11,6 +11,7 @@ export class Contrato {
   private _dias: String[];
   private _valor: Number;
   private _dataPagamento: Date;
+  private _situacao: String;
 
   constructor(
     responsavel: Responsavel,
@@ -28,6 +29,7 @@ export class Contrato {
     this._dias = dias;
     this._valor = valor;
     this._dataPagamento = dataPagamento;
+    this._situacao = "Iniciado"
   }
 
   // Getters
@@ -64,6 +66,10 @@ export class Contrato {
   }
   get id(): Number {
     return this._id;
+  }
+
+  get situacao(): String {
+    return this._situacao;
   }
 
 
@@ -106,5 +112,9 @@ export class Contrato {
 
   set id(id: Number) {
     this._id = id;
+  }
+
+  set situacao(situacao: String) {
+    this._situacao = situacao;
   }
 }

@@ -17,6 +17,12 @@ import { CardModule } from 'primeng/card';
 import { Menu, MenuModule } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { Table, TableModule } from 'primeng/table';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { SelectModule } from 'primeng/select';
+
+
+
 
 
 
@@ -38,6 +44,10 @@ import { ToastModule } from 'primeng/toast';
     MenuModule,
     Menu,
     ToastModule,
+    TableModule,
+    MultiSelectModule,
+    SelectModule
+    
 
   ],
   exports: [
@@ -55,7 +65,10 @@ import { ToastModule } from 'primeng/toast';
     InputTextModule,
     CardModule,
     MenuModule,
-    ToastModule
+    ToastModule,
+    TableModule,
+    MultiSelectModule,
+    SelectModule
   ]
 })
 export class PrimengImports {}

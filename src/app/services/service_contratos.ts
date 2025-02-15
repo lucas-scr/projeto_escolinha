@@ -29,27 +29,33 @@ export class ServiceContratos {
 
     let responsavel1: Responsavel = new Responsavel(
       'Responsável 1',
-      '12345678901'
+      '12345678901',
+      11123456789
     );
     let responsavel2: Responsavel = new Responsavel(
       'Responsável 2',
-      '12345678902'
+      '12345678902',
+      61123456789
     );
     let responsavel3: Responsavel = new Responsavel(
       'Responsável 3',
-      '12345678903'
+      '12345678903',
+      1112345123
     );
     let responsavel4: Responsavel = new Responsavel(
       'Responsável 4',
-      '12345678904'
+      '12345678904',
+      11123116789
     );
     let responsavel5: Responsavel = new Responsavel(
       'Responsável 5',
-      '12345678905'
+      '12345678905',
+      32123456789
     );
     let responsavel6: Responsavel = new Responsavel(
       'Responsável 6',
-      '12345678906'
+      '12345678906',
+      76123456789
     );
 
     this.listaContratos = [

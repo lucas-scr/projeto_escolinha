@@ -3,10 +3,12 @@ import { Pessoa } from "../interfaces/pessoa";
 export class Responsavel implements Pessoa{
     nome: String;
     private _documento: String;
+    private _contato?: Number;
 
-    constructor(nome: String, documento: String){
+    constructor(nome: String, documento: String, contato?: Number){
         this.nome = nome;
         this._documento = documento;
+        this._contato = contato
     }
 
     get getNome(): String {
@@ -26,5 +28,15 @@ export class Responsavel implements Pessoa{
         if (!valor.trim()) throw new Error("Documento não pode ser vazio!");
         this._documento = valor;
     }
+
+    
+    get contato(): Number {
+        return this._contato;
+    }
+
+    set contato(contato: Number) {
+        this._contato = contato;
+    }
+
 
 }
