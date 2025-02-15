@@ -4,7 +4,7 @@ import { PrimengImports } from '../../shared/primengImports.module';
 import { ServiceContratos } from '../../services/service_contratos';
 import { Contrato } from '../../model/Contrato';
 import { TelefonePipe, MoedaPipe } from '../../mascaras.pipe';
-import { MenuItem, MessageService } from 'primeng/api';
+import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { Menu } from 'primeng/menu';
 
@@ -18,7 +18,10 @@ import { Menu } from 'primeng/menu';
   ],
   templateUrl: './lista-contratos.component.html',
   styleUrl: './lista-contratos.component.css',
-  providers: [ServiceContratos,   MessageService],
+  providers: [ServiceContratos,
+       MessageService,
+       ConfirmationService
+      ],
 })
 export class ListaContratosComponent {
   opcoesDeAcoes: MenuItem[] | undefined;
@@ -34,7 +37,8 @@ export class ListaContratosComponent {
   constructor(
     private contratosService: ServiceContratos,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit() {
@@ -63,7 +67,8 @@ export class ListaContratosComponent {
           {
             label: 'Remover',
             icon: 'pi pi-trash',
-            command: () => this.removerAlunoDaLista(this.itemId),
+            // command: () => this.removerAlunoDaLista(this.itemId),
+            command: () => this.confirmarRemover(),
           },
         ],
       },
@@ -87,4 +92,38 @@ export class ListaContratosComponent {
   showMessage(tipoMensagem: String, titulo: String,mensagem: String){
     this.messageService.add({ severity: `${tipoMensagem}`, summary: `${titulo}`, detail: `${mensagem}`, life: 3000 });
   }
+
+  confirmarRemover() {
+    this.confirmationService.confirm({
+        target: event.target as EventTarget,
+        message: 'Tem certeza que deseja remover o contrato?',
+        header: 'Remover contrato',
+        closable: true,
+        closeOnEscape: true,
+        icon: 'pi pi-exclamation-triangle',
+        rejectButtonProps: {
+            label: 'Não',
+            severity: 'secondary',
+            outlined: true,
+        },
+        acceptButtonProps: {
+            label: 'Sim',
+            severity: 'danger',
+        },
+        accept: () => {
+            this.removerAlunoDaLista(this.itemId)
+        },
+        reject: () => {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Rejected',
+                detail: 'You have rejected',
+                life: 3000,
+            });
+        },
+    });
+}
+
+
+
 }

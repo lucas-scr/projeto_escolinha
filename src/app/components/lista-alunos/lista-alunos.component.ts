@@ -2,11 +2,9 @@ import { Component, OnInit ,OnChanges, SimpleChanges, Input, OnDestroy, ViewChil
 import { PrimengImports } from '../../shared/primengImports.module';
 import { Aluno } from '../../model/Alunos';
 import { ServiceAlunos } from '../../services/service_alunos';
-import { MenuItem, MessageService } from 'primeng/api';
+import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Menu } from 'primeng/menu';
 import { Router } from '@angular/router';
-
-
 
 
 
@@ -20,7 +18,8 @@ import { Router } from '@angular/router';
   templateUrl: './lista-alunos.component.html',
   styleUrl: './lista-alunos.component.css',
   providers: [
-    MessageService
+    MessageService,
+    ConfirmationService
   ]
 })
 export class ListaAlunosComponent implements OnInit {
@@ -34,7 +33,12 @@ export class ListaAlunosComponent implements OnInit {
 
   opcoesDeAcoes: MenuItem[] | undefined;
 
-  constructor(private serviceAluno: ServiceAlunos, private router: Router, private messageService: MessageService){
+  constructor(
+    private serviceAluno: ServiceAlunos, 
+    private router: Router, 
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService
+  ){
     this.listaAlunos = serviceAluno.listarAlunos();
   }
 
@@ -68,7 +72,7 @@ export class ListaAlunosComponent implements OnInit {
               {
                   label: 'Remover',
                   icon: 'pi pi-trash',
-                  command:() => this.removerAlunoDaLista(this.alunoId)
+                  command:() => this.confirmarRemover()
               }
           ]
       }
@@ -77,7 +81,7 @@ export class ListaAlunosComponent implements OnInit {
 
   removerAlunoDaLista(id: Number){
     this.serviceAluno.removerAlunoDaLista(id);
-    this.showMessage("success", "Título", "Item removido com sucesso");
+    this.showMessage("success", "Excluir", "Aluno removido com sucesso");
   
   }
 
@@ -89,5 +93,30 @@ export class ListaAlunosComponent implements OnInit {
   showMessage(tipoMensagem: String, titulo: String,mensagem: String){
     this.messageService.add({ severity: `${tipoMensagem}`, summary: `${titulo}`, detail: `${mensagem}`, life: 3000 });
   }
+
+
+  confirmarRemover() {
+    this.confirmationService.confirm({
+        target: event.target as EventTarget,
+        message: 'Tem certeza que deseja remover o aluno?',
+        header: 'Remover aluno',
+        closable: true,
+        closeOnEscape: true,
+        icon: 'pi pi-exclamation-triangle',
+        rejectButtonProps: {
+            label: 'Não',
+            severity: 'secondary',
+            outlined: true,
+        },
+        acceptButtonProps: {
+            label: 'Sim',
+            severity: 'danger',
+        },
+        accept: () => {
+          this.removerAlunoDaLista(this.alunoId)
+        }
+    });
+}
+
   
 }

@@ -20,6 +20,8 @@ import { ToastModule } from 'primeng/toast';
 import { Table, TableModule } from 'primeng/table';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SelectModule } from 'primeng/select';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
 
 
 
@@ -46,7 +48,8 @@ import { SelectModule } from 'primeng/select';
     ToastModule,
     TableModule,
     MultiSelectModule,
-    SelectModule
+    SelectModule,
+    ConfirmDialogModule
     
 
   ],
@@ -68,7 +71,8 @@ import { SelectModule } from 'primeng/select';
     ToastModule,
     TableModule,
     MultiSelectModule,
-    SelectModule
+    SelectModule,
+    ConfirmDialogModule
   ]
 })
 export class PrimengImports {}
