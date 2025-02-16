@@ -6,8 +6,7 @@ import { AvatarModule } from 'primeng/avatar';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
 import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
-
-
+import { ServiceMensagemGlobal } from './services/mensagens_global';
 
 
 
@@ -24,7 +23,10 @@ import { ToastModule } from 'primeng/toast';
 
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  providers:[
+    ServiceMensagemGlobal
+  ]
 })
 export class AppComponent {
   title = 'projeto_escolinha';

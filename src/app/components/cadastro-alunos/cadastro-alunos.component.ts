@@ -4,7 +4,7 @@ import { ServiceAlunos } from '../../services/service_alunos';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { Aluno } from '../../model/Alunos';
 import { PrimengImports } from '../../shared/primengImports.module';
-import { MensagemGlobalService } from '../../services/mensagem_global';
+import { ServiceMensagemGlobal } from '../../services/mensagens_global';
 
 @Component({
   selector: 'app-cadastro-alunos',
@@ -16,6 +16,7 @@ import { MensagemGlobalService } from '../../services/mensagem_global';
   templateUrl: './cadastro-alunos.component.html',
   styleUrl: './cadastro-alunos.component.css',
   providers: [
+    ServiceMensagemGlobal
   ]
 
 })
@@ -27,7 +28,7 @@ export class CadastroAlunosComponent implements OnInit {
   autorizacaoDeImagem: Boolean = false;
   aluno: Aluno;  
 
-  constructor(private serviceAlunos: ServiceAlunos, private router: Router){
+  constructor(private serviceAlunos: ServiceAlunos, private router: Router, private serviceMensagemGlobal: ServiceMensagemGlobal){
   }
 
   ngOnInit(){
@@ -37,6 +38,7 @@ export class CadastroAlunosComponent implements OnInit {
   onSubmit(){
     this.aluno = new Aluno(this.nome,this.dataNascimento, this.autorizacaoDeImagem, this.sexo);
     this.serviceAlunos.adicionarAlunosNalista(this.aluno);
+    this.serviceMensagemGlobal.showMessage("success","Cadastro", "Aluno cadastrado com sucesso.")
     this.router.navigate(['/alunos'])
   }
 
