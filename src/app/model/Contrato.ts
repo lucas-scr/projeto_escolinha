@@ -12,6 +12,7 @@ export class Contrato {
   private _valor: Number;
   private _dataPagamento: Date;
   private _situacao: String;
+  private _ressarcimentoEmFeriados: Boolean;
 
   constructor(
     responsavel: Responsavel,
@@ -72,6 +73,10 @@ export class Contrato {
     return this._situacao;
   }
 
+  get ressarcimentoEmFeriados(): Boolean{
+    return this._ressarcimentoEmFeriados
+  }
+
 
   // Setters
   set responsavel(responsavel: Responsavel) {
@@ -117,4 +122,9 @@ export class Contrato {
   set situacao(situacao: String) {
     this._situacao = situacao;
   }
+  set ressarcimentoEmFeriados(ressarcimento: Boolean) {
+    this._ressarcimentoEmFeriados = ressarcimento;
+  }
+
+
 }

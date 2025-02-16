@@ -43,6 +43,7 @@
 .situacao-ativo {
     width: 100%;
     border-radius: 4px;
+    padding: 3px;
     padding-right: 4px;
     padding-left: 4px;
     border: 1px solid;
@@ -52,7 +53,14 @@
   }
   
   .situacao-inativo {
-    color: red;
+    width: 100%;
+    border-radius: 4px;
+    padding: 3px;
+    padding-right: 4px;
+    padding-left: 4px;
+    border: 1px solid;
+    font-size: 14px;
+    background-color: #F69EBC;
 
   }
 

@@ -25,6 +25,10 @@ import { IftaLabelModule } from 'primeng/iftalabel';
 import { DatePickerModule } from 'primeng/datepicker';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { CheckboxModule } from 'primeng/checkbox';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputMaskModule } from 'primeng/inputmask';
+
+
 
 
 
@@ -58,6 +62,8 @@ import { CheckboxModule } from 'primeng/checkbox';
     DatePickerModule,
     RadioButtonModule,
     CheckboxModule,    
+    InputNumberModule,
+    InputMaskModule
 
   ],
   exports: [
@@ -85,6 +91,9 @@ import { CheckboxModule } from 'primeng/checkbox';
     DatePickerModule,
     RadioButtonModule,
     CheckboxModule,
+    InputNumberModule,
+    InputMaskModule,
+    
   ]
 })
 export class PrimengImports {}

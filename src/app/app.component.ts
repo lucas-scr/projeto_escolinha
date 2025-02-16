@@ -5,6 +5,9 @@ import { MenuLateralComponent } from './components/menu-lateral/menu-lateral.com
 import { AvatarModule } from 'primeng/avatar';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
 import { CardModule } from 'primeng/card';
+import { ToastModule } from 'primeng/toast';
+
+
 
 
 
@@ -16,7 +19,8 @@ import { CardModule } from 'primeng/card';
     OverlayBadgeModule,
     CardModule,
     RouterOutlet,
-    CommonModule
+    CommonModule,
+    ToastModule,
 
   ],
   templateUrl: './app.component.html',
@@ -24,6 +28,7 @@ import { CardModule } from 'primeng/card';
 })
 export class AppComponent {
   title = 'projeto_escolinha';
+
 
   menuLateral: Boolean = true;
 

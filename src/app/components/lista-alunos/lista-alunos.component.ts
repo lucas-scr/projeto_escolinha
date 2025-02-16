@@ -4,7 +4,7 @@ import { Aluno } from '../../model/Alunos';
 import { ServiceAlunos } from '../../services/service_alunos';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Menu } from 'primeng/menu';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -36,8 +36,9 @@ export class ListaAlunosComponent implements OnInit {
   constructor(
     private serviceAluno: ServiceAlunos, 
     private router: Router, 
+    private route: ActivatedRoute,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
   ){
     this.listaAlunos = serviceAluno.listarAlunos();
   }
@@ -54,6 +55,12 @@ export class ListaAlunosComponent implements OnInit {
   }
 
   ngOnInit(){
+    this.route.queryParams.subscribe(params => {
+      if (params['mensagem']) {
+        this.showMessage('success', 'Sucesso!', params['mensagem']);
+      }
+    });
+
     this.opcoesDeAcoes = [
       { 
           label: 'Opções',

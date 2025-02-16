@@ -8,9 +8,9 @@ import { Pessoa } from "../interfaces/pessoa";
     private _dias: String[];
     private _autorizacaoDeImagem: Boolean;
     private _iniciaisNome: String;
-    private _sexo: String;
+    private _sexo?: String;
 
-    constructor(nome: String, dataNascimento: Date, autorizacaoDeImagem: Boolean, sexo: String ,diasDaSemana?: String[]){
+    constructor(nome: String, dataNascimento: Date, autorizacaoDeImagem: Boolean, sexo?: String ,diasDaSemana?: String[]){
         this.nome = nome;
         this._dataNascimento = dataNascimento;
         this._autorizacaoDeImagem = autorizacaoDeImagem;
