@@ -10,18 +10,10 @@ import { Menu } from 'primeng/menu';
 
 @Component({
   selector: 'app-lista-contratos',
-  imports: [
-    PrimengImports, 
-    TelefonePipe,
-    MoedaPipe
-
-  ],
+  imports: [PrimengImports, TelefonePipe, MoedaPipe],
   templateUrl: './lista-contratos.component.html',
   styleUrl: './lista-contratos.component.css',
-  providers: [ServiceContratos,
-       MessageService,
-       ConfirmationService
-      ],
+  providers: [ServiceContratos, MessageService, ConfirmationService],
 })
 export class ListaContratosComponent {
   opcoesDeAcoes: MenuItem[] | undefined;
@@ -84,46 +76,59 @@ export class ListaContratosComponent {
     this.menu.toggle(event); // Exibe o menu no local correto
   }
 
-  removerAlunoDaLista(id: Number){
+  removerAlunoDaLista(id: Number) {
     this.contratosService.removerContratoDaLista(id);
-    this.showMessage("success", "Removido!", "Contrato removido com sucesso.")
+    this.showMessage('success', 'Removido!', 'Contrato removido com sucesso.');
   }
 
-  showMessage(tipoMensagem: String, titulo: String,mensagem: String){
-    this.messageService.add({ severity: `${tipoMensagem}`, summary: `${titulo}`, detail: `${mensagem}`, life: 3000 });
+  showMessage(tipoMensagem: String, titulo: String, mensagem: String) {
+    this.messageService.add({
+      severity: `${tipoMensagem}`,
+      summary: `${titulo}`,
+      detail: `${mensagem}`,
+      life: 3000,
+    });
   }
 
   confirmarRemover() {
     this.confirmationService.confirm({
-        target: event.target as EventTarget,
-        message: 'Tem certeza que deseja remover o contrato?',
-        header: 'Remover contrato',
-        closable: true,
-        closeOnEscape: true,
-        icon: 'pi pi-exclamation-triangle',
-        rejectButtonProps: {
-            label: 'Não',
-            severity: 'secondary',
-            outlined: true,
-        },
-        acceptButtonProps: {
-            label: 'Sim',
-            severity: 'danger',
-        },
-        accept: () => {
-            this.removerAlunoDaLista(this.itemId)
-        },
-        reject: () => {
-            this.messageService.add({
-                severity: 'error',
-                summary: 'Rejected',
-                detail: 'You have rejected',
-                life: 3000,
-            });
-        },
+      target: event.target as EventTarget,
+      message: 'Tem certeza que deseja remover o contrato?',
+      header: 'Remover contrato',
+      closable: true,
+      closeOnEscape: true,
+      icon: 'pi pi-exclamation-triangle',
+      rejectButtonProps: {
+        label: 'Não',
+        severity: 'secondary',
+        outlined: true,
+      },
+      acceptButtonProps: {
+        label: 'Sim',
+        severity: 'danger',
+      },
+      accept: () => {
+        this.removerAlunoDaLista(this.itemId);
+      },
+      reject: () => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Rejected',
+          detail: 'You have rejected',
+          life: 3000,
+        });
+      },
     });
-}
+  }
 
-
-
+  getSituacaoClass(situacao: String): String {
+    switch (situacao) {
+      case 'Iniciado':
+        return 'situacao-ativo';
+      case 'Finalizado':
+        return 'situacao-inativo';
+      default:
+        return ''; // Classe vazia caso não encontre a situação
+    }
+  }
 }

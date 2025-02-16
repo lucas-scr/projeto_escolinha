@@ -21,6 +21,10 @@ import { Table, TableModule } from 'primeng/table';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SelectModule } from 'primeng/select';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { IftaLabelModule } from 'primeng/iftalabel';
+import { DatePickerModule } from 'primeng/datepicker';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { CheckboxModule } from 'primeng/checkbox';
 
 
 
@@ -49,8 +53,11 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     TableModule,
     MultiSelectModule,
     SelectModule,
-    ConfirmDialogModule
-    
+    ConfirmDialogModule,
+    IftaLabelModule,
+    DatePickerModule,
+    RadioButtonModule,
+    CheckboxModule,    
 
   ],
   exports: [
@@ -68,11 +75,16 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     InputTextModule,
     CardModule,
     MenuModule,
+    Menu,
     ToastModule,
     TableModule,
     MultiSelectModule,
     SelectModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    IftaLabelModule,
+    DatePickerModule,
+    RadioButtonModule,
+    CheckboxModule,
   ]
 })
 export class PrimengImports {}

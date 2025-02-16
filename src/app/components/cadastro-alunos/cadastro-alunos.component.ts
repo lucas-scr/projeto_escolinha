@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, isStandalone, LOCALE_ID, OnInit } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { ServiceAlunos } from '../../services/service_alunos';
 import { FormsModule } from '@angular/forms';
@@ -14,6 +14,7 @@ import { Aluno } from '../../model/Alunos';
 import { DatePickerModule } from 'primeng/datepicker';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { CheckboxModule } from 'primeng/checkbox';
+import { SharedModule } from 'primeng/api';
 
 
 
