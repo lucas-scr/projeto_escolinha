@@ -13,16 +13,16 @@ export class ServiceAlunos {
 
     constructor (){
         this.listaAlunos = [
-            new Aluno("Carlim", new Date ("2000-05-02"), false, "M"),
-            new Aluno("Joao",  new Date ("2001-08-04"), true, "M" ),
-            new Aluno("Maria",  new Date ("1999-10-02"), false, "F"),
-            new Aluno ("Aninha", new Date ("1999-10-28"), false, "F"),
-            new Aluno("Lucas Silva",  new Date("2014-05-12"), true, "M"),
-            new Aluno("Mariana Souza",  new Date("2016-09-23"), false, "F"),
-            new Aluno("Rafael Oliveira", new Date("2017-11-05"), true, "M"),
-            new Aluno("Isabela Mendes",  new Date("2015-07-19"), false, "F"),
-            new Aluno("Pedro Ferreira", new Date("2018-02-28"), true, "M"),
-            new Aluno("Pedro Teixeira", new Date("2018-02-28"), true, "M")
+            new Aluno("Carlim", new Date ("2000-05-02"), "M"),
+            new Aluno("Joao",  new Date ("2001-08-04"),  "M" ),
+            new Aluno("Maria",  new Date ("1999-10-02"),  "F"),
+            new Aluno ("Aninha", new Date ("1999-10-28"),  "F"),
+            new Aluno("Lucas Silva",  new Date("2014-05-12"),  "M"),
+            new Aluno("Mariana Souza",  new Date("2016-09-23"),  "F"),
+            new Aluno("Rafael Oliveira", new Date("2017-11-05"),  "M"),
+            new Aluno("Isabela Mendes",  new Date("2015-07-19"),  "F"),
+            new Aluno("Pedro Ferreira", new Date("2018-02-28"),  "M"),
+            new Aluno("Pedro Teixeira", new Date("2018-02-28"),  "M")
         ]
 
         this.listaAlunos[0].dias = ["Segunda", "Terça"];

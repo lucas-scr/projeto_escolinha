@@ -6,16 +6,17 @@ import { Pessoa } from "../interfaces/pessoa";
     private _idade?: Number;
     private _dataNascimento: Date;
     private _dias: String[];
-    private _autorizacaoDeImagem: Boolean;
+    private _autorizacaoDeImagem?: Boolean;
     private _iniciaisNome: String;
-    private _sexo?: String;
+    private _sexo: String;
 
-    constructor(nome: String, dataNascimento: Date, autorizacaoDeImagem: Boolean, sexo?: String ,diasDaSemana?: String[]){
+    constructor(nome: String, dataNascimento: Date, sexo: String ,autorizacaoDeImagem?: boolean, diasDaSemana?: String[]){
         this.nome = nome;
         this._dataNascimento = dataNascimento;
         this._autorizacaoDeImagem = autorizacaoDeImagem;
         this._iniciaisNome = this.gerarIniciais(nome);
         this._sexo = sexo;
+        this._dias = diasDaSemana;
     }
 
     get getNome(): String{

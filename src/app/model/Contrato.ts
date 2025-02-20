@@ -14,6 +14,7 @@ export class Contrato {
   private _situacao: String;
   private _ressarcimentoEmFeriados: Boolean;
 
+
   constructor(
     responsavel: Responsavel,
     aluno: Aluno,

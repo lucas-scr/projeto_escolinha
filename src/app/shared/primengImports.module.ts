@@ -27,6 +27,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputMaskModule } from 'primeng/inputmask';
+import { DialogModule } from 'primeng/dialog';
+
 
 
 
@@ -63,7 +65,8 @@ import { InputMaskModule } from 'primeng/inputmask';
     RadioButtonModule,
     CheckboxModule,    
     InputNumberModule,
-    InputMaskModule
+    InputMaskModule,
+    DialogModule
 
   ],
   exports: [
@@ -93,6 +96,7 @@ import { InputMaskModule } from 'primeng/inputmask';
     CheckboxModule,
     InputNumberModule,
     InputMaskModule,
+    DialogModule
     
   ]
 })

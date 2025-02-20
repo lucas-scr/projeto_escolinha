@@ -10,22 +10,12 @@ export class ServiceContratos {
   private listaContratos: Contrato[] = [];
 
   constructor() {
-    let aluno1: Aluno = new Aluno('Carlim', new Date('2000-05-02'), false, 'M');
-    let aluno2: Aluno = new Aluno('Joao', new Date('2001-08-04'), true, 'M');
-    let aluno3: Aluno = new Aluno('Maria', new Date('1999-10-02'), false, 'F');
-    let aluno4: Aluno = new Aluno('Aninha', new Date('1999-10-28'), false, 'F');
-    let aluno5: Aluno = new Aluno(
-      'Lucas Silva',
-      new Date('2014-05-12'),
-      true,
-      'M'
-    );
-    let aluno6: Aluno = new Aluno(
-      'Mariana Souza',
-      new Date('2016-09-23'),
-      false,
-      'F'
-    );
+    let aluno1: Aluno = new Aluno('Carlim', new Date('2000-05-02'), 'M');
+    let aluno2: Aluno = new Aluno('Joao', new Date('2001-08-04'), 'M');
+    let aluno3: Aluno = new Aluno('Maria', new Date('1999-10-02'), 'F');
+    let aluno4: Aluno = new Aluno('Aninha', new Date('1999-10-28'), 'F');
+    let aluno5: Aluno = new Aluno('Lucas Silva', new Date('2014-05-12'), 'M');
+    let aluno6: Aluno = new Aluno('Mariana Souza', new Date('2016-09-23'), 'F');
 
     let responsavel1: Responsavel = new Responsavel(
       'Responsável 1',
@@ -81,8 +71,7 @@ export class ServiceContratos {
         new Date('2024-05-01'),
         ['Segunda', 'Quarta', 'Sexta'],
         600,
-        new Date('2024-04-30'),
-        new Date('2024-12-31')
+        new Date('2024-04-30')
       ),
       new Contrato(
         responsavel4,
@@ -98,8 +87,7 @@ export class ServiceContratos {
         new Date('2024-07-01'),
         ['Segunda', 'Quarta'],
         550,
-        new Date('2024-06-30'),
-        new Date('2024-11-30')
+        new Date('2024-06-30')
       ),
       new Contrato(
         responsavel6,
@@ -143,17 +131,19 @@ export class ServiceContratos {
   }
 
   findBydId(id: Number): Contrato {
-    const contratoEncontrado = this.listaContratos.find((item) => item.id == id);
+    const contratoEncontrado = this.listaContratos.find(
+      (item) => item.id == id
+    );
     return contratoEncontrado;
   }
 
-  AtualizarContratoNalista(contrato: Contrato){
-    this.listaContratos = this.listaContratos.map(item => {
-        if(item.id = contrato.id){
-          return  item = contrato;
-        } else{
-            return item;
-        }
-     } );
-}
+  AtualizarContratoNalista(contrato: Contrato) {
+    this.listaContratos = this.listaContratos.map((item) => {
+      if ((item.id = contrato.id)) {
+        return (item = contrato);
+      } else {
+        return item;
+      }
+    });
+  }
 }

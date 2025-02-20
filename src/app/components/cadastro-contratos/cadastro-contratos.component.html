@@ -44,49 +44,50 @@
         </div>
 
         <p-divider />
-        <h4>Dados do aluno</h4>
-
-
-        <div class="cadastro_input">
-            <p-floatlabel variant="on">
-                <input id="nome_aluno" pInputText [(ngModel)]="nome" required name="nome_aluno">
-                <label for="nome_aluno">Nome do aluno</label>
-            </p-floatlabel>
-            <div *ngIf="formContrato.controls['nome_aluno']?.invalid && formContrato.controls['nome_aluno']?.touched">
-                <small>Este campo é obrigatório</small>
-            </div>
+        <div class="aluno_section">
+            <h4>Lista de Alunos</h4>
+            <p-button (click)="abrirModalAdicionarAluno()" label="Adicionar aluno" />
         </div>
 
-        <div class="cadastro_input">
-            <p-floatlabel variant="on">
-                <p-datepicker id="dataNascimento" [(ngModel)]="dataNascimento" required name="dataNascimento"
-                    dateFormat="dd/mm/yy" [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" />
-                <label class="calendar_label" for="dataNascimento">Data de nascimento</label>
-            </p-floatlabel>
-            <div
-                *ngIf="formContrato.controls['dataNascimento']?.invalid && formContrato.controls['dataNascimento']?.touched">
-                <small>Este campo é obrigatório</small>
-            </div>
-        </div>
+        <p-dataview [value]="alunos" [rows]="5" [paginator]="false" emptyMessage="Nenhum resultado encontrado.">
+            <ng-template #list let-items>
+                <div>
+                    <div class="col-span-12" *ngFor="let item of items; let first = first" class="col-span-12">
+                        <div class="list_item">
+                            <div class="list_item_row">
+                                <div class="item_avatar">
+                                    <p-avatar [label]=item.iniciaisNome styleClass="mr-2"
+                                        [ngClass]="{ 'list_sexo_m': item.sexo === 'M', 'list_sexo_f': item.sexo === 'F' }"
+                                        size="xlarge" shape="circle" />
+                                </div>
+                                <div class="item_labels">
+                                    <span class="list_principal_nome">{{ item.nome }}</span>
 
-        <div class="cadastro_input">
-            <label class="label_radiogroup" for="sexoAluno">Sexo</label>
-            <div id="sexoAluno" class="radio_button">
-                <div class="flex items-center">
-                    <p-radiobutton name="masculino" value="M" [(ngModel)]="sexo" inputId="sexo1" name="sexo" />
-                    <label for="sexo1" class="ml-2">Masculino</label>
+                                    <div class="item_nascimento">
+                                        <i class="pi pi-gift" style="font-size: 1rem"> </i>
+                                        <span class="label_item_list" style="margin-left: 5px"> {{item.dataNascimento |
+                                            date:'dd/MM/yyyy' }}</span>
+                                    </div>
+                                    <div class="list_dias_semana">
+                                        <i class="pi pi-calendar" style="font-size: 1rem"> </i>
+                                        <div class="list_dias">
+                                            <p-chip class="item_list_chip" *ngFor="let dia of item.dias"
+                                                [label]="dia" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list_acoes">
+                                    <p-button icon="pi pi-trash" [rounded]="true" [text]="true" [raised]="true" severity="danger" (click)="removerAluno(item)"  />
+                                </div>
+                            </div>
+                        </div>
+                        <p-divider />
+                    </div>
                 </div>
-
-                <div class="radio_button">
-                    <p-radiobutton name="feminino" value="F" [(ngModel)]="sexo" inputId="sexo2" name="sexo" />
-                    <label for="sexo2" class="ml-2">Feminino</label>
-                </div>
-            </div>
-        </div>
+            </ng-template>
+        </p-dataview>
 
 
-
-        <p-divider />
         <h4>Dados do contrato</h4>
         <div class="dados_contrato">
 
@@ -116,17 +117,6 @@
 
 
 
-            <div class="div_multiselection">
-                <label class="label_multiselect" for="dias_contrato">Dias da semana:</label>
-                <div class="cadastro_input_multiselecao" >
-                    <div  class="checkbox" *ngFor="let dia of dias"  name="dias_contrato">
-                        <p-checkbox [inputId]="dia.key" name="dias_contrato" [value]="dia" [(ngModel)]="diasSelecionados" />
-                        <label [for]="dia.key"> {{ dia.name }} </label>
-                    </div>
-                </div>
-            </div>
-            
-
             <div class="cadastro_input">
                 <p-floatlabel variant="on">
                     <p-inputnumber [(ngModel)]="valorContratado" name="valor_contrato" required inputId="currency-us"
@@ -142,13 +132,14 @@
             <div class="cadastro_input_checkbox">
                 <p-checkbox [(ngModel)]="autorizacaoDeImagem" [binary]="true" inputId="autorizaocaoImagem"
                     name="usoImagem" />
-                <label for="autorizaocaoImagem" class="ml-2">Autorizado o uso de imagem e video do aluno</label>
+                <label for="autorizaocaoImagem" class="ml-2">Autorizado o uso de imagem e video do(s) aluno(s)</label>
             </div>
 
             <div class="cadastro_input_checkbox">
                 <p-checkbox [(ngModel)]="ressarcimentoEmFeriados" [binary]="true" inputId="ressarcimentoEmFeriados"
                     name="ressarcimentoEmFeriados" />
-                <label for="ressarcimentoEmFeriados" class="ml-2">O responsável opta por ressarcimento do valor no lugar de atividades nos casos <del></del> feriados</label>
+                <label for="ressarcimentoEmFeriados" class="ml-2">O responsável opta por ressarcimento do valor no lugar
+                    de atividades nos casos <del></del> feriados</label>
             </div>
 
         </div>
@@ -161,7 +152,68 @@
         </div>
     </form>
 
-    <ng-template #footer>
 
-    </ng-template>
 </p-card>
+
+<p-dialog header="Adicionar Aluno" [modal]="true" [(visible)]="modalAdicionar"
+    [style]="{ width: '40%', height: '55%' }">
+    <form #formAluno="ngForm" (ngSubmit)="onSubmit()">
+        <div class="formulario_cadastro">
+            <div class="formulario_dados">
+
+                <span class="p-text-secondary block mb-8">Insira os dados do aluno</span>
+                <div class="cadastro_input">
+                    <p-floatlabel variant="on">
+                        <input id="nome_aluno" pInputText [(ngModel)]="nome" required name="add_nome_aluno">
+                        <label for="nome_aluno">Nome do aluno</label>
+                    </p-floatlabel>
+                    <div
+                        *ngIf="formAluno.controls['add_nome_aluno']?.invalid && formAluno.controls['add_nome_aluno']?.touched">
+                        <small>Este campo é obrigatório</small>
+                    </div>
+                </div>
+
+                <div class="cadastro_input">
+                    <p-floatlabel variant="on">
+                        <p-datepicker id="dataNascimento" [(ngModel)]="dataNascimento" required name="dataNascimento"
+                            dateFormat="dd/mm/yy" [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" />
+                        <label class="calendar_label" for="dataNascimento">Data de nascimento</label>
+                    </p-floatlabel>
+                    <div
+                        *ngIf="formAluno.controls['dataNascimento']?.invalid && formAluno.controls['dataNascimento']?.touched">
+                        <small>Este campo é obrigatório</small>
+                    </div>
+                </div>
+
+                <div class="cadastro_input">
+                    <label class="label_radiogroup" for="sexoAluno">Sexo</label>
+                    <div id="sexoAluno" class="radio_button">
+                        <div class="flex items-center">
+                            <p-radiobutton name="masculino" value="M" [(ngModel)]="sexo" inputId="sexo1" name="sexo" />
+                            <label for="sexo1" class="ml-2">Masculino</label>
+                        </div>
+
+                        <div class="radio_button">
+                            <p-radiobutton name="feminino" value="F" [(ngModel)]="sexo" inputId="sexo2" name="sexo" />
+                            <label for="sexo2" class="ml-2">Feminino</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="div_multiselection">
+                    <label class="label_multiselect" for="dias_contrato">Dias da semana:</label>
+                    <div class="cadastro_input_multiselecao">
+                        <div class="checkbox" *ngFor="let dia of dias" name="dias_contrato">
+                            <p-checkbox [inputId]="dia" name="dias_contrato" [value]="dia"
+                                [(ngModel)]="diasSelecionados" />
+                            <label [for]="dia"> {{ dia }} </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <ng-template #footer>
+        <p-button label="Cancelar" severity="secondary" (click)="modalAdicionar = false" />
+        <p-button label="Adicionar" type="submit" (click)="adicionarAluno()" [disabled]="formAluno.invalid" />
+    </ng-template>
+</p-dialog>
