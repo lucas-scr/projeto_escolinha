@@ -7,6 +7,8 @@ import { OverlayBadgeModule } from 'primeng/overlaybadge';
 import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
 import { ServiceMensagemGlobal } from './services/mensagens_global';
+import {MockDbAlunosService } from './mocks/mockDbAlunos'
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 
 
@@ -20,6 +22,7 @@ import { ServiceMensagemGlobal } from './services/mensagens_global';
     RouterOutlet,
     CommonModule,
     ToastModule,
+    InMemoryWebApiModule
 
   ],
   templateUrl: './app.component.html',

@@ -31,10 +31,11 @@ export class ListaContratosComponent {
     private router: Router,
     private messageService: MessageService,
     private confirmationService: ConfirmationService
-  ) {}
+  ) {
+    this.listaContratos = this.contratosService.listarContrato();
+  }
 
   ngOnInit() {
-    this.listaContratos = this.contratosService.listarContrato();
     this.loading = false;
 
     this.status = [

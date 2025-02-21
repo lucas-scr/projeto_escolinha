@@ -4,7 +4,7 @@ import { Responsavel } from './Responsavel';
 export class Contrato {
   private _id: Number;  
   private _responsavel: Responsavel;
-  private _aluno: Aluno;
+  private _alunos: Aluno [];
   private _dataCadastro: Date;
   private _dataInicio: Date;
   private _dataFim?: Date;
@@ -17,15 +17,14 @@ export class Contrato {
 
   constructor(
     responsavel: Responsavel,
-    aluno: Aluno,
+    alunos: Aluno[],
     dataInicio: Date,
     dias: String[],
     valor: Number,
     dataPagamento: Date,
-    dataFim?: Date
   ) {
     this._responsavel = responsavel,
-    this._aluno = aluno,
+    this._alunos = alunos,
     this._dataCadastro = new Date();
     this._dataInicio = dataInicio;
     this._dias = dias;
@@ -39,8 +38,8 @@ export class Contrato {
     return this._responsavel;
   }
 
-  get aluno(): Aluno {
-    return this._aluno;
+  get alunos(): Aluno[] {
+    return this._alunos;
   }
 
   get dataCadastro(): Date {
@@ -84,8 +83,8 @@ export class Contrato {
     this._responsavel = responsavel;
   }
 
-  set aluno(aluno: Aluno) {
-    this._aluno = aluno;
+  set alunos(alunos: Aluno[]) {
+    this._alunos = alunos;
   }
 
   set dataCadastro(dataCadastro: Date) {

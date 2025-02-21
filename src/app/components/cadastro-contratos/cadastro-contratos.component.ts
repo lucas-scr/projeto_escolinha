@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { Responsavel } from '../../model/Responsavel';
 import { PrimengImports } from '../../shared/primengImports.module';
@@ -7,6 +7,7 @@ import { Aluno } from '../../model/Alunos';
 import { MessageService } from 'primeng/api';
 import { ServiceContratos } from '../../services/service_contratos';
 import { ServiceAlunos } from '../../services/service_alunos';
+import { Contrato } from '../../model/Contrato';
 
 @Component({
   selector: 'app-cadastro-contratos',
@@ -16,8 +17,7 @@ import { ServiceAlunos } from '../../services/service_alunos';
   providers: [MessageService],
 })
 export class CadastroContratosComponent implements OnInit {
-  modalAdicionar: boolean= false;
-
+  modalAdicionar: boolean = false;
 
   responsavel: Responsavel = new Responsavel('', '');
   alunoNovo: Aluno;
@@ -32,57 +32,66 @@ export class CadastroContratosComponent implements OnInit {
   autorizacaoDeImagem: boolean = false;
   ressarcimentoEmFeriados: Boolean;
 
+  alunos: Aluno[] = [];
 
-  alunos: Aluno[] = [  ];
-
-  dias: string[] = [ "Segunda", "Terça", "Quarta", "Quinta", "Sexta" ];
+  dias: string[] = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'];
   diasSelecionados: String[] = [];
 
+  novoContrato: Contrato;
 
   constructor(
     private messageService: MessageService,
     private contratoService: ServiceContratos,
-    private serviceAlunos: ServiceAlunos
+    private serviceAlunos: ServiceAlunos,
+    private router: Router
   ) {}
 
   ngOnInit() {
-    this.alunos.push(new Aluno("Aluno 1 da Silva",new Date(), "F", this.autorizacaoDeImagem, ["Segunda", "Terça"]))
+    this.alunos.push(
+      new Aluno('Aluno 1 da Silva', new Date(), 'F', this.autorizacaoDeImagem, [
+        'Segunda',
+        'Terça',
+      ])
+    );
   }
 
   onSubmit() {
-    this.alunoNovo = new Aluno(this.nome,this.dataNascimento, this.sexo);
-    this.serviceAlunos.adicionarAlunosNalista(this.alunoNovo);
-    
-    console.log(Aluno)
+    this.novoContrato = new Contrato(this.responsavel, this.alunos,this.dataInicio, ["Segunda"], this.valorContratado, this.dataPagamento)
+    this.contratoService.adicionarContratoNalista(this.novoContrato);
+    this.router.navigate(['/contratos']);
   }
 
-  abrirModalAdicionarAluno(){
+  abrirModalAdicionarAluno() {
     this.modalAdicionar = true;
     this.limparDadosAluno();
-
   }
-  
-  adicionarAluno(){
-    this.alunos.push(new Aluno(this.nome, this.dataNascimento, this.sexo, this.autorizacaoDeImagem, this.diasSelecionados))
+
+  adicionarAluno() {
+    this.alunos.push(
+      new Aluno(
+        this.nome,
+        this.dataNascimento,
+        this.sexo,
+        this.autorizacaoDeImagem,
+        this.diasSelecionados
+      )
+    );
     this.modalAdicionar = false;
-    this.alunos = [...this.alunos]; // Atualiza a referência do array
+    this.alunos = [...this.alunos]; 
 
-    console.log(this.alunos)
-
+    console.log(this.alunos);
   }
-  removerAluno(aluno: Aluno){
-    const index = this.alunos.findIndex(alunoLista => alunoLista === aluno)
-    if(index !== -1) {
-       this.alunos.splice(index, 1);
+  removerAluno(aluno: Aluno) {
+    const index = this.alunos.findIndex((alunoLista) => alunoLista === aluno);
+    if (index !== -1) {
+      this.alunos.splice(index, 1);
     }
   }
 
-  limparDadosAluno(){
-    this.nome = "";
+  limparDadosAluno() {
+    this.nome = '';
     this.dataNascimento = undefined;
     this.sexo = undefined;
     this.diasSelecionados = undefined;
   }
-
 }
-

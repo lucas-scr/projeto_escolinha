@@ -51,7 +51,7 @@ export class ServiceContratos {
     this.listaContratos = [
       new Contrato(
         responsavel1,
-        aluno1,
+        [aluno1],
         new Date('2024-03-01'),
         ['Segunda'],
         500,
@@ -59,7 +59,7 @@ export class ServiceContratos {
       ),
       new Contrato(
         responsavel2,
-        aluno2,
+        [aluno2, aluno1, aluno3],
         new Date('2024-04-01'),
         ['Terça', 'Quinta'],
         400,
@@ -67,7 +67,7 @@ export class ServiceContratos {
       ),
       new Contrato(
         responsavel3,
-        aluno3,
+        [aluno3],
         new Date('2024-05-01'),
         ['Segunda', 'Quarta', 'Sexta'],
         600,
@@ -75,7 +75,7 @@ export class ServiceContratos {
       ),
       new Contrato(
         responsavel4,
-        aluno4,
+        [aluno4],
         new Date('2024-06-01'),
         ['Terça', 'Quinta'],
         450,
@@ -83,7 +83,7 @@ export class ServiceContratos {
       ),
       new Contrato(
         responsavel5,
-        aluno5,
+        [aluno5, aluno2],
         new Date('2024-07-01'),
         ['Segunda', 'Quarta'],
         550,
@@ -91,7 +91,7 @@ export class ServiceContratos {
       ),
       new Contrato(
         responsavel6,
-        aluno6,
+        [aluno6],
         new Date('2024-08-01'),
         ['Segunda', 'Quarta', 'Sexta'],
         500,
@@ -108,7 +108,10 @@ export class ServiceContratos {
   }
 
   adicionarContratoNalista(novoContrato: Contrato) {
+    this.listaContratos = [...this.listaContratos]; // Atualiza a referência do array
+    novoContrato.id = this.capturarUltimoId();
     this.listaContratos.push(novoContrato);
+
   }
 
   removerContratoDaLista(id: Number) {
@@ -122,6 +125,8 @@ export class ServiceContratos {
   }
 
   listarContrato(): Contrato[] {
+    this.listaContratos = [...this.listaContratos]; // Atualiza a referência do array
+
     return this.listaContratos;
   }
 

@@ -68,3 +68,7 @@
   .item_list:hover{
     background-color: #ECFDF5;
   }
+td{
+    vertical-align: middle; /* Alinha o conteúdo verticalmente */
+
+}

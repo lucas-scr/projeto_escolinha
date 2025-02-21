@@ -1,6 +1,10 @@
 
 import { Injectable } from '@angular/core';
 import { Aluno } from '../model/Alunos';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+
 
 @Injectable({
   providedIn: 'root' // Torna o serviço disponível globalmente
@@ -9,53 +13,16 @@ import { Aluno } from '../model/Alunos';
 
 export class ServiceAlunos {
 
+    private url = 'api/alunos'
+
     private listaAlunos: Aluno[] =  [];
 
-    constructor (){
-        this.listaAlunos = [
-            new Aluno("Carlim", new Date ("2000-05-02"), "M"),
-            new Aluno("Joao",  new Date ("2001-08-04"),  "M" ),
-            new Aluno("Maria",  new Date ("1999-10-02"),  "F"),
-            new Aluno ("Aninha", new Date ("1999-10-28"),  "F"),
-            new Aluno("Lucas Silva",  new Date("2014-05-12"),  "M"),
-            new Aluno("Mariana Souza",  new Date("2016-09-23"),  "F"),
-            new Aluno("Rafael Oliveira", new Date("2017-11-05"),  "M"),
-            new Aluno("Isabela Mendes",  new Date("2015-07-19"),  "F"),
-            new Aluno("Pedro Ferreira", new Date("2018-02-28"),  "M"),
-            new Aluno("Pedro Teixeira", new Date("2018-02-28"),  "M")
-        ]
+    constructor (private http: HttpClient){
+        
+    }
 
-        this.listaAlunos[0].dias = ["Segunda", "Terça"];
-        this.listaAlunos[1].dias = ["Terça"];
-        this.listaAlunos[2].dias = ["Segunda", "Sexta"];
-        this.listaAlunos[3].dias = ["Segunda", "Sexta"];
-        this.listaAlunos[4].dias = ["Segunda", "Sexta"];
-        this.listaAlunos[5].dias = ["Segunda", "Sexta"];
-        this.listaAlunos[6].dias = ["Segunda", "Sexta"];
-        this.listaAlunos[7].dias = ["Segunda", "Sexta"];
-        this.listaAlunos[8].dias = ["Segunda", "Sexta"];
-        this.listaAlunos[9].dias = ["Segunda", "quarta"];
-        this.listaAlunos[0].idade = 8;
-        this.listaAlunos[1].idade = 8;
-        this.listaAlunos[2].idade = 8;
-        this.listaAlunos[3].idade = 8;
-        this.listaAlunos[4].idade = 8;
-        this.listaAlunos[5].idade = 8;
-        this.listaAlunos[6].idade = 8;
-        this.listaAlunos[7].idade = 8;
-        this.listaAlunos[8].idade = 8;
-        this.listaAlunos[9].idade = 8;
-
-        this.listaAlunos[0].id = 1;
-        this.listaAlunos[1].id = 2;
-        this.listaAlunos[2].id = 3;
-        this.listaAlunos[3].id = 4;
-        this.listaAlunos[4].id = 5;
-        this.listaAlunos[5].id = 6;
-        this.listaAlunos[6].id = 7;
-        this.listaAlunos[7].id = 8;
-        this.listaAlunos[8].id = 9;
-        this.listaAlunos[9].id = 10;
+    obterAlunos(): Observable<Aluno[]>{
+        return this.http.get<Aluno[]>(this.url);
     }
 
     adicionarAlunosNalista(aluno: Aluno){
