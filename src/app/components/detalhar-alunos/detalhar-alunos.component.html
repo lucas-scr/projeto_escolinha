@@ -15,7 +15,7 @@
 
         <div class="cadastro_input">
             <p-floatlabel variant="on">
-            <p-datepicker  id="dataNascimento" [(ngModel)]="aluno.dataNascimento" disabled  required name="dataNascimento" dateFormat="dd/mm/yy"   [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" />
+            <p-datepicker  id="dataNascimento" [(ngModel)]="aluno.dataNascimento "  disabled  required name="dataNascimento" dateFormat="dd/mm/yy"  [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" />
             <label class="calendar_label" for="dataNascimento">Data de nascimento</label>
         </p-floatlabel>
         <div *ngIf="formAluno.controls['dataNascimento']?.invalid && formAluno.controls['dataNascimento']?.touched">

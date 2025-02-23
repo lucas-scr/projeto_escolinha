@@ -14,6 +14,7 @@ import { Aluno } from '../../model/Alunos';
 import { DatePickerModule } from 'primeng/datepicker';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { CheckboxModule } from 'primeng/checkbox';
+import { ServiceMensagemGlobal } from '../../services/mensagens_global';
 
 
 @Component({
@@ -39,52 +40,53 @@ import { CheckboxModule } from 'primeng/checkbox';
 })
 export class AlteracaoAlunosComponent implements OnInit {
 
-  alunoId: Number | undefined;
+  alunoId: number | undefined;
 
   nome: String;
   dataNascimento: Date;
   sexo: String;
-  autorizacaoDeImagem: Boolean = false;
-  alunoAtualizado: Aluno;
-  
-  constructor(private serviceAlunos: ServiceAlunos, private route: ActivatedRoute){
-    this.capturarId();
-    this.carregarDados (this.serviceAlunos.findBydId(this.alunoId))
-    console.log(this.serviceAlunos.findBydId(this.alunoId))
+  autorizacaoDeImagem: Boolean;
 
+  
+  constructor(private serviceAlunos: ServiceAlunos, private route: ActivatedRoute, private serviceMensagemGlobal: ServiceMensagemGlobal){
+    this.capturarId();
   }
 
   onSubmit(){
-    this.serviceAlunos.AtualizarAlunoNalista(this.salvarDadosAlterado())
+    let novoAluno: Aluno = new Aluno(this.nome, this.dataNascimento,this.sexo,this.autorizacaoDeImagem)
+
+    this.serviceAlunos.atualizarAlunoNalista(this.alunoId, novoAluno).subscribe(
+      {
+        next: () => this.serviceMensagemGlobal.showMessage("success","Cadastro", "Os dados do aluno foram atualizados com sucesso."),
+        error: (erro) => {
+          this.serviceMensagemGlobal.showMessage("success","Cadastro", "Ocorreu um erro. Tente novamente mais tarde"),
+          console.log(erro)
+        } 
+      }
+    );
+
     history.back();
   }
-
   ngOnInit() {
 
   }
-  capturarId(){
-    this.route.params.subscribe(params => {
-      if(params != undefined){
+  capturarId() {
+    this.route.params.subscribe((params) => {
+      if (params != undefined) {
         this.alunoId = params['id'];
-      }else{
-        throw console.error("Aluno não identificado");
+        this.carregarDadosAluno();
+      } else {
+        throw console.error('Aluno não identificado');
       }
-      })
+    });
   }
 
-  carregarDados(alunoCarregado:Aluno){
-    this.nome = alunoCarregado.nome;
-    this.dataNascimento = alunoCarregado.dataNascimento; 
-    this.sexo = alunoCarregado.sexo;
-    this.autorizacaoDeImagem = alunoCarregado.autorizacaoDeImagem;
-  }
-
-  salvarDadosAlterado(): Aluno{
-    this.alunoAtualizado = this.serviceAlunos.findBydId(this.alunoId)
-    this.alunoAtualizado.nome = this.nome;
-    this.alunoAtualizado.dataNascimento = this.dataNascimento;
-    this.alunoAtualizado.sexo = this.sexo;
-    this.alunoAtualizado.autorizacaoDeImagem = this.autorizacaoDeImagem;
-    return this.alunoAtualizado;
+  carregarDadosAluno() {
+    this.serviceAlunos.findById(this.alunoId).subscribe((res) => {
+      this.nome = res.nome;
+      this.dataNascimento = res.dataNascimento;
+      this.sexo = res.sexo;
+      this.autorizacaoDeImagem = res.autorizacaoDeImagem;
+    });
   }
 }

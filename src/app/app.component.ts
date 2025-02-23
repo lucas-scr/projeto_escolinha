@@ -9,6 +9,7 @@ import { ToastModule } from 'primeng/toast';
 import { ServiceMensagemGlobal } from './services/mensagens_global';
 import {MockDbAlunosService } from './mocks/mockDbAlunos'
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { ServiceAlunos } from './services/service_alunos';
 
 
 
@@ -22,13 +23,15 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
     RouterOutlet,
     CommonModule,
     ToastModule,
-    InMemoryWebApiModule
+    InMemoryWebApiModule,
+  
 
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   providers:[
-    ServiceMensagemGlobal
+    ServiceMensagemGlobal,
+    ServiceAlunos
   ]
 })
 export class AppComponent {

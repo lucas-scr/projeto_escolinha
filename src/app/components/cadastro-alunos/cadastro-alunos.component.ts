@@ -26,7 +26,6 @@ export class CadastroAlunosComponent implements OnInit {
   nome: String;
   dataNascimento: Date = new Date()
   autorizacaoDeImagem: boolean = false;
-  aluno: Aluno;  
 
   constructor(private serviceAlunos: ServiceAlunos, private router: Router, private serviceMensagemGlobal: ServiceMensagemGlobal){
   }
@@ -36,8 +35,12 @@ export class CadastroAlunosComponent implements OnInit {
   }
 
   onSubmit(){
-    this.aluno = new Aluno(this.nome,this.dataNascimento,this.sexo, this.autorizacaoDeImagem );
-    this.serviceAlunos.adicionarAlunosNalista(this.aluno);
+    let alunoNovo = new Aluno(this.nome,this.dataNascimento,this.sexo, this.autorizacaoDeImagem );
+    this.serviceAlunos.adicionarAlunoNaLista(alunoNovo).subscribe(
+      res =>{
+        console.log("Adicionad com sucesso", res)
+      }
+    );
     this.serviceMensagemGlobal.showMessage("success","Cadastro", "Aluno cadastrado com sucesso.")
     this.router.navigate(['/alunos'])
   }

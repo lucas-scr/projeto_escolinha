@@ -13,19 +13,17 @@ import { ServiceAlunos } from '../../services/service_alunos';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Menu } from 'primeng/menu';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';  // Importando o módulo
-
-
+import { HttpClientModule } from '@angular/common/http'; // Importando o módulo
 
 @Component({
   selector: 'app-lista-alunos',
-  imports: [PrimengImports, HttpClientModule],
+  imports: [PrimengImports],
   templateUrl: './lista-alunos.component.html',
   styleUrl: './lista-alunos.component.css',
   providers: [MessageService, ConfirmationService],
 })
 export class ListaAlunosComponent implements OnInit {
-  listaAlunos: Aluno[] = [];
+  listaAlunos: Aluno[];
   filtroNome: String;
 
   @ViewChild('menu') menu!: Menu;
@@ -42,7 +40,10 @@ export class ListaAlunosComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.listaAlunos = this.serviceAluno.listarAlunos();
+    this.serviceAluno.obterAlunos().subscribe({
+      next: (dados) => (this.listaAlunos = dados),
+      error: (erro) => console.log('Erro:', erro)
+    });
 
     this.opcoesDeAcoes = [
       {
@@ -72,21 +73,11 @@ export class ListaAlunosComponent implements OnInit {
 
   removerAlunoDaLista(id: Number) {
     this.serviceAluno.removerAlunoDaLista(id);
-    this.showMessage('success', 'Excluir', 'Aluno removido com sucesso');
   }
 
   abrirMenu(event: Event, aluno: any) {
     this.alunoId = aluno;
     this.menu.toggle(event); // Exibe o menu no local correto
-  }
-
-  showMessage(tipoMensagem: String, titulo: String, mensagem: String) {
-    this.messageService.add({
-      severity: `${tipoMensagem}`,
-      summary: `${titulo}`,
-      detail: `${mensagem}`,
-      life: 3000,
-    });
   }
 
   confirmarRemover() {
@@ -112,14 +103,15 @@ export class ListaAlunosComponent implements OnInit {
     });
   }
 
-  filtrarLista(event: any){
-    if(this.filtroNome.length > 0){
-      this.listaAlunos = this.serviceAluno.listarAlunos().filter(aluno => 
-        aluno.nome
-        .toLowerCase()
-        .startsWith(this.filtroNome.toLowerCase()))
-    }else{
-      this.listaAlunos = this.serviceAluno.listarAlunos();
-    }
+  filtrarLista(event: any) {
+    this.serviceAluno.obterAlunos().subscribe((alunos) => {
+      if (this.filtroNome.length > 0) {
+        this.listaAlunos = alunos.filter((aluno) =>
+          aluno.nome.toLowerCase().startsWith(this.filtroNome.toLowerCase())
+        );
+      }else{
+        this.listaAlunos = alunos
+      }
+    });
   }
 }

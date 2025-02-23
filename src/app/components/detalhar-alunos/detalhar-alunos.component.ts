@@ -15,7 +15,6 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { CheckboxModule } from 'primeng/checkbox';
 
-
 @Component({
   selector: 'app-detalhar-alunos',
   imports: [
@@ -32,30 +31,39 @@ import { CheckboxModule } from 'primeng/checkbox';
     DatePickerModule,
     RadioButtonModule,
     CheckboxModule,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './detalhar-alunos.component.html',
-  styleUrl: './detalhar-alunos.component.css'
+  styleUrl: './detalhar-alunos.component.css',
 })
 export class DetalharAlunosComponent {
-
   alunoId: Number;
 
-  aluno: Aluno;
+  aluno: Aluno = {} as Aluno;
 
-  constructor(private serviceAluno: ServiceAlunos, private route: ActivatedRoute){
-    this.capturarId()
-    this.aluno = this.serviceAluno.findBydId(this.alunoId)
+  constructor(
+    private serviceAluno: ServiceAlunos,
+    private route: ActivatedRoute
+  ) {
+    this.capturarId();
+
   }
 
-  capturarId(){
-    this.route.params.subscribe(params => {
-      if(params != undefined){
+  capturarId() {
+    this.route.params.subscribe((params) => {
+      if (params != undefined) {
         this.alunoId = params['id'];
-      }else{
-        throw console.error("Aluno não identificado");
+        this.carregarDadosAluno();
+      } else {
+        throw console.error('Aluno não identificado');
       }
-      })
+    });
   }
 
+  carregarDadosAluno() {
+    this.serviceAluno.findById(this.alunoId).subscribe((res) => {
+      this.aluno = res;
+      this.aluno.dataNascimento = new Date(this.aluno.dataNascimento);
+    });
+  }
 }
