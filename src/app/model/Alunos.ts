@@ -11,7 +11,7 @@ import { Pessoa } from "../interfaces/pessoa";
     iniciaisNome: String;
     sexo: String;
 
-    constructor(nome: String, dataNascimento: Date, sexo: String ,autorizacaoDeImagem?: boolean, diasDaSemana?: String[], id?: Number, iniciais?: String){
+    constructor(nome: String, dataNascimento: Date, sexo: String ,autorizacaoDeImagem?: Boolean, diasDaSemana?: String[], id?: Number, iniciais?: String){
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.autorizacaoDeImagem = autorizacaoDeImagem;

@@ -14,6 +14,7 @@ import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Menu } from 'primeng/menu';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http'; // Importando o módulo
+import { ServiceMensagemGlobal } from '../../services/mensagens_global';
 
 @Component({
   selector: 'app-lista-alunos',
@@ -28,22 +29,20 @@ export class ListaAlunosComponent implements OnInit {
 
   @ViewChild('menu') menu!: Menu;
 
-  alunoId: Number = 2;
+  alunoId: Number;;
 
   opcoesDeAcoes: MenuItem[] | undefined;
 
   constructor(
     private serviceAluno: ServiceAlunos,
     private router: Router,
-    private messageService: MessageService,
+    private messageService: ServiceMensagemGlobal,
     private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit() {
-    this.serviceAluno.obterAlunos().subscribe({
-      next: (dados) => (this.listaAlunos = dados),
-      error: (erro) => console.log('Erro:', erro)
-    });
+    
+    this.carregarDadosNaLista();
 
     this.opcoesDeAcoes = [
       {
@@ -64,15 +63,37 @@ export class ListaAlunosComponent implements OnInit {
           {
             label: 'Remover',
             icon: 'pi pi-trash',
-            command: () => this.confirmarRemover(),
+            command: () => {
+              this.confirmarRemover()
+            },
           },
         ],
       },
     ];
   }
 
+  carregarDadosNaLista(){
+    this.serviceAluno.obterAlunos().subscribe({
+      next: (dados) => (this.listaAlunos = dados),
+      error: (erro) => console.log('Erro:', erro)
+    });
+  }
+
   removerAlunoDaLista(id: Number) {
-    this.serviceAluno.removerAlunoDaLista(id);
+    this.serviceAluno.removerAluno(id).subscribe(
+      {
+        next: () => 
+          {
+            this.messageService.showMessage("success","Exclusão", "O aluno foi removido com sucesso.");
+            this.carregarDadosNaLista()
+          },
+        error: (erro) => {
+          this.messageService.showMessage("danger","Erro", "Não foi possível excluir o aluno." );
+          console.log(erro)
+        }
+
+      }
+    );
   }
 
   abrirMenu(event: Event, aluno: any) {

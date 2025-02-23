@@ -84,7 +84,7 @@ export class AlteracaoAlunosComponent implements OnInit {
   carregarDadosAluno() {
     this.serviceAlunos.findById(this.alunoId).subscribe((res) => {
       this.nome = res.nome;
-      this.dataNascimento = res.dataNascimento;
+      this.dataNascimento = new Date (res.dataNascimento);
       this.sexo = res.sexo;
       this.autorizacaoDeImagem = res.autorizacaoDeImagem;
     });

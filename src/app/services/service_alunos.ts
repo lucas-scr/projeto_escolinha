@@ -31,17 +31,13 @@ export class ServiceAlunos {
     }
     
 
-    removerAlunoDaLista(id: Number){
-     const index = this.listaAlunos.findIndex(alunoLista => alunoLista.id === id)
-
-     if(index !== -1) {
-        this.listaAlunos.splice(index, 1);
-     }
-    }
+    removerAluno(id: Number): Observable<Aluno>{
+        console.log(id);
+        return this.http.delete<Aluno>(`${this.url}/${id}`)
+    }   
  
 
-
-    atualizarAlunoNalista(id: number, aluno: Aluno):Observable<Aluno>{
+    atualizarAlunoNalista(id: Number, aluno: Aluno):Observable<Aluno>{
        return this.http.put<Aluno>(`${this.url}/${id}`, aluno)
     }
 

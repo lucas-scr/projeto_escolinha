@@ -37,11 +37,10 @@ export class CadastroAlunosComponent implements OnInit {
   onSubmit(){
     let alunoNovo = new Aluno(this.nome,this.dataNascimento,this.sexo, this.autorizacaoDeImagem );
     this.serviceAlunos.adicionarAlunoNaLista(alunoNovo).subscribe(
-      res =>{
-        console.log("Adicionad com sucesso", res)
+      {
+        next: () => this.serviceMensagemGlobal.showMessage("success","Cadastro", "Aluno cadastrado com sucesso.")
       }
     );
-    this.serviceMensagemGlobal.showMessage("success","Cadastro", "Aluno cadastrado com sucesso.")
     this.router.navigate(['/alunos'])
   }
 
