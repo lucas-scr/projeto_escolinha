@@ -14,6 +14,7 @@ import { Aluno } from '../../model/Alunos';
 import { DatePickerModule } from 'primeng/datepicker';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { CheckboxModule } from 'primeng/checkbox';
+import { DiasDaSemana } from '../../common/enumDiasDaSemana';
 
 @Component({
   selector: 'app-detalhar-alunos',
@@ -41,12 +42,21 @@ export class DetalharAlunosComponent {
 
   aluno: Aluno = {} as Aluno;
 
+    dias: string [] = [
+      DiasDaSemana.SEGUNDA,
+      DiasDaSemana.TERCA,
+      DiasDaSemana.QUARTA,
+      DiasDaSemana.QUINTA,
+      DiasDaSemana.SEXTA,
+    ];
+  
+    diasSelecionados: [] = [];
+
   constructor(
     private serviceAluno: ServiceAlunos,
     private route: ActivatedRoute
   ) {
     this.capturarId();
-
   }
 
   capturarId() {

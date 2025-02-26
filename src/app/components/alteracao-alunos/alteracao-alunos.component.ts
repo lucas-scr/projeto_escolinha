@@ -15,6 +15,7 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ServiceMensagemGlobal } from '../../services/mensagens_global';
+import { DiasDaSemana } from '../../common/enumDiasDaSemana';
 
 
 @Component({
@@ -40,12 +41,21 @@ import { ServiceMensagemGlobal } from '../../services/mensagens_global';
 })
 export class AlteracaoAlunosComponent implements OnInit {
 
-  alunoId: number | undefined;
+  alunoId: Number | undefined;
 
   nome: String;
   dataNascimento: Date;
   sexo: String;
   autorizacaoDeImagem: Boolean;
+  dias: string [] = [
+    DiasDaSemana.SEGUNDA,
+    DiasDaSemana.TERCA,
+    DiasDaSemana.QUARTA,
+    DiasDaSemana.QUINTA,
+    DiasDaSemana.SEXTA,
+  ];
+
+  diasSelecionados: string [] = [];
 
   
   constructor(private serviceAlunos: ServiceAlunos, private route: ActivatedRoute, private serviceMensagemGlobal: ServiceMensagemGlobal){
@@ -53,13 +63,13 @@ export class AlteracaoAlunosComponent implements OnInit {
   }
 
   onSubmit(){
-    let novoAluno: Aluno = new Aluno(this.nome, this.dataNascimento,this.sexo,this.autorizacaoDeImagem)
+    let novoAluno: Aluno = new Aluno(this.nome, this.dataNascimento,this.sexo,this.autorizacaoDeImagem, this.diasSelecionados, this.alunoId )
 
     this.serviceAlunos.atualizarAlunoNalista(this.alunoId, novoAluno).subscribe(
       {
         next: () => this.serviceMensagemGlobal.showMessage("success","Cadastro", "Os dados do aluno foram atualizados com sucesso."),
         error: (erro) => {
-          this.serviceMensagemGlobal.showMessage("success","Cadastro", "Ocorreu um erro. Tente novamente mais tarde"),
+          this.serviceMensagemGlobal.showMessage("warn","Cadastro", "Ocorreu um erro. Tente novamente mais tarde"),
           console.log(erro)
         } 
       }
@@ -87,6 +97,8 @@ export class AlteracaoAlunosComponent implements OnInit {
       this.dataNascimento = new Date (res.dataNascimento);
       this.sexo = res.sexo;
       this.autorizacaoDeImagem = res.autorizacaoDeImagem;
+      this.diasSelecionados = res.dias;
+      this.alunoId = res.id;
     });
   }
 }

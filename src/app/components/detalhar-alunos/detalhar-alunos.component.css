@@ -52,3 +52,18 @@ small{
 .radio_button label{
     margin-left: 0.8rem;
 }
+
+
+.cadastro_input_multiselecao {
+    display: flex;
+    width: 60%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+::ng-deep p-checkbox    {
+margin-right: 1rem;
+}  

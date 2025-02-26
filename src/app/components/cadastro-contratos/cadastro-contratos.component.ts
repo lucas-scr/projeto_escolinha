@@ -8,6 +8,7 @@ import { MessageService } from 'primeng/api';
 import { ServiceContratos } from '../../services/service_contratos';
 import { ServiceAlunos } from '../../services/service_alunos';
 import { Contrato } from '../../model/Contrato';
+import { DiasDaSemana } from '../../common/enumDiasDaSemana';
 
 @Component({
   selector: 'app-cadastro-contratos',
@@ -34,8 +35,14 @@ export class CadastroContratosComponent implements OnInit {
 
   alunos: Aluno[] = [];
 
-  dias: string[] = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'];
-  diasSelecionados: String[] = [];
+  dias: string[] = [
+    DiasDaSemana.SEGUNDA,
+    DiasDaSemana.SEXTA,
+    DiasDaSemana.QUARTA,
+    DiasDaSemana.QUINTA,
+    DiasDaSemana.SEXTA
+  ];
+  diasSelecionados: string[] = [];
 
   novoContrato: Contrato;
 
