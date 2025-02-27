@@ -7,6 +7,7 @@ import { TelefonePipe, MoedaPipe } from '../../mascaras.pipe';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { Menu } from 'primeng/menu';
+import { ServiceMensagemGlobal } from '../../services/mensagens_global';
 
 @Component({
   selector: 'app-lista-contratos',
@@ -15,35 +16,34 @@ import { Menu } from 'primeng/menu';
   styleUrl: './lista-contratos.component.css',
   providers: [ServiceContratos, MessageService, ConfirmationService],
 })
-export class ListaContratosComponent {
+export class ListaContratosComponent implements OnInit {
   opcoesDeAcoes: MenuItem[] | undefined;
-  listaContratos: Contrato[];
+  listaContratos: Contrato[] = [];
   status: any[];
   searchValue: String;
-  responsaveis: any[];
   loading: boolean = true;
-  activityValues: number[] = [0, 100];
   itemId: Number;
   @ViewChild('menu') menu!: Menu;
 
   constructor(
     private contratosService: ServiceContratos,
     private router: Router,
-    private messageService: MessageService,
+    private messageService: ServiceMensagemGlobal,
     private confirmationService: ConfirmationService
   ) {
-    this.listaContratos = this.contratosService.listarContrato();
+
   }
 
   ngOnInit() {
+
+      this.carregarContratos();
+
     this.loading = false;
 
     this.status = [
       { label: 'Iniciado', value: 'iniciado' },
       { label: 'Finalizado', value: 'finalizado' },
     ];
-
-    this.responsaveis = [{ name: 'Amy Elsner' }, { name: 'Anna Fali' }];
 
     this.opcoesDeAcoes = [
       {
@@ -72,24 +72,28 @@ export class ListaContratosComponent {
     table.clear();
   }
 
+  carregarContratos(){
+    this.contratosService.listarContratos().subscribe({
+      next: (dados) => this.listaContratos = dados,
+      error: (erro) => console.log(erro)
+    })
+  }
+
   abrirMenu(event: Event, id: any) {
     this.itemId = id;
     this.menu.toggle(event); // Exibe o menu no local correto
   }
 
-  removerAlunoDaLista(id: Number) {
-    this.contratosService.removerContratoDaLista(id);
-    this.showMessage('success', 'Removido!', 'Contrato removido com sucesso.');
+  removerContratoLista(id: Number) {
+    this.contratosService.removerContrato(id).subscribe({
+      next: () =>  {this.messageService.showMessage('success', 'Removido!', 'Contrato removido com sucesso.'),
+        this.carregarContratos();
+      },
+      error: () => this.messageService.showMessage('danger', 'Erro', 'Não foi possível remover o contrato.'),
+    });
+  
   }
 
-  showMessage(tipoMensagem: String, titulo: String, mensagem: String) {
-    this.messageService.add({
-      severity: `${tipoMensagem}`,
-      summary: `${titulo}`,
-      detail: `${mensagem}`,
-      life: 3000,
-    });
-  }
 
   confirmarRemover() {
     this.confirmationService.confirm({
@@ -109,16 +113,9 @@ export class ListaContratosComponent {
         severity: 'danger',
       },
       accept: () => {
-        this.removerAlunoDaLista(this.itemId);
+        this.removerContratoLista(this.itemId);
       },
-      reject: () => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Rejected',
-          detail: 'You have rejected',
-          life: 3000,
-        });
-      },
+      reject: () => {},
     });
   }
 

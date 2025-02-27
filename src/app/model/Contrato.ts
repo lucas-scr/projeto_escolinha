@@ -2,102 +2,48 @@ import { Aluno } from './Alunos';
 import { Responsavel } from './Responsavel';
 
 export class Contrato {
-  private _id: Number;  
-  private _responsavel: Responsavel;
-  private _alunos: Aluno [];
-  private _dataCadastro: Date;
-  private _dataInicio: Date;
-  private _dataFim?: Date;
-  private _dias: String[];
-  private _valor: Number;
-  private _dataPagamento: Date;
-  private _situacao: String;
-  private _ressarcimentoEmFeriados: Boolean;
+  id: Number;  
+  responsavel: Responsavel;
+  alunos: Aluno [];
+  dataCadastro: Date;
+  dataInicio: Date;
+  dataFim?: Date;
+  _dias: String[];
+  valor: Number;
+  dataPagamento: Date;
+  situacao: String;
+  ressarcimentoEmFeriados: Boolean;
 
 
   constructor(
     responsavel: Responsavel,
     alunos: Aluno[],
     dataInicio: Date,
-    dias: String[],
     valor: Number,
     dataPagamento: Date,
+    dias?: String[],
+    id?: Number
+
   ) {
-    this._responsavel = responsavel,
-    this._alunos = alunos,
-    this._dataCadastro = new Date();
-    this._dataInicio = dataInicio;
+    this.responsavel = responsavel,
+    this.alunos = alunos,
+    this.dataCadastro = new Date();
+    this.dataInicio = dataInicio;
     this._dias = dias;
-    this._valor = valor;
-    this._dataPagamento = dataPagamento;
-    this._situacao = "Iniciado"
+    this.valor = valor;
+    this.dataPagamento = dataPagamento;
+    this.situacao = "Iniciado";
+    this.id = id;
   }
 
-  // Getters
-  get responsavel(): Responsavel {
-    return this._responsavel;
-  }
-
-  get alunos(): Aluno[] {
-    return this._alunos;
-  }
-
-  get dataCadastro(): Date {
-    return this._dataCadastro;
-  }
-
-  get dataInicio(): Date {
-    return this._dataInicio;
-  }
-
-  get dataFim(): Date | undefined {
-    return this._dataFim;
-  }
 
   get dias(): String[] {
     return this._dias;
   }
 
-  get valor(): Number {
-    return this._valor;
-  }
-
-  get dataPagamento(): Date {
-    return this._dataPagamento;
-  }
-  get id(): Number {
-    return this._id;
-  }
-
-  get situacao(): String {
-    return this._situacao;
-  }
-
-  get ressarcimentoEmFeriados(): Boolean{
-    return this._ressarcimentoEmFeriados
-  }
 
 
-  // Setters
-  set responsavel(responsavel: Responsavel) {
-    this._responsavel = responsavel;
-  }
 
-  set alunos(alunos: Aluno[]) {
-    this._alunos = alunos;
-  }
-
-  set dataCadastro(dataCadastro: Date) {
-    this._dataCadastro = dataCadastro;
-  }
-
-  set dataInicio(dataInicio: Date) {
-    this._dataInicio = dataInicio;
-  }
-
-  set dataFim(dataFim: Date | undefined) {
-    this._dataFim = dataFim;
-  }
 
   set dias(dias: String[]) {
     if (dias.length > 5) {
@@ -106,25 +52,6 @@ export class Contrato {
     this._dias = dias;
   }
 
-  set valor(valor: Number) {
-    this._valor = valor;
-  }
-
-  set dataPagamento(dataPagamento: Date) {
-    this._dataPagamento = dataPagamento;
-  }
-
-
-  set id(id: Number) {
-    this._id = id;
-  }
-
-  set situacao(situacao: String) {
-    this._situacao = situacao;
-  }
-  set ressarcimentoEmFeriados(ressarcimento: Boolean) {
-    this._ressarcimentoEmFeriados = ressarcimento;
-  }
 
 
 }

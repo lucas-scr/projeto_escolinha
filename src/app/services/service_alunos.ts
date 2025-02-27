@@ -15,8 +15,6 @@ export class ServiceAlunos {
 
     private url = 'api/alunos'
 
-    private listaAlunos: Aluno[] =  [];
-
     constructor (private http: HttpClient){
         
     }
@@ -32,7 +30,6 @@ export class ServiceAlunos {
     
 
     removerAluno(id: Number): Observable<Aluno>{
-        console.log(id);
         return this.http.delete<Aluno>(`${this.url}/${id}`)
     }   
  

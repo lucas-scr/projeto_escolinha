@@ -104,10 +104,10 @@
             </div>
 
             <div class="cadastro_input">
+
                 <p-floatlabel variant="on">
-                    <p-datepicker id="dataPagamento" [(ngModel)]="dataPagamento" required name="dataPagamento"
-                        dateFormat="dd/mm/yy" [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" />
-                    <label class="calendar_label" for="dataPagamento">Data de pagamento</label>
+                    <p-inputnumber id="dataPagamento" maxlength=2  min=1 max=31 [(ngModel)]="dataPagamento" name="dataPagamento" required />
+                        <label class="calendar_label" for="dataPagamento">Dia do pagamento</label>
                 </p-floatlabel>
                 <div
                     *ngIf="formContrato.controls['dataPagamento']?.invalid && formContrato.controls['dataPagamento']?.touched">

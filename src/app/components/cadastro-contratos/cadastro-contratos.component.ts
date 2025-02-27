@@ -9,6 +9,7 @@ import { ServiceContratos } from '../../services/service_contratos';
 import { ServiceAlunos } from '../../services/service_alunos';
 import { Contrato } from '../../model/Contrato';
 import { DiasDaSemana } from '../../common/enumDiasDaSemana';
+import { ServiceMensagemGlobal } from '../../services/mensagens_global';
 
 @Component({
   selector: 'app-cadastro-contratos',
@@ -22,7 +23,6 @@ export class CadastroContratosComponent implements OnInit {
 
   responsavel: Responsavel = new Responsavel('', '');
   alunoNovo: Aluno;
-
   nome: String;
   dataNascimento: Date;
   sexo: String;
@@ -37,7 +37,7 @@ export class CadastroContratosComponent implements OnInit {
 
   dias: string[] = [
     DiasDaSemana.SEGUNDA,
-    DiasDaSemana.SEXTA,
+    DiasDaSemana.TERCA,
     DiasDaSemana.QUARTA,
     DiasDaSemana.QUINTA,
     DiasDaSemana.SEXTA
@@ -47,7 +47,7 @@ export class CadastroContratosComponent implements OnInit {
   novoContrato: Contrato;
 
   constructor(
-    private messageService: MessageService,
+    private messageService: ServiceMensagemGlobal,
     private contratoService: ServiceContratos,
     private serviceAlunos: ServiceAlunos,
     private router: Router
@@ -63,8 +63,12 @@ export class CadastroContratosComponent implements OnInit {
   }
 
   onSubmit() {
-    this.novoContrato = new Contrato(this.responsavel, this.alunos,this.dataInicio, ["Segunda"], this.valorContratado, this.dataPagamento)
-    this.contratoService.adicionarContratoNalista(this.novoContrato);
+    this.novoContrato = new Contrato(this.responsavel, this.alunos,this.dataInicio, this.valorContratado, this.dataPagamento )
+    this.contratoService.cadastrarContrato(this.novoContrato).subscribe({
+      next: () => this.messageService.showMessage('success','Cadastrado!', 'Cadastro realizado com sucesso.'),
+      error: () => this.messageService.showMessage('danger','Algo deu errado!', 'Não foi possível realizar o cadastro.'),
+    })
+    
     this.router.navigate(['/contratos']);
   }
 
