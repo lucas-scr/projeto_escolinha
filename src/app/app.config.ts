@@ -15,15 +15,14 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { MockDbAlunosService } from './mocks/mockDbAlunos';
-import { MockDbContratosService } from './mocks/mockDbContratos';
+import { MockDbService } from './mocks/mockDb';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
-    importProvidersFrom(InMemoryWebApiModule.forRoot(MockDbAlunosService)),
+    importProvidersFrom(InMemoryWebApiModule.forRoot(MockDbService)),
     MessageService,
-    importProvidersFrom(InMemoryWebApiModule.forRoot(MockDbContratosService)),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimationsAsync(),

@@ -2,13 +2,13 @@
     <ng-template #title>
         Cadastrar contrato
     </ng-template>
-    <form #formContrato="ngForm" (ngSubmit)="onSubmit()">
+    <form #formContrato="ngForm" (ngSubmit)="onSubmit()" *ngIf="contratoCarregado">
         <p-divider />
         <h4>Dados do responsável</h4>
         <div class="dados_responsavel">
             <div class="cadastro_input cadastro_input_primeiro ">
                 <p-floatlabel variant="on">
-                    <input id="nome_responsavel" pInputText [(ngModel)]="responsavel.nome" required
+                    <input id="nome_responsavel" pInputText [(ngModel)]="contratoCarregado.responsavel.nome" required
                         name="nome_responsavel">
                     <label for="nome_responsavel">Nome</label>
                 </p-floatlabel>
@@ -20,7 +20,7 @@
 
             <div class="cadastro_input" id="documento_input">
                 <p-floatlabel variant="on">
-                    <input id="documento_responsavel" pInputText [(ngModel)]="responsavel.documento" required
+                    <input id="documento_responsavel" pInputText [(ngModel)]="contratoCarregado.responsavel.documento" required
                         name="documento_responsavel">
                     <label for="documento_responsavel">Documento (CPF, RG ou CNH)</label>
                 </p-floatlabel>
@@ -30,9 +30,9 @@
                 </div>
             </div>
 
-            <div class="cadastro_input">
+            <div class="cadastro_input" >
                 <p-floatlabel class="label-fixo" variant="on">
-                    <p-inputmask id="contato_responsavel" mask="(99) 99999-9999" [(ngModel)]="responsavel.contato"
+                    <p-inputmask id="contato_responsavel" mask="(99) 99999-9999" [(ngModel)]="contato"
                         required placeholder="(__) _____-____" name="contato_responsavel" />
                     <label for="contato_responsavel">Telefone de contato</label>
                 </p-floatlabel>
@@ -49,14 +49,14 @@
             <p-button (click)="abrirModalAdicionarAluno()" label="Adicionar aluno" />
         </div>
 
-        <p-dataview [value]="alunos" [rows]="5" [paginator]="false" emptyMessage="Nenhum resultado encontrado.">
+        <p-dataview [value]="contratoCarregado.alunos" [rows]="5" [paginator]="false" emptyMessage="Nenhum resultado encontrado.">
             <ng-template #list let-items>
                 <div>
-                    <div class="col-span-12" *ngFor="let item of items; let first = first" class="col-span-12">
+                    <div class="col-span-12" *ngFor="let item of contratoCarregado.alunos; let first = first" class="col-span-12">
                         <div class="list_item">
                             <div class="list_item_row">
                                 <div class="item_avatar">
-                                    <p-avatar [label]=item.iniciaisNome styleClass="mr-2"
+                                    <p-avatar [label]=item.iniciaisNome.toString() styleClass="mr-2"
                                         [ngClass]="{ 'list_sexo_m': item.sexo === 'M', 'list_sexo_f': item.sexo === 'F' }"
                                         size="xlarge" shape="circle" />
                                 </div>
@@ -93,7 +93,7 @@
 
             <div class="cadastro_input">
                 <p-floatlabel variant="on">
-                    <p-datepicker id="dataInicio" [(ngModel)]="dataInicio" required name="dataInicio"
+                    <p-datepicker id="dataInicio" [(ngModel)]="contratoCarregado.dataInicio" required name="dataInicio"
                         dateFormat="dd/mm/yy" [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" />
                     <label class="calendar_label" for="dataInicio">Data de início</label>
                 </p-floatlabel>
@@ -106,7 +106,7 @@
             <div class="cadastro_input">
 
                 <p-floatlabel variant="on">
-                    <p-inputnumber id="dataPagamento" maxlength=2  min=1 max=31 [(ngModel)]="diaPagamento" name="dataPagamento" required />
+                    <p-inputnumber id="dataPagamento" maxlength=2  min=1 max=31 [(ngModel)]="contratoCarregado.diaPagamento" name="dataPagamento" required />
                         <label class="calendar_label" for="dataPagamento">Dia do pagamento</label>
                 </p-floatlabel>
                 <div
@@ -119,7 +119,7 @@
 
             <div class="cadastro_input">
                 <p-floatlabel variant="on">
-                    <p-inputnumber [(ngModel)]="valorContratado" name="valor_contrato" required inputId="currency-us"
+                    <p-inputnumber [(ngModel)]="contratoCarregado.valor" name="contratoCarregado.valor_contrato" required inputId="currency-us"
                         mode="currency" currency="BRL" locale="pt-BR" />
                     <label class="calendar_label" for="dataNascimento">Valor</label>
                 </p-floatlabel>
@@ -130,13 +130,13 @@
             </div>
 
             <div class="cadastro_input_checkbox">
-                <p-checkbox [(ngModel)]="autorizacaoDeImagem" [binary]="true" inputId="autorizaocaoImagem"
+                <p-checkbox [(ngModel)]="contratoCarregado.autorizacaoImagem" [binary]="true" inputId="autorizaocaoImagem"
                     name="usoImagem" />
                 <label for="autorizaocaoImagem" class="ml-2">Autorizado o uso de imagem e video do(s) aluno(s)</label>
             </div>
 
             <div class="cadastro_input_checkbox">
-                <p-checkbox [(ngModel)]="ressarcimentoEmFeriados" [binary]="true" inputId="ressarcimentoEmFeriados"
+                <p-checkbox [(ngModel)]="contratoCarregado.ressarcimentoEmFeriados" [binary]="true" inputId="ressarcimentoEmFeriados"
                     name="ressarcimentoEmFeriados" />
                 <label for="ressarcimentoEmFeriados" class="ml-2">O responsável opta por ressarcimento do valor no lugar
                     de atividades nos casos <del></del> feriados</label>

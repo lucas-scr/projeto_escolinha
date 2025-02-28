@@ -10,9 +10,10 @@ export class Contrato {
   dataFim?: Date;
   _dias: String[];
   valor: Number;
-  dataPagamento: Date;
+  diaPagamento: Number;
   situacao: String;
   ressarcimentoEmFeriados: Boolean;
+  autorizacaoImagem: Boolean;
 
 
   constructor(
@@ -20,7 +21,8 @@ export class Contrato {
     alunos: Aluno[],
     dataInicio: Date,
     valor: Number,
-    dataPagamento: Date,
+    diaPagamento: Number,
+    autorizacaoImagem: Boolean,
     dias?: String[],
     id?: Number
 
@@ -31,9 +33,10 @@ export class Contrato {
     this.dataInicio = dataInicio;
     this._dias = dias;
     this.valor = valor;
-    this.dataPagamento = dataPagamento;
+    this.diaPagamento = diaPagamento;
     this.situacao = "Iniciado";
     this.id = id;
+    this.autorizacaoImagem = autorizacaoImagem;
   }
 
 

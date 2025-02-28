@@ -21,7 +21,7 @@ import { ServiceMensagemGlobal } from '../../services/mensagens_global';
 export class CadastroContratosComponent implements OnInit {
   modalAdicionar: boolean = false;
 
-  responsavel: Responsavel = new Responsavel('', '');
+  responsavel: Responsavel = new Responsavel('', '', 4123412);
   alunoNovo: Aluno;
   nome: String;
   dataNascimento: Date;
@@ -29,7 +29,7 @@ export class CadastroContratosComponent implements OnInit {
   valorContratado: Number;
   dataInicio: Date;
 
-  dataPagamento: Date;
+  diaPagamento: Number;
   autorizacaoDeImagem: boolean = false;
   ressarcimentoEmFeriados: Boolean;
 
@@ -54,16 +54,10 @@ export class CadastroContratosComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.alunos.push(
-      new Aluno('Aluno 1 da Silva', new Date(), 'F', this.autorizacaoDeImagem, [
-        'Segunda',
-        'Terça',
-      ])
-    );
   }
 
   onSubmit() {
-    this.novoContrato = new Contrato(this.responsavel, this.alunos,this.dataInicio, this.valorContratado, this.dataPagamento )
+    this.novoContrato = new Contrato(this.responsavel, this.alunos,this.dataInicio, this.valorContratado, this.diaPagamento, this.autorizacaoDeImagem)
     this.contratoService.cadastrarContrato(this.novoContrato).subscribe({
       next: () => this.messageService.showMessage('success','Cadastrado!', 'Cadastro realizado com sucesso.'),
       error: () => this.messageService.showMessage('danger','Algo deu errado!', 'Não foi possível realizar o cadastro.'),

@@ -3,9 +3,9 @@ import { Pessoa } from "../interfaces/pessoa";
 export class Responsavel implements Pessoa{
     nome: String;
     documento: String;
-    contato?: Number;
+    contato: Number;
 
-    constructor(nome: String, documento: String, contato?: Number){
+    constructor(nome: String, documento: String, contato: Number){
         this.nome = nome;
         this.documento = documento;
         this.contato = contato

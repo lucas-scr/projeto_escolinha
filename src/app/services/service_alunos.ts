@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { Aluno } from '../model/Alunos';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 
 export class ServiceAlunos {
 
-    private url = 'api/alunos'
+    private url = 'api/alunos';
 
     constructor (private http: HttpClient){
         

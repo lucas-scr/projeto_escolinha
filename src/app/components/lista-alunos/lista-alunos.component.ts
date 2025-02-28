@@ -74,7 +74,7 @@ export class ListaAlunosComponent implements OnInit {
 
   carregarDadosNaLista(){
     this.serviceAluno.obterAlunos().subscribe({
-      next: (dados) => (this.listaAlunos = dados),
+      next: (dados) => this.listaAlunos = dados,
       error: (erro) => console.log('Erro:', erro)
     });
   }

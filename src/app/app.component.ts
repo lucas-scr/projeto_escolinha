@@ -7,7 +7,6 @@ import { OverlayBadgeModule } from 'primeng/overlaybadge';
 import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
 import { ServiceMensagemGlobal } from './services/mensagens_global';
-import {MockDbAlunosService } from './mocks/mockDbAlunos'
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { ServiceAlunos } from './services/service_alunos';
 

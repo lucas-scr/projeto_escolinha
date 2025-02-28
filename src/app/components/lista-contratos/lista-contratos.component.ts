@@ -5,7 +5,7 @@ import { ServiceContratos } from '../../services/service_contratos';
 import { Contrato } from '../../model/Contrato';
 import { TelefonePipe, MoedaPipe } from '../../mascaras.pipe';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Menu } from 'primeng/menu';
 import { ServiceMensagemGlobal } from '../../services/mensagens_global';
 
@@ -36,7 +36,7 @@ export class ListaContratosComponent implements OnInit {
 
   ngOnInit() {
 
-      this.carregarContratos();
+    this.carregarContratos();
 
     this.loading = false;
 
@@ -52,10 +52,13 @@ export class ListaContratosComponent implements OnInit {
           {
             label: 'Detalhar',
             icon: 'pi pi-eye',
+            command: () => this.router.navigate(['/detalhar-contrato', this.itemId]),
           },
           {
             label: 'Editar',
             icon: 'pi pi-pencil',
+            command: () => this.router.navigate(['/editar-contrato', this.itemId]),
+
           },
           {
             label: 'Remover',
