@@ -37,10 +37,9 @@ export class EditarContratosComponent implements OnInit {
     DiasDaSemana.QUINTA,
     DiasDaSemana.SEXTA,
   ];
-  
+
   diasSelecionados: string[] = [];
 
-  novoContrato: Contrato;
 
   constructor(
     private messageService: ServiceMensagemGlobal,
@@ -57,18 +56,18 @@ export class EditarContratosComponent implements OnInit {
   }
 
   onSubmit() {
-    this.contratoService.cadastrarContrato(this.novoContrato).subscribe({
+    this.contratoService.atualizarContrato(this.contratoId,this.contratoCarregado).subscribe({
       next: () =>
         this.messageService.showMessage(
           'success',
-          'Cadastrado!',
-          'Cadastro realizado com sucesso.'
+          'Atualizado!',
+          'Contrato atualizado com sucesso.'
         ),
       error: () =>
         this.messageService.showMessage(
           'danger',
           'Algo deu errado!',
-          'Não foi possível realizar o cadastro.'
+          'Não foi possível realizar a atualização.'
         ),
     });
 

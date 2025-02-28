@@ -23,23 +23,21 @@ export class TelefonePipe implements PipeTransform {
 
 @Pipe({
   name: 'moeda',
+  standalone: true,
 })
 export class MoedaPipe implements PipeTransform {
-  transform(
-    value: number | string,
-    simbolo: string = 'R$',
-    decimal: number = 2
-  ): string {
+  transform(value: number | string): string {
     if (value === null || value === undefined) return '';
-    let valor: number =
-      typeof value === 'string'
-        ? parseFloat(value.replace(/[^\d.-]/g, ''))
-        : value;
-    if (isNaN(valor)) return '';
-    valor = valor / 100;
-    return `${simbolo} ${valor.toLocaleString('pt-BR', {
-      minimumFractionDigits: decimal,
-      maximumFractionDigits: decimal,
-    })}`;
+    
+    const numberValue = typeof value === 'string' ? parseFloat(value) : value;
+    
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(numberValue);
+  }
+
+  parse(value: string): number {
+    return parseFloat(value.replace(/\D/g, '')) / 100; 
   }
 }

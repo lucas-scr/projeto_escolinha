@@ -7,12 +7,12 @@ import { DiasDaSemana } from '../../common/enumDiasDaSemana';
 import { PrimengImports } from '../../shared/primengImports.module';
 
 @Component({
-  selector: 'app-alteracao-alunos',
+  selector: 'app-editar-alunos',
   imports: [PrimengImports, RouterLink],
   templateUrl: './editar-alunos.component.html',
   styleUrl: './editar-alunos.component.css',
 })
-export class AlteracaoAlunosComponent implements OnInit {
+export class EditarAlunosComponent implements OnInit {
   alunoId: Number | undefined;
 
   nome: String;
@@ -53,7 +53,7 @@ export class AlteracaoAlunosComponent implements OnInit {
         next: () =>
           this.serviceMensagemGlobal.showMessage(
             'success',
-            'Cadastro',
+            'Atualização',
             'Os dados do aluno foram atualizados com sucesso.'
           ),
         error: (erro) => {
