@@ -8,6 +8,7 @@ import { ListaContratosComponent } from './components/lista-contratos/lista-cont
 import { CadastroContratosComponent } from './components/cadastro-contratos/cadastro-contratos.component';
 import { EditarContratosComponent } from './components/editar-contratos/editar-contratos.component';
 import { DetalharContratosComponent } from './components/detalhar-contratos/detalhar-contratos.component';
+import { PaginaInicialComponent } from './components/pagina-inicial/pagina-inicial.component';
 
 
 export const routes: Routes = [
@@ -19,6 +20,7 @@ export const routes: Routes = [
     {path: 'cadastrar-contratos', component: CadastroContratosComponent},
     {path: 'editar-contrato/:id', component: EditarContratosComponent},
     {path: 'detalhar-contrato/:id', component: DetalharContratosComponent},
-
+    {path: '', component: PaginaInicialComponent},
+    {path: 'inicio', component: PaginaInicialComponent}
 
 ];
