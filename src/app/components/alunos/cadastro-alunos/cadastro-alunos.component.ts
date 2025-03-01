@@ -1,10 +1,10 @@
 import { Component, isStandalone, LOCALE_ID, OnInit } from '@angular/core';
-import { ServiceAlunos } from '../../services/service_alunos';
+import { ServiceAlunos } from '../../../services/service_alunos';
 import { Router, RouterLink, RouterModule } from '@angular/router';
-import { Aluno } from '../../model/Alunos';
-import { PrimengImports } from '../../shared/primengImports.module';
-import { ServiceMensagemGlobal } from '../../services/mensagens_global';
-import { DiasDaSemana } from '../../common/enumDiasDaSemana';
+import { Aluno } from '../../../model/Alunos';
+import { PrimengImports } from '../../../shared/primengImports.module';
+import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
+import { DiasDaSemana } from '../../../common/enumDiasDaSemana';
 
 
 @Component({
@@ -17,6 +17,7 @@ import { DiasDaSemana } from '../../common/enumDiasDaSemana';
 export class CadastroAlunosComponent implements OnInit {
   sexo: String = 'M';
   nome: String;
+  dataNascimentoLimite: Date = new Date();
   dataNascimento: Date = new Date();
   autorizacaoDeImagem: boolean = false;
   dias: string [] = [

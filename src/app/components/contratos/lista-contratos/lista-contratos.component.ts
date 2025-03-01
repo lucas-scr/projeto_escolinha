@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
-import { PrimengImports } from '../../shared/primengImports.module';
-import { ServiceContratos } from '../../services/service_contratos';
-import { Contrato } from '../../model/Contrato';
-import { TelefonePipe, MoedaPipe } from '../../mascaras.pipe';
+import { PrimengImports } from '../../../shared/primengImports.module';
+import { ServiceContratos } from '../../../services/service_contratos';
+import { Contrato } from '../../../model/Contrato';
+import { TelefonePipe, MoedaPipe } from '../../../mascaras.pipe';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Router, RouterLink } from '@angular/router';
 import { Menu } from 'primeng/menu';
-import { ServiceMensagemGlobal } from '../../services/mensagens_global';
+import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
 
 @Component({
   selector: 'app-lista-contratos',

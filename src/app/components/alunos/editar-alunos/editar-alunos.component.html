@@ -1,6 +1,6 @@
-<p-card header="Cadastrar Aluno">
+<p-card header="Alterar dado do aluno">
     <ng-template #title>
-        Cadastrar Aluno
+        Alterar dado do aluno
     </ng-template>
     <form #formAluno="ngForm" (ngSubmit)="onSubmit()">
         <div class="cadastro_input">
@@ -15,7 +15,7 @@
 
         <div class="cadastro_input">
             <p-floatlabel variant="on">
-                <p-datepicker id="dataNascimento" [(ngModel)]="dataNascimento" required name="dataNascimento"
+                <p-datepicker id="dataNascimento" [maxDate]="dataNascimentoLimite" [(ngModel)]="dataNascimento" required name="dataNascimento"
                     dateFormat="dd/mm/yy" [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" />
                 <label class="calendar_label" for="dataNascimento">Data de nascimento</label>
             </p-floatlabel>
@@ -38,17 +38,19 @@
                 </div>
             </div>
         </div>
+
         <div class="cadastro_input">
             <label class="label_multiselect" for="dias_aluno">Dias da semana:</label>
             <div class="cadastro_input_multiselecao">
                 <div class="checkbox" *ngFor="let dia of dias" name="dias_aluno">
-                    <p-checkbox [inputId]="dia" name="dias_aluno" [value]="dia" [(ngModel)]="diasSelecionados" />
-                    <label [for]="dia"> {{ dia }} </label>
+                    <p-checkbox [inputId]="dia" name="dias_aluno" [value]="dia" [(ngModel)]="diasSelecionados" required />
+                    <label class="label_checkbox" [for]="dia"> {{ dia }} </label>
                 </div>
             </div>
+            <div *ngIf="formAluno.controls['dias_aluno']?.invalid && formAluno.controls['dias_aluno']?.touched">
+                <small>Selecione ao menos um dia</small>
+            </div>
         </div>
-
-
 
         <div class="cadastro_input">
             <p-checkbox [(ngModel)]="autorizacaoDeImagem" [binary]="true" inputId="autorizaocaoImagem"
@@ -67,5 +69,3 @@
 
     </ng-template>
 </p-card>
-
-<p-toast />

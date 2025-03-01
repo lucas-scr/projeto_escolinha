@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ServiceAlunos } from '../../services/service_alunos';
+import { ServiceAlunos } from '../../../services/service_alunos';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Aluno } from '../../model/Alunos';
-import { ServiceMensagemGlobal } from '../../services/mensagens_global';
-import { DiasDaSemana } from '../../common/enumDiasDaSemana';
-import { PrimengImports } from '../../shared/primengImports.module';
+import { Aluno } from '../../../model/Alunos';
+import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
+import { DiasDaSemana } from '../../../common/enumDiasDaSemana';
+import { PrimengImports } from '../../../shared/primengImports.module';
 
 @Component({
   selector: 'app-editar-alunos',
@@ -16,6 +16,7 @@ export class EditarAlunosComponent implements OnInit {
   alunoId: Number | undefined;
 
   nome: String;
+  dataNascimentoLimite: Date = new Date();
   dataNascimento: Date;
   sexo: String;
   autorizacaoDeImagem: Boolean;

@@ -45,32 +45,29 @@
 
         <p-divider />
         <div class="aluno_section">
-            <h4>Lista de Alunos</h4>
+            <h4>Aluno</h4>
         </div>
-
-        <p-dataview [value]="contratoCarregado.alunos" [rows]="5" [paginator]="false" emptyMessage="Nenhum resultado encontrado.">
-            <ng-template #list let-items>
                 <div>
-                    <div class="col-span-12" *ngFor="let item of contratoCarregado.alunos; let first = first" class="col-span-12">
+                    <div class="col-span-12" class="col-span-12">
                         <div class="list_item">
                             <div class="list_item_row">
                                 <div class="item_avatar">
-                                    <p-avatar [label]=item.iniciaisNome.toString() styleClass="mr-2"
-                                        [ngClass]="{ 'list_sexo_m': item.sexo === 'M', 'list_sexo_f': item.sexo === 'F' }"
+                                    <p-avatar [label]=contratoCarregado.aluno.iniciaisNome.toString() styleClass="mr-2"
+                                        [ngClass]="{ 'list_sexo_m': contratoCarregado.aluno.sexo === 'M', 'list_sexo_f': contratoCarregado.aluno.sexo === 'F' }"
                                         size="xlarge" shape="circle" />
                                 </div>
                                 <div class="item_labels">
-                                    <span class="list_principal_nome">{{ item.nome }}</span>
+                                    <span class="list_principal_nome">{{ contratoCarregado.aluno.nome }}</span>
 
                                     <div class="item_nascimento">
                                         <i class="pi pi-gift" style="font-size: 1rem"> </i>
-                                        <span class="label_item_list" style="margin-left: 5px"> {{item.dataNascimento |
+                                        <span class="label_item_list" style="margin-left: 5px"> {{contratoCarregado.aluno.dataNascimento |
                                             date:'dd/MM/yyyy' }}</span>
                                     </div>
                                     <div class="list_dias_semana">
                                         <i class="pi pi-calendar" style="font-size: 1rem"> </i>
                                         <div class="list_dias">
-                                            <p-chip class="item_list_chip" *ngFor="let dia of item.dias"
+                                            <p-chip class="item_list_chip" *ngFor="let dia of contratoCarregado._dias"
                                                 [label]="dia" />
                                         </div>
                                     </div>
@@ -80,8 +77,6 @@
                         <p-divider />
                     </div>
                 </div>
-            </ng-template>
-        </p-dataview>
 
 
         <h4>Dados do contrato</h4>
@@ -98,11 +93,21 @@
                     <small>Este campo é obrigatório</small>
                 </div>
             </div>
+            <div class="cadastro_input">
+                <p-floatlabel variant="on">
+                    <p-datepicker inputId="horarioInicio" [(ngModel)]="contratoCarregado.dataInicio" disabled required [timeOnly]="true" name="horarioInicio" />
+                    <label class="calendar_label" for="horarioInicio">Horário das aulas</label>
+                </p-floatlabel>
+                <div
+                    *ngIf="formContrato.controls['horarioInicio']?.invalid && formContrato.controls['horarioInicio']?.touched">
+                    <small>Este campo é obrigatório</small>
+                </div>
+            </div>
 
             <div class="cadastro_input">
 
                 <p-floatlabel variant="on">
-                    <p-inputNumber id="dataPagamento" [disabled]="true" maxlength=2  min=1 max=31 [(ngModel)]="contratoCarregado.diaPagamento" name="dataPagamento" required />
+                    <p-inputNumber id="dataPagamento"  [disabled]="true"  maxlength=2  min=1 max=31 [(ngModel)]="contratoCarregado.diaPagamento" name="dataPagamento" required />
                         <label class="calendar_label" for="dataPagamento">Dia do pagamento</label>
                 </p-floatlabel>
                 <div
@@ -126,13 +131,13 @@
             </div>
 
             <div class="cadastro_input_checkbox">
-                <p-checkbox [(ngModel)]="contratoCarregado.autorizacaoImagem" [disabled]="true" [binary]="true" inputId="autorizaocaoImagem"
+                <p-checkbox [(ngModel)]="contratoCarregado.autorizacaoImagem" readonly [binary]="true" inputId="autorizaocaoImagem"
                     name="usoImagem" />
                 <label for="autorizaocaoImagem" class="ml-2">Autorizado o uso de imagem e video do(s) aluno(s)</label>
             </div>
 
             <div class="cadastro_input_checkbox">
-                <p-checkbox [(ngModel)]="contratoCarregado.ressarcimentoEmFeriados" [disabled]="true" [binary]="true" inputId="ressarcimentoEmFeriados"
+                <p-checkbox [(ngModel)]="contratoCarregado.ressarcimentoEmFeriados" readonly [binary]="true" inputId="ressarcimentoEmFeriados"
                     name="ressarcimentoEmFeriados" />
                 <label for="ressarcimentoEmFeriados" class="ml-2">O responsável opta por ressarcimento do valor no lugar
                     de atividades nos casos <del></del> feriados</label>

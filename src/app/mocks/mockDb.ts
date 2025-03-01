@@ -32,7 +32,7 @@ import { Responsavel } from '../model/Responsavel';
          const contratos = [
               new Contrato(
                 new Responsavel('Responsável 2', '12345678901', 12345667111),
-                [new Aluno('Joao',  new Date ('2001-08-04'),  'M', true, ['Segunda', 'Terça'], 1, "J" )],
+                new Aluno('Joao',  new Date ('2001-08-04'),  'M', true, ['Segunda'], 1, "J" ),
                 new Date('2024-03-01'),
                 500,
                 20,
@@ -43,11 +43,7 @@ import { Responsavel } from '../model/Responsavel';
               ),
               new Contrato(
                 new Responsavel('Responsável 2', '12345678902', 12345667111),
-                [
-                  new Aluno('Maria',  new Date ('1999-10-02'),  'F', false, ['Segunda', 'Quarta'], 2, "M"),
-                  new Aluno ('Aninha', new Date ('1999-10-28'),  'F', true, ['Sexta'], 3, "A"),
-                  new Aluno('Lucas Silva',  new Date('2014-05-12'),  'M', true, ['Segunda', 'Terça'], 4, "LS"),
-                ],
+                new Aluno('Lucas Silva',  new Date('2014-05-12'),  'M', true, ['Terça', 'Quinta'], 4, "LS"),
                 new Date('2024-04-01'),
                 400,
                 12,
@@ -58,7 +54,7 @@ import { Responsavel } from '../model/Responsavel';
               ),
               new Contrato(
                 new Responsavel('Responsável 3', '12345678903', 12345667111),
-                [new Aluno('Lucas Silva',  new Date('2014-05-12'),  'M', true, ['Segunda', 'Terça'], 4, "LS")],
+                new Aluno('Lucas Silva',  new Date('2014-05-12'),  'M', true, ['Segunda', 'Quarta', 'Sexta'], 4, "LS"),
                 new Date('2024-05-01'),
                 600,
                23,
@@ -68,7 +64,7 @@ import { Responsavel } from '../model/Responsavel';
               ),
               new Contrato(
                 new Responsavel('Responsável 4', '12345678904', 12345667111),
-                [new Aluno('Mariana Souza',  new Date('2016-09-23'),  'F', true, ['Quarta', 'Quinta'], 5, "MS")],
+                new Aluno('Mariana Souza',  new Date('2016-09-23'),  'F', true,  ['Terça', 'Quinta'], 5, "MS"),
                 new Date('2024-06-01'),
                 450,
                 2,
@@ -79,10 +75,7 @@ import { Responsavel } from '../model/Responsavel';
               ),
               new Contrato(
                 new Responsavel('Responsável 5', '12345678905', 12345667111),
-                [
-                  new Aluno('Lucas Silva',  new Date('2014-05-12'),  'M', true, ['Segunda', 'Terça'], 4, "LS"),
-                  new Aluno ('Aninha', new Date ('1999-10-28'),  'F', true, ['Sexta'], 3, "A"),
-                ],
+                new Aluno('Lucas Silva',  new Date('2014-05-12'),  'M', true, ['Segunda', 'Quarta'], 4, "LS")   ,
                 new Date('2024-07-01'),
                 550,
                 17,
@@ -93,7 +86,7 @@ import { Responsavel } from '../model/Responsavel';
               ),
               new Contrato(
                 new Responsavel('Responsável 6', '12345678906', 12345667111),
-                [new Aluno ('Aninha', new Date ('1999-10-28'),  'F', true, ['Sexta'], 3, "A")],
+                new Aluno ('Aninha', new Date ('1999-10-28'),  'F', true, ['Segunda', 'Quarta', 'Sexta'], 3, "A"),
                 new Date('2024-08-01'),        500,
                 25,
                 true,

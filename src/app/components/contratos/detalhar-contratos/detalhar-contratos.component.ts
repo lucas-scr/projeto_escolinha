@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { ServiceMensagemGlobal } from '../../services/mensagens_global';
-import { ServiceContratos } from '../../services/service_contratos';
+import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
+import { ServiceContratos } from '../../../services/service_contratos';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Contrato } from '../../model/Contrato';
-import { PrimengImports } from '../../shared/primengImports.module';
+import { Contrato } from '../../../model/Contrato';
+import { PrimengImports } from '../../../shared/primengImports.module';
 
 @Component({
   selector: 'app-detalhar-contratos',
@@ -14,14 +14,13 @@ import { PrimengImports } from '../../shared/primengImports.module';
 export class DetalharContratosComponent {
 
   modalAdicionar: boolean = false;
-  
+
+    dataLimite: Date = new Date();
+
     contratoId: Number;
-    contratoCarregado: Contrato;
-    contato: Number = 12345667111
-  
+    contratoCarregado: Contrato
     
-    autorizacaoDeImagem: Boolean;
-  
+
     
     diasSelecionados: string[] = [];
   
@@ -29,7 +28,6 @@ export class DetalharContratosComponent {
     constructor(
       private messageService: ServiceMensagemGlobal,
       private contratoService: ServiceContratos,
-      private router: Router,
       private route: ActivatedRoute
     ) {
       this.capturarId();

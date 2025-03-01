@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
-import { Responsavel } from '../../model/Responsavel';
-import { PrimengImports } from '../../shared/primengImports.module';
-import { Aluno } from '../../model/Alunos';
+import { Responsavel } from '../../../model/Responsavel';
+import { PrimengImports } from '../../../shared/primengImports.module';
+import { Aluno } from '../../../model/Alunos';
 import { MessageService } from 'primeng/api';
-import { ServiceContratos } from '../../services/service_contratos';
-import { ServiceAlunos } from '../../services/service_alunos';
-import { Contrato } from '../../model/Contrato';
-import { DiasDaSemana } from '../../common/enumDiasDaSemana';
-import { ServiceMensagemGlobal } from '../../services/mensagens_global';
+import { ServiceContratos } from '../../../services/service_contratos';
+import { ServiceAlunos } from '../../../services/service_alunos';
+import { Contrato } from '../../../model/Contrato';
+import { DiasDaSemana } from '../../../common/enumDiasDaSemana';
+import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
 
 @Component({
   selector: 'app-cadastro-contratos',
@@ -27,13 +27,14 @@ export class CadastroContratosComponent implements OnInit {
   dataNascimento: Date;
   sexo: String;
   valorContratado: Number;
-  dataInicio: Date;
+  dataInicio: Date = new Date();
+  dataLimite: Date = new Date();
 
   diaPagamento: Number;
   autorizacaoDeImagem: boolean = false;
   ressarcimentoEmFeriados: Boolean;
 
-  alunos: Aluno[] = [];
+  aluno: Aluno;
 
   dias: string[] = [
     DiasDaSemana.SEGUNDA,
@@ -49,7 +50,6 @@ export class CadastroContratosComponent implements OnInit {
   constructor(
     private messageService: ServiceMensagemGlobal,
     private contratoService: ServiceContratos,
-    private serviceAlunos: ServiceAlunos,
     private router: Router
   ) {}
 
@@ -57,7 +57,7 @@ export class CadastroContratosComponent implements OnInit {
   }
 
   onSubmit() {
-    this.novoContrato = new Contrato(this.responsavel, this.alunos,this.dataInicio, this.valorContratado, this.diaPagamento, this.autorizacaoDeImagem)
+    this.novoContrato = new Contrato(this.responsavel, this.aluno,this.dataInicio, this.valorContratado, this.diaPagamento, this.autorizacaoDeImagem)
     this.contratoService.cadastrarContrato(this.novoContrato).subscribe({
       next: () => this.messageService.showMessage('success','Cadastrado!', 'Cadastro realizado com sucesso.'),
       error: () => this.messageService.showMessage('danger','Algo deu errado!', 'Não foi possível realizar o cadastro.'),
@@ -66,37 +66,4 @@ export class CadastroContratosComponent implements OnInit {
     this.router.navigate(['/contratos']);
   }
 
-  abrirModalAdicionarAluno() {
-    this.modalAdicionar = true;
-    this.limparDadosAluno();
-  }
-
-  adicionarAluno() {
-    this.alunos.push(
-      new Aluno(
-        this.nome,
-        this.dataNascimento,
-        this.sexo,
-        this.autorizacaoDeImagem,
-        this.diasSelecionados
-      )
-    );
-    this.modalAdicionar = false;
-    this.alunos = [...this.alunos]; 
-
-    console.log(this.alunos);
-  }
-  removerAluno(aluno: Aluno) {
-    const index = this.alunos.findIndex((alunoLista) => alunoLista === aluno);
-    if (index !== -1) {
-      this.alunos.splice(index, 1);
-    }
-  }
-
-  limparDadosAluno() {
-    this.nome = '';
-    this.dataNascimento = undefined;
-    this.sexo = undefined;
-    this.diasSelecionados = undefined;
-  }
 }

@@ -4,11 +4,11 @@ import { Responsavel } from './Responsavel';
 export class Contrato {
   id: Number;  
   responsavel: Responsavel;
-  alunos: Aluno [];
+  aluno: Aluno;
   dataCadastro: Date;
   dataInicio: Date;
   dataFim?: Date;
-  _dias: String[];
+  _dias: string[];
   valor: Number;
   diaPagamento: Number;
   situacao: String;
@@ -18,17 +18,17 @@ export class Contrato {
 
   constructor(
     responsavel: Responsavel,
-    alunos: Aluno[],
+    aluno: Aluno,
     dataInicio: Date,
     valor: Number,
     diaPagamento: Number,
     autorizacaoImagem: Boolean,
-    dias?: String[],
+    dias?: string[],
     id?: Number
 
   ) {
     this.responsavel = responsavel,
-    this.alunos = alunos,
+    this.aluno = aluno,
     this.dataCadastro = new Date();
     this.dataInicio = dataInicio;
     this._dias = dias;
@@ -45,10 +45,7 @@ export class Contrato {
   }
 
 
-
-
-
-  set dias(dias: String[]) {
+  set dias(dias: string[]) {
     if (dias.length > 5) {
       throw new Error('O número máximo de dias permitidos é 5.');
     }
