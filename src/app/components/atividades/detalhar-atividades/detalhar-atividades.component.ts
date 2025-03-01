@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-visualizar-atividades',
+  selector: 'app-detalhar-atividades',
   imports: [],
   templateUrl: './detalhar-atividades.component.html',
   styleUrl: './detalhar-atividades.component.css'
 })
-export class VisualizarAtividadesComponent {
+export class DetalharAtividadesComponent {
 
 }
