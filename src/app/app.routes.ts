@@ -10,6 +10,8 @@ import { EditarContratosComponent } from './components/contratos/editar-contrato
 import { DetalharContratosComponent } from './components/contratos/detalhar-contratos/detalhar-contratos.component';
 import { PaginaInicialComponent } from './components/pagina-inicial/pagina-inicial.component';
 import { ListarAtividadesComponent } from './components/atividades/listar-atividades/listar-atividades.component';
+import { EditarAtividadesComponent } from './components/atividades/editar-atividades/editar-atividades.component';
+import { DetalharAtividadesComponent } from './components/atividades/detalhar-atividades/detalhar-atividades.component';
 
 
 export const routes: Routes = [
@@ -23,5 +25,7 @@ export const routes: Routes = [
     {path: 'detalhar-contrato/:id', component: DetalharContratosComponent},
     {path: '', component: PaginaInicialComponent},
     {path: 'inicio', component: PaginaInicialComponent},
-    {path: 'atividades', component: ListarAtividadesComponent}
+    {path: 'atividades', component: ListarAtividadesComponent},
+    {path: 'editar-atividade/:id', component: EditarAtividadesComponent},
+    {path: 'detalhar-atividade/:id', component: DetalharAtividadesComponent},
 ];

@@ -7,14 +7,14 @@ import {
   OnDestroy,
   ViewChild,
 } from '@angular/core';
-import { PrimengImports } from '../../shared/primengImports.module';
-import { Aluno } from '../../model/Alunos';
-import { ServiceAlunos } from '../../services/service_alunos';
+import { PrimengImports } from '../../../shared/primengImports.module';
+import { Aluno } from '../../../model/Alunos';
+import { ServiceAlunos } from '../../../services/service_alunos';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Menu } from 'primeng/menu';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http'; // Importando o módulo
-import { ServiceMensagemGlobal } from '../../services/mensagens_global';
+import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
 
 @Component({
   selector: 'app-lista-alunos',

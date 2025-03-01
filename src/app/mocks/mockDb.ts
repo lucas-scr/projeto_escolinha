@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Aluno } from '../model/Alunos';
 import { Contrato } from '../model/Contrato';
 import { Responsavel } from '../model/Responsavel';
+import { Atividade } from '../interfaces/atividades';
+import { Materia } from '../interfaces/materias';
 
 @Injectable({
     providedIn: 'root',
@@ -95,6 +97,61 @@ import { Responsavel } from '../model/Responsavel';
               ),
             ];
 
-        return {alunos, contratos}
+            const atividades: Atividade[] = [
+              { id: 1,
+                codigo: 'Materia01',
+                materia: 'Ciências',
+                arquivo: new Blob(['Português: Análise sintática'], { type: 'text/plain' }),
+                dataCriacao: new Date('2025-02-15T09:00:00')
+              },
+              { 
+                id: 2,
+                codigo: 'Materia02',
+                materia: 'Ciências',
+                arquivo: new Blob(['Matemática: Cálculo de limites'], { type: 'text/plain' }),
+                dataCriacao: new Date('2025-02-16T10:00:00')
+              },
+              { 
+                id: 3,
+                codigo: 'Materia03',
+                materia: 'História',
+                arquivo: new Blob(['História: Idade Média'], { type: 'text/plain' }),
+                dataCriacao: new Date('2025-02-17T11:30:00')
+              },
+              { 
+                id: 4,
+                codigo: 'Materia04',
+                materia: 'Portugues',
+                arquivo: new Blob(['Geografia: Cartografia e mapas'], { type: 'text/plain' }),
+                dataCriacao: new Date('2025-02-18T14:45:00')
+              },
+              { 
+                id: 5,
+                codigo: 'Materia05',
+                materia: 'Matemática',
+                arquivo: new Blob(['Ciências: Ecossistemas'], { type: 'text/plain' }),
+                dataCriacao: new Date('2025-02-19T08:20:00')
+              },
+              { 
+                id: 6,
+                codigo: 'Materia06',
+                materia: 'Português',
+                arquivo: new Blob(['Física: Leis de Newton'], { type: 'text/plain' }),
+                dataCriacao: new Date('2025-02-20T15:00:00')
+              }
+            ];
+
+            const materias: Materia [] = [
+     
+                { id: 1, nome: 'Português' },
+                { id: 2, nome: 'Matemática' },
+                { id: 3, nome: 'História' },
+                { id: 4, nome: 'Geografia' },
+                { id: 5, nome: 'Ciências' },
+                { id: 6, nome: 'Física' }
+            ]
+
+        return {alunos, contratos, atividades, materias}
     }
+
   }

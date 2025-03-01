@@ -49,6 +49,7 @@ export class MenuLateralComponent implements OnInit {
           {
             label: 'Atividades',
             icon: 'pi pi-book',
+            route: '/atividades'
           },
         ],
       },
