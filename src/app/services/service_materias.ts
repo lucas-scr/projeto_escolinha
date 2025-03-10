@@ -6,7 +6,7 @@ import { Materia } from '../interfaces/materias';
 @Injectable({
   providedIn: 'root',
 })
-export class ArquivoService {
+export class ServiceMateria {
     private URL = 'api/materias';
 
     constructor( private http: HttpClient){

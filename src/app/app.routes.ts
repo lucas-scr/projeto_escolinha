@@ -12,6 +12,7 @@ import { PaginaInicialComponent } from './components/pagina-inicial/pagina-inici
 import { ListarAtividadesComponent } from './components/atividades/listar-atividades/listar-atividades.component';
 import { EditarAtividadesComponent } from './components/atividades/editar-atividades/editar-atividades.component';
 import { DetalharAtividadesComponent } from './components/atividades/detalhar-atividades/detalhar-atividades.component';
+import { CadastrarAtividadesComponent } from './components/atividades/cadastrar-atividades/cadastrar-atividades.component';
 
 
 export const routes: Routes = [
@@ -28,4 +29,6 @@ export const routes: Routes = [
     {path: 'atividades', component: ListarAtividadesComponent},
     {path: 'editar-atividade/:id', component: EditarAtividadesComponent},
     {path: 'detalhar-atividade/:id', component: DetalharAtividadesComponent},
+    {path: 'cadastrar-atividade', component: CadastrarAtividadesComponent},
+
 ];

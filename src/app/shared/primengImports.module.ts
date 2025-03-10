@@ -28,10 +28,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputMaskModule } from 'primeng/inputmask';
 import { DialogModule } from 'primeng/dialog';
-
-
-
-
+import { FileUploadModule } from 'primeng/fileupload';
 
 
 
@@ -66,7 +63,8 @@ import { DialogModule } from 'primeng/dialog';
     CheckboxModule,    
     InputNumberModule,
     InputMaskModule,
-    DialogModule
+    DialogModule,
+    FileUploadModule
 
   ],
   exports: [
@@ -96,7 +94,8 @@ import { DialogModule } from 'primeng/dialog';
     CheckboxModule,
     InputNumberModule,
     InputMaskModule,
-    DialogModule
+    DialogModule,
+    FileUploadModule
     
   ]
 })
