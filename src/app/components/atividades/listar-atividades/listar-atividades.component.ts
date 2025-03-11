@@ -5,6 +5,7 @@ import { Route, Router } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { Menu } from 'primeng/menu';
 import { ServiceAtividades } from '../../../services/service_atividades';
+import { ServiceMateria } from '../../../services/service_materias';
 
 @Component({
   selector: 'app-listar-atividades',
@@ -18,6 +19,8 @@ export class ListarAtividadesComponent implements OnInit {
   searchValue: String;
   itemId: number;
 
+  listaMaterias: [] = [];
+
   listaAtividades: Atividade[] = [];
 
   loading: boolean = true;
@@ -26,11 +29,13 @@ export class ListarAtividadesComponent implements OnInit {
 
   @ViewChild('menu') menu!: Menu;
   
-  constructor(private serviceAtividades: ServiceAtividades ,private router: Router){
+  constructor(private serviceAtividades: ServiceAtividades ,private router: Router, private serviceMateria: ServiceMateria){
 
   }
 
   ngOnInit(): void {
+
+    this.serviceMateria.consultarPorId
 
 
     this.loading = false;

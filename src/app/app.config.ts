@@ -17,7 +17,6 @@ import {
 } from '@angular/common/http';
 import { MockDbService } from './mocks/mockDb';
 
-
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(withInterceptorsFromDi()),

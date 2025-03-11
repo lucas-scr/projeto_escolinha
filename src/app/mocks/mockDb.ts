@@ -99,43 +99,55 @@ import { Materia } from '../interfaces/materias';
 
             const atividades: Atividade[] = [
               { id: 1,
-                codigo: 'Materia01',
-                materia: 'Ciências',
+                codigo: "Materia01",
+                materia: 5,
+                nomeMateria: 'Ciências',
+                nomeArquivo: 'arquivo1.png',
                 arquivo: new Blob(['Português: Análise sintática'], { type: 'text/plain' }),
                 dataCriacao: new Date('2025-02-15T09:00:00')
               },
               { 
                 id: 2,
-                codigo: 'Materia02',
-                materia: 'Ciências',
+                codigo: "Materia02",
+                materia: 2,
+                nomeMateria: 'Matemática',
+                nomeArquivo: 'arquivo1.png',
                 arquivo: new Blob(['Matemática: Cálculo de limites'], { type: 'text/plain' }),
                 dataCriacao: new Date('2025-02-16T10:00:00')
               },
               { 
                 id: 3,
-                codigo: 'Materia03',
-                materia: 'História',
+                codigo: "Materia03",
+                materia: 4,
+                nomeMateria: 'Geografia',
+                nomeArquivo: 'arquivo.123',
                 arquivo: new Blob(['História: Idade Média'], { type: 'text/plain' }),
                 dataCriacao: new Date('2025-02-17T11:30:00')
               },
               { 
                 id: 4,
-                codigo: 'Materia04',
-                materia: 'Portugues',
+                codigo: "Materia04",
+                materia: 3,
+                nomeMateria: 'História',
+                nomeArquivo: 'arquivo.113',
                 arquivo: new Blob(['Geografia: Cartografia e mapas'], { type: 'text/plain' }),
                 dataCriacao: new Date('2025-02-18T14:45:00')
               },
               { 
                 id: 5,
-                codigo: 'Materia05',
-                materia: 'Matemática',
+                codigo: "Materia05",
+                materia: 2,
+                nomeArquivo: 'arquivo.124',
+                nomeMateria: 'Matemática',
                 arquivo: new Blob(['Ciências: Ecossistemas'], { type: 'text/plain' }),
                 dataCriacao: new Date('2025-02-19T08:20:00')
               },
               { 
                 id: 6,
-                codigo: 'Materia06',
-                materia: 'Português',
+                codigo: "Materia06",
+                materia: 1,
+                nomeMateria: 'Português',
+                nomeArquivo: 'arquivo.123',
                 arquivo: new Blob(['Física: Leis de Newton'], { type: 'text/plain' }),
                 dataCriacao: new Date('2025-02-20T15:00:00')
               }
