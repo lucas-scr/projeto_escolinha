@@ -98,7 +98,7 @@ export class ListaAlunosComponent implements OnInit {
 
   abrirMenu(event: Event, aluno: any) {
     this.alunoId = aluno;
-    this.menu.toggle(event); // Exibe o menu no local correto
+    this.menu.toggle(event);
   }
 
   confirmarRemover() {

@@ -1,4 +1,4 @@
-import { InMemoryDbService } from 'angular-in-memory-web-api';
+import { InMemoryDbService, RequestInfo } from 'angular-in-memory-web-api';
 import { Injectable } from '@angular/core';
 import { Aluno } from '../model/Alunos';
 import { Contrato } from '../model/Contrato';
@@ -103,6 +103,7 @@ import { Materia } from '../interfaces/materias';
                 materia: 5,
                 nomeMateria: 'Ciências',
                 nomeArquivo: 'arquivo1.png',
+                tipoArquivo: 'pdf',
                 arquivo: new Blob(['Português: Análise sintática'], { type: 'text/plain' }),
                 dataCriacao: new Date('2025-02-15T09:00:00')
               },
@@ -112,6 +113,7 @@ import { Materia } from '../interfaces/materias';
                 materia: 2,
                 nomeMateria: 'Matemática',
                 nomeArquivo: 'arquivo1.png',
+                tipoArquivo: 'text/plain',
                 arquivo: new Blob(['Matemática: Cálculo de limites'], { type: 'text/plain' }),
                 dataCriacao: new Date('2025-02-16T10:00:00')
               },
@@ -121,6 +123,7 @@ import { Materia } from '../interfaces/materias';
                 materia: 4,
                 nomeMateria: 'Geografia',
                 nomeArquivo: 'arquivo.123',
+                tipoArquivo: 'text/plain',
                 arquivo: new Blob(['História: Idade Média'], { type: 'text/plain' }),
                 dataCriacao: new Date('2025-02-17T11:30:00')
               },
@@ -130,6 +133,7 @@ import { Materia } from '../interfaces/materias';
                 materia: 3,
                 nomeMateria: 'História',
                 nomeArquivo: 'arquivo.113',
+                tipoArquivo: 'text/plain',
                 arquivo: new Blob(['Geografia: Cartografia e mapas'], { type: 'text/plain' }),
                 dataCriacao: new Date('2025-02-18T14:45:00')
               },
@@ -139,19 +143,22 @@ import { Materia } from '../interfaces/materias';
                 materia: 2,
                 nomeArquivo: 'arquivo.124',
                 nomeMateria: 'Matemática',
+                tipoArquivo: 'text/plain',
                 arquivo: new Blob(['Ciências: Ecossistemas'], { type: 'text/plain' }),
                 dataCriacao: new Date('2025-02-19T08:20:00')
               },
               { 
-                id: 6,
+                id: 10,
                 codigo: "Materia06",
                 materia: 1,
                 nomeMateria: 'Português',
                 nomeArquivo: 'arquivo.123',
+                tipoArquivo: 'pdf',
                 arquivo: new Blob(['Física: Leis de Newton'], { type: 'text/plain' }),
                 dataCriacao: new Date('2025-02-20T15:00:00')
               }
             ];
+
 
             const materias: Materia [] = [
      
@@ -165,5 +172,31 @@ import { Materia } from '../interfaces/materias';
 
         return {alunos, contratos, atividades, materias}
     }
+
+    
+  get(reqInfo: RequestInfo) {
+    const { collectionName, id } = reqInfo;
+
+    if (collectionName === 'atividades' && reqInfo.url.endsWith('/arquivo')) {
+      const atividade = reqInfo.collection.find((item: any) => item.id === +id);
+      if (!atividade) {
+        return reqInfo.utils.createResponse$(() => ({
+          body: 'Arquivo não encontrado',
+          status: 404,
+        }));
+      }
+
+      const arquivoBlob = atividade.arquivoBlob ? atividade.arquivoBlob : new Uint8Array();
+
+      const blob = new Blob([arquivoBlob], { type: atividade.tipoArquivo });
+
+      return reqInfo.utils.createResponse$(() => ({
+        body: blob,
+        status: 200,
+      }));
+    }
+
+    return undefined;
+  }
 
   }

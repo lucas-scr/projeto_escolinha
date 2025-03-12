@@ -6,16 +6,16 @@ import { ConfirmationService, MenuItem } from 'primeng/api';
 import { Menu } from 'primeng/menu';
 import { ServiceAtividades } from '../../../services/service_atividades';
 import { ServiceMateria } from '../../../services/service_materias';
+import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
 
 @Component({
   selector: 'app-listar-atividades',
   imports: [PrimengImports],
   templateUrl: './listar-atividades.component.html',
   styleUrl: './listar-atividades.component.css',
-  providers: [ServiceAtividades, ConfirmationService]
+  providers: [ServiceAtividades, ConfirmationService],
 })
 export class ListarAtividadesComponent implements OnInit {
-
   searchValue: String;
   itemId: number;
 
@@ -28,21 +28,22 @@ export class ListarAtividadesComponent implements OnInit {
   opcoesDeAcoes: MenuItem[] | undefined;
 
   @ViewChild('menu') menu!: Menu;
-  
-  constructor(private serviceAtividades: ServiceAtividades ,private router: Router, private serviceMateria: ServiceMateria){
 
-  }
+  constructor(
+    private serviceAtividades: ServiceAtividades,
+    private router: Router,
+    private serviceMateria: ServiceMateria,
+    private serviceMensagemGlobal: ServiceMensagemGlobal,
+    private confirmationService: ConfirmationService
+  ) {}
 
   ngOnInit(): void {
-
-    this.serviceMateria.consultarPorId
-
+    this.serviceMateria.consultarPorId;
 
     this.loading = false;
 
-    this.carregarAtividades()
+    this.carregarAtividades();
 
-      
     this.opcoesDeAcoes = [
       {
         label: 'Opções',
@@ -50,18 +51,18 @@ export class ListarAtividadesComponent implements OnInit {
           {
             label: 'Detalhar',
             icon: 'pi pi-eye',
-            command: () => this.router.navigate(['/detalhar-atividade', this.itemId]),
+            command: () =>
+              this.router.navigate(['/detalhar-atividade', this.itemId]),
           },
           {
             label: 'Editar',
             icon: 'pi pi-pencil',
-            command: () => this.router.navigate(['/editar-atividade', this.itemId]),
-
+            command: () =>
+              this.router.navigate(['/editar-atividade', this.itemId]),
           },
           {
             label: 'Remover',
             icon: 'pi pi-trash',
-            // command: () => this.removerAlunoDaLista(this.itemId),
             command: () => this.confirmarRemover(),
           },
         ],
@@ -69,22 +70,53 @@ export class ListarAtividadesComponent implements OnInit {
     ];
   }
 
-
-  confirmarRemover(){
-
+  confirmarRemover() {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Tem certeza que deseja remover a atividade?',
+      header: 'Remover atividade',
+      closable: true,
+      closeOnEscape: true,
+      icon: 'pi pi-exclamation-triangle',
+      rejectButtonProps: {
+        label: 'Não',
+        severity: 'secondary',
+        outlined: true,
+      },
+      acceptButtonProps: {
+        label: 'Sim',
+        severity: 'danger',
+      },
+      accept: () => {
+        this.removerAtividade(this.itemId);
+      },
+    });
   }
 
-  abrirMenu(event: any, id: number){
+  abrirMenu(event: any, id: number) {
     this.itemId = id;
     this.menu.toggle(event); // Exibe o menu no local correto
   }
 
-  carregarAtividades(){
-    this.serviceAtividades.getAtividades().subscribe(
-    {next: (atividades) => this.listaAtividades = atividades,
-      error: (erro) => console.log(erro)
+  carregarAtividades() {
+    this.serviceAtividades
+      .getAtividades()
+      .subscribe({
+        next: (atividades) => (this.listaAtividades = atividades),
+        error: (erro) => console.log(erro),
+      });
+  }
 
-    }
-    )
+  removerAtividade(id: Number) {
+    this.serviceAtividades.removerAtividadeById(id).subscribe({
+      next: () => {
+        this.serviceMensagemGlobal.showMessage('success','Removido!', 'O registro foi excluído com sucesso.');
+        this.carregarAtividades()
+      },
+      error: (err) =>{
+        this.serviceMensagemGlobal.showMessage('error','Erro', 'Desculpe! Ocorreu um erro e não conseguimos remover o registro.')
+
+      }
+    });
   }
 }

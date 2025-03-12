@@ -20,9 +20,9 @@ import { PrimengImports } from '../../../shared/primengImports.module';
   styleUrl: './editar-atividades.component.css',
 })
 export class EditarAtividadesComponent implements OnInit, OnDestroy {
-  idAtividade: Number;
-
+  idAtividade: number;
   codigo: String;
+  dataCriacao: Date;
 
   listaMaterias: Materia[] | undefined;
   materiaSelecionada: Materia | undefined;
@@ -30,6 +30,7 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
   nomeArquivo: String;
   isImage: boolean = false;
   arquivoUrl: string | null = null;
+  tipoArquivo: String;
   arquivoBlob: Blob;
 
   constructor(
@@ -41,28 +42,31 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.carregarMaterias();
     this.capturarId();
+    this.carregarMaterias();
   }
 
   onSubmit() {
-    if(this.arquivoBlob == null || this.arquivoUrl == null){
+    if (this.arquivoBlob == null || this.arquivoUrl == null) {
       this.serviceMensagemGlobal.showMessage(
         'error',
         'Erro',
         'Informe todos os campos obrigatórios'
       );
-    }else{
+    } else {
       let atividadeAtualizada: Atividade = {
+        tipoArquivo: this.tipoArquivo,
         codigo: this.codigo,
         materia: this.materiaSelecionada.id,
         nomeMateria: this.materiaSelecionada.nome,
         arquivo: this.arquivoBlob,
-        nomeArquivo: this.nomeArquivo }
-      this.atualizarDados(this.idAtividade, atividadeAtualizada)
+        nomeArquivo: this.nomeArquivo,
+        dataCriacao: this.dataCriacao,
+        id: new Number(this.idAtividade),
+      };
+      this.atualizarDados(this.idAtividade, atividadeAtualizada);
     }
   }
-
 
   onFileSelect(event: any) {
     if (event.files && event.files.length > 0) {
@@ -71,6 +75,7 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
       this.isImage = file.type.startsWith('image/');
 
       this.nomeArquivo = file.name;
+      this.tipoArquivo = file.type;
 
       if (file.type === 'application/pdf') {
         if (this.arquivoUrl) {
@@ -96,23 +101,25 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
     }
   }
 
-  carregarDadosAtividade() {
-    this.serviceAtividade.findById(this.idAtividade).subscribe({
+  carregarDadosAtividade(id: Number) {
+    this.serviceAtividade.findById(id).subscribe({
       next: (atividade) => {
         this.codigo = atividade.codigo;
-
         this.materiaSelecionada = {
           nome: atividade.nomeMateria,
-          id: atividade.materia
-        }
-        this.nomeArquivo = atividade.nomeArquivo || "Arquivo anexado";
+          id: atividade.materia,
+        };
+        this.nomeArquivo = atividade.nomeArquivo || 'Arquivo anexado';
+        this.dataCriacao = new Date(atividade.dataCriacao);
 
-        if(atividade.arquivo instanceof Blob){
-          this.arquivoBlob = atividade.arquivo;
+
+        if (atividade.arquivo) {
+          this.tipoArquivo = atividade.tipoArquivo;
+          this.arquivoBlob = new Blob([atividade.arquivo]);
           this.arquivoUrl = URL.createObjectURL(this.arquivoBlob);
         }
       },
-      error: (erro) => {
+      error: () => {
         this.serviceMensagemGlobal.showMessage(
           'error',
           'Erro',
@@ -127,15 +134,14 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
     this.route.params.subscribe((params) => {
       if (params != undefined) {
         this.idAtividade = params['id'];
-        console.log("id carregado", this.idAtividade)
-        this.carregarDadosAtividade();
+        this.carregarDadosAtividade(this.idAtividade);
       } else {
-        throw console.error('Aluno não identificado');
+        throw console.error('Atividade não identificada');
       }
     });
   }
 
-  carregarMaterias(){
+  carregarMaterias() {
     this.serviceMaterias.getMaterias().subscribe({
       next: (materias) => {
         this.listaMaterias = materias;
@@ -144,23 +150,30 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
     });
   }
 
-  atualizarDados(id: number, atividade: Atividade){
+  atualizarDados(id: Number, atividade: Atividade) {
     this.serviceAtividade.atualizarAtividade(id, atividade).subscribe({
-      next: () => {this.serviceMensagemGlobal.showMessage('success', 'Sucesso!', 'Atividade atualizada com sucesso.');
-        this.router.navigate(['/atividades'])
-      },
-      error: (error) => {this.serviceMensagemGlobal.showMessage('error', 'Erro!', 'Ocorreu um erro ao atualizar os dados da atividade.');
+      next: () => {
+        this.serviceMensagemGlobal.showMessage(
+          'success',
+          'Sucesso!',
+          'Atividade atualizada com sucesso.'
+        );
         this.router.navigate(['/atividades']);
-        console.log(error)
-      
-      }
-    })
+      },
+      error: (error) => {
+        this.serviceMensagemGlobal.showMessage(
+          'error',
+          'Erro!',
+          'Ocorreu um erro ao atualizar os dados da atividade.'
+        );
+        this.router.navigate(['/atividades']);
+        console.log(error);
+      },
+    });
   }
   ngOnDestroy() {
     if (this.arquivoUrl) {
       URL.revokeObjectURL(this.arquivoUrl);
     }
   }
-
-
 }

@@ -28,7 +28,7 @@
 
         <div class="cadastro_input" >
             <label>Arquivo da atividade</label>
-            <p-fileupload #fu required class="p-fileupload p-component" [multiple]="false" id="arquivo_select" mode="basic"
+            <p-fileupload #fu class="p-fileupload p-component" [multiple]="false" id="arquivo_select" mode="basic"
                 chooseLabel="Escolha" chooseIcon="pi pi-upload" (onSelect)="onFileSelect($event)" name="demo[]"
                 accept="image/*, .pdf" maxFileSize="1000000">
             
@@ -41,17 +41,6 @@
                 <small>Insira o arquivo da atividade</small>
             </div>
         </div>
-
-        <div *ngIf="arquivoUrl">
-            <ng-container *ngIf="isImage; else pdfTemplate">
-              <img [src]="arquivoUrl" alt="Imagem carregada" class="preview-imagem" />
-            </ng-container>
-          
-            <ng-template #pdfTemplate>
-              <a [href]="arquivoUrl" target="_blank">📄 Visualizar PDF</a>
-            </ng-template>
-          </div>
-
 
         <div class="cadastro_botoes">
             <p-button label="Cancelar" routerLink="/atividades" severity="secondary" class="w-full" [outlined]="true"

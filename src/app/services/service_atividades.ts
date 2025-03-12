@@ -50,4 +50,12 @@ export class ServiceAtividades {
     findById(id: Number): Observable<Atividade>{
       return this.http.get<Atividade>(`${this.URL}/${id}`)
     }
+
+    findArquivoByAtividade(id: Number):Observable<Blob>{
+      return this.http.get<Blob>(`${this.URL}/${id}/arquivo`, {responseType: 'blob' as 'json',})
+
+    }
+    removerAtividadeById(id: Number): Observable<Atividade>{
+      return this.http.delete<Atividade>(`${this.URL}/${id}`)
+    }
 }

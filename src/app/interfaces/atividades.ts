@@ -6,6 +6,7 @@ export interface Atividade{
     nomeMateria: String;
     nomeArquivo: String;
     arquivo: Blob;
+    tipoArquivo: String;
     dataCriacao?: Date;
     id?: Number
 }

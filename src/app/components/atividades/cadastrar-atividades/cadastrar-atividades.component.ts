@@ -26,7 +26,8 @@ export class CadastrarAtividadesComponent implements OnInit, OnDestroy {
   nomeArquivo: String;
   isImage: boolean = false;
   arquivoUrl: string | null = null;
-  arquivoBlob: Blob | null = null;
+  tipoArquivo: String;
+  arquivoBlob: Blob;
   
 
   constructor(
@@ -56,6 +57,7 @@ export class CadastrarAtividadesComponent implements OnInit, OnDestroy {
       );
     } else {
       let atividadeCadastrada: Atividade = {
+        tipoArquivo: this.tipoArquivo,
         codigo: this.codigo,
         materia: this.materiaSelecionada.id,
         nomeMateria: this.materiaSelecionada.nome,
@@ -63,8 +65,8 @@ export class CadastrarAtividadesComponent implements OnInit, OnDestroy {
         arquivo: this.arquivoBlob,
         nomeArquivo: this.nomeArquivo
       };
-
       this.cadastrarAtividade(atividadeCadastrada);
+    
 
     }
   }
@@ -83,6 +85,7 @@ export class CadastrarAtividadesComponent implements OnInit, OnDestroy {
         if (this.arquivoUrl) {
           URL.revokeObjectURL(this.arquivoUrl);
         }
+        this.tipoArquivo = 'application/pdf';
         const reader = new FileReader();
         reader.onload = () => {
           const pdfBytes = new Uint8Array(reader.result as ArrayBuffer);
@@ -92,6 +95,7 @@ export class CadastrarAtividadesComponent implements OnInit, OnDestroy {
         reader.readAsArrayBuffer(file);
       } else {
         const reader = new FileReader();
+        this.tipoArquivo = file.type;
         reader.onload = () => {
           this.arquivoBlob = new Blob([reader.result as ArrayBuffer], {
             type: file.type,
@@ -102,6 +106,7 @@ export class CadastrarAtividadesComponent implements OnInit, OnDestroy {
       }
     }
   }
+
   cadastrarAtividade(atividade: Atividade){
     this.serviceAtividade.cadastrarAtividade(atividade).subscribe({
       next: () => {
