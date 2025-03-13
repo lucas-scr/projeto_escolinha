@@ -1,3 +1,4 @@
+import { Aula } from "../interfaces/aula";
 import { Pessoa } from "../interfaces/pessoa";
 
 
@@ -6,12 +7,13 @@ import { Pessoa } from "../interfaces/pessoa";
     nome: String;
     idade?: Number;
     dataNascimento: Date;
-    dias: string[];
-    autorizacaoDeImagem?: Boolean;
+    dias: Aula[];
+    autorizacaoDeImagem: boolean;
     iniciaisNome: String;
     sexo: String;
+    isDiasAlternados: boolean;
 
-    constructor(nome: String, dataNascimento: Date, sexo: String ,autorizacaoDeImagem?: Boolean, diasDaSemana?: string[], id?: Number, iniciais?: String){
+    constructor(nome: String, dataNascimento: Date, sexo: String ,autorizacaoDeImagem: boolean, diasAlternados: boolean, diasDaSemana?: Aula[], id?: Number, iniciais?: String){
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.autorizacaoDeImagem = autorizacaoDeImagem;
@@ -20,6 +22,7 @@ import { Pessoa } from "../interfaces/pessoa";
         this.dias = diasDaSemana;
         this.id = id;
         this.idade = this.calcularIdade(dataNascimento);
+        this.isDiasAlternados = diasAlternados;
     }
 
 

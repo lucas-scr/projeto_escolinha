@@ -93,19 +93,7 @@
                         <small>Este campo é obrigatório</small>
                     </div>
                 </div>
-                <div class="div_multiselection">
-                    <label class="label_multiselect" for="dias_contrato">Dias da semana:</label>
-                    <div class="cadastro_input_multiselecao">
-                        <div class="checkbox" *ngFor="let dia of dias" required name="dias_contrato">
-                            <p-checkbox [inputId]="dia" name="dias_contrato" [value]="dia"
-                                [(ngModel)]="diasSelecionados" #diasModel="ngModel" required  />
-                            <label [for]="dia"> {{ dia }} </label>
-                        </div>
-                    </div>
-                    <div *ngIf="formContrato.controls['dias_contrato']?.invalid && formContrato.controls['dias_contrato']?.touched">
-                        <small>Selecione ao menos um dia</small>
-                    </div>
-                </div>
+
             </div>
         </div>
         <p-divider />
@@ -123,8 +111,45 @@
                     <small>Este campo é obrigatório</small>
                 </div>
             </div>
+            <div class="div_multiselection" *ngIf="!isDiasAlternados">
+                <label class="label_multiselect" for="dias_contrato">Dias da semana:</label>
+                <div class="cadastro_input_multiselecao">
+                    <div class="checkbox" *ngFor="let dia of dias" required name="dias_contrato">
+                        <p-checkbox [inputId]="dia" name="dias_contrato" [value]="dia"
+                            [(ngModel)]="diasSelecionados" #diasModel="ngModel" required />
+                        <label [for]="dia"> {{ dia }} </label>
+                    </div>
+                </div>
+                <div
+                    *ngIf="formContrato.controls['dias_contrato']?.invalid && formContrato.controls['dias_contrato']?.touched">
+                    <small>Selecione ao menos um dia</small>
+                </div>
+            </div>
+
+            <div class="horarioAulas" *ngIf="!isDiasAlternados">
+                <div class="cadastro_input_horarios" *ngFor="let horario of diasSelecionados">
+
+                    <p-floatlabel variant="on">
+                        <p-datepicker required inputId="horarioInicio" [(ngModel)]="dataInicio" [timeOnly]="true"
+                            name="horarioInicio" />
+                        <label class="calendar_label" for="horarioInicio">Horário da aula na {{horario}}</label>
+                    </p-floatlabel>
+                    <div
+                        *ngIf="formContrato.controls['horarioInicio']?.invalid && formContrato.controls['horarioInicio']?.touched">
+                        <small>Este campo é obrigatório</small>
+                    </div>
+                </div>
+            </div>
 
             <div class="cadastro_input">
+                <p-checkbox [(ngModel)]="isDiasAlternados" [binary]="true" inputId="diasAlternados"
+                    name="diasAlternados" />
+                <label for="diasAlternados" style="margin-left: 0.3rem;">As aulas serão realizadas em dias
+                    alternados</label>
+            </div>
+            
+
+            <div class="cadastro_input" *ngIf="isDiasAlternados">
                 <p-floatlabel variant="on">
                     <p-datepicker required inputId="horarioInicio" [(ngModel)]="dataInicio" [timeOnly]="true"
                         name="horarioInicio" />

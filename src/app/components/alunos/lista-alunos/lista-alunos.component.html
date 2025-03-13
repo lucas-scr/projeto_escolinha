@@ -47,9 +47,11 @@
                             </div>
                             <div class="list_dias_semana">
                                 <i class="pi pi-calendar" style="font-size: 1rem"> </i>
-                                <div class="list_dias" >
-                                    <p-chip class="item_list_chip" 
-                                    *ngFor="let dia of item.dias" [label]="dia" />
+                                <div class="list_dias" *ngIf="!item.isDiasAlternados" >
+                                    <p-chip class="item_list_chip"  *ngFor="let dia of item.dias" [label]="dia" />
+                                </div>
+                                <div  *ngIf="item.isDiasAlternados">
+                                    <p  style="margin-left: 5px">Dias alternados</p>
                                 </div>
                             </div>
                         </div>   

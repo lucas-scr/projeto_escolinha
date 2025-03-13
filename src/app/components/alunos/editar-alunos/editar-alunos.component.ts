@@ -19,7 +19,8 @@ export class EditarAlunosComponent implements OnInit {
   dataNascimentoLimite: Date = new Date();
   dataNascimento: Date;
   sexo: String;
-  autorizacaoDeImagem: Boolean;
+  autorizacaoDeImagem: boolean;
+  isDiasAlternados: boolean;
   dias: string[] = [
     DiasDaSemana.SEGUNDA,
     DiasDaSemana.TERCA,
@@ -27,6 +28,8 @@ export class EditarAlunosComponent implements OnInit {
     DiasDaSemana.QUINTA,
     DiasDaSemana.SEXTA,
   ];
+
+  alunoCarregado: Aluno;
 
   diasSelecionados: string[] = [];
 
@@ -39,17 +42,10 @@ export class EditarAlunosComponent implements OnInit {
   }
 
   onSubmit() {
-    let novoAluno: Aluno = new Aluno(
-      this.nome,
-      this.dataNascimento,
-      this.sexo,
-      this.autorizacaoDeImagem,
-      this.diasSelecionados,
-      this.alunoId
-    );
+    this.selecionarDiasAlternados()
 
     this.serviceAlunos
-      .atualizarAlunoNalista(this.alunoId, novoAluno)
+      .atualizarAlunoNalista(this.alunoId, this.alunoCarregado)
       .subscribe({
         next: () =>
           this.serviceMensagemGlobal.showMessage(
@@ -82,13 +78,14 @@ export class EditarAlunosComponent implements OnInit {
   }
 
   carregarDadosAluno() {
-    this.serviceAlunos.findById(this.alunoId).subscribe((res) => {
-      this.nome = res.nome;
-      this.dataNascimento = new Date(res.dataNascimento);
-      this.sexo = res.sexo;
-      this.autorizacaoDeImagem = res.autorizacaoDeImagem;
-      this.diasSelecionados = res.dias;
-      this.alunoId = res.id;
+    this.serviceAlunos.findById(this.alunoId).subscribe((aluno) => {
+      this.alunoCarregado = aluno;
+      this.alunoCarregado.dataNascimento = new Date(aluno.dataNascimento);
     });
+  }
+  selecionarDiasAlternados(){
+    if(this.isDiasAlternados){
+      this.diasSelecionados = [];
+    }
   }
 }

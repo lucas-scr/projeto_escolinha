@@ -6,10 +6,10 @@ import { PrimengImports } from '../../../shared/primengImports.module';
 import { Aluno } from '../../../model/Alunos';
 import { MessageService } from 'primeng/api';
 import { ServiceContratos } from '../../../services/service_contratos';
-import { ServiceAlunos } from '../../../services/service_alunos';
 import { Contrato } from '../../../model/Contrato';
 import { DiasDaSemana } from '../../../common/enumDiasDaSemana';
 import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
+import { Aula } from '../../../interfaces/aula';
 
 @Component({
   selector: 'app-cadastro-contratos',
@@ -19,10 +19,7 @@ import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
   providers: [MessageService],
 })
 export class CadastroContratosComponent implements OnInit {
-  modalAdicionar: boolean = false;
-
   responsavel: Responsavel = new Responsavel('', '', 4123412);
-  alunoNovo: Aluno;
   nome: String;
   dataNascimento: Date;
   sexo: String;
@@ -34,18 +31,17 @@ export class CadastroContratosComponent implements OnInit {
   autorizacaoDeImagem: boolean = false;
   ressarcimentoEmFeriados: Boolean;
 
-  aluno: Aluno;
-
   dias: string[] = [
     DiasDaSemana.SEGUNDA,
     DiasDaSemana.TERCA,
     DiasDaSemana.QUARTA,
     DiasDaSemana.QUINTA,
-    DiasDaSemana.SEXTA
+    DiasDaSemana.SEXTA,
   ];
   diasSelecionados: string[] = [];
+  aulas: Aula[] = [];
 
-  novoContrato: Contrato;
+  isDiasAlternados: boolean;
 
   constructor(
     private messageService: ServiceMensagemGlobal,
@@ -53,17 +49,47 @@ export class CadastroContratosComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onSubmit() {
-    this.novoContrato = new Contrato(this.responsavel, this.aluno,this.dataInicio, this.valorContratado, this.diaPagamento, this.autorizacaoDeImagem)
-    this.contratoService.cadastrarContrato(this.novoContrato).subscribe({
-      next: () => this.messageService.showMessage('success','Cadastrado!', 'Cadastro realizado com sucesso.'),
-      error: () => this.messageService.showMessage('danger','Algo deu errado!', 'Não foi possível realizar o cadastro.'),
-    })
-    
+    this.limparDiasSelecionados();
+    let aluno = new Aluno(
+      this.nome,
+      this.dataNascimento,
+      this.sexo,
+      this.autorizacaoDeImagem,
+      this.isDiasAlternados,
+      this.aulas
+    );
+    let novoContrato = new Contrato(
+      this.responsavel,
+      aluno,
+      this.dataInicio,
+      this.valorContratado,
+      this.diaPagamento,
+      this.autorizacaoDeImagem
+    );
+    this.contratoService.cadastrarContrato(novoContrato).subscribe({
+      next: () =>
+        this.messageService.showMessage(
+          'success',
+          'Cadastrado!',
+          'Cadastro realizado com sucesso.'
+        ),
+      error: () =>
+        this.messageService.showMessage(
+          'danger',
+          'Algo deu errado!',
+          'Não foi possível realizar o cadastro.'
+        ),
+    });
+
     this.router.navigate(['/contratos']);
   }
 
+  limparDiasSelecionados() {
+    if (this.isDiasAlternados) {
+      this.diasSelecionados = [];
+    }
+  }
 }

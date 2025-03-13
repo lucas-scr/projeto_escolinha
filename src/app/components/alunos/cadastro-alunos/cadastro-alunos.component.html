@@ -38,7 +38,7 @@
                 </div>
             </div>
         </div>
-        <div class="cadastro_input">
+        <div class="cadastro_input" *ngIf="!isDiasAlternados">
             <label class="label_multiselect" for="dias_aluno">Dias da semana:</label>
             <div class="cadastro_input_multiselecao">
                 <div class="checkbox" *ngFor="let dia of dias" name="dias_aluno">
@@ -49,6 +49,14 @@
             <div *ngIf="formAluno.controls['dias_aluno']?.invalid && formAluno.controls['dias_aluno']?.touched">
                 <small>Selecione ao menos um dia</small>
             </div>
+        </div>
+
+        <p-divider />
+
+        <div class="cadastro_input">
+            <p-checkbox [(ngModel)]="isDiasAlternados" [binary]="true" inputId="diasAlternados"
+                name="diasAlternados" />
+            <label for="diasAlternados" class="ml-2">As aulas serão realizadas em dias alternados</label>
         </div>
 
 

@@ -19,6 +19,7 @@ export class CadastroAlunosComponent implements OnInit {
   nome: String;
   dataNascimentoLimite: Date = new Date();
   dataNascimento: Date = new Date();
+  isDiasAlternados: boolean;
   autorizacaoDeImagem: boolean = false;
   dias: string [] = [
     DiasDaSemana.SEGUNDA,
@@ -39,11 +40,12 @@ export class CadastroAlunosComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit() {
+    this.selecionarDiasAlternados();
     let alunoNovo = new Aluno(
       this.nome,
       this.dataNascimento,
       this.sexo,
-      this.autorizacaoDeImagem,
+      this.autorizacaoDeImagem, this.isDiasAlternados,
       this.diasSelecionados
     );
     this.serviceAlunos.adicionarAlunoNaLista(alunoNovo).subscribe({
@@ -55,5 +57,11 @@ export class CadastroAlunosComponent implements OnInit {
         ),
     });
     this.router.navigate(['/alunos']);
+  }
+
+  selecionarDiasAlternados(){
+    if(this.isDiasAlternados){
+      this.diasSelecionados = [];
+    }
   }
 }
