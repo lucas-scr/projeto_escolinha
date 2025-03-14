@@ -19,6 +19,11 @@ import { Aula } from '../../../interfaces/aula';
   providers: [MessageService],
 })
 export class CadastroContratosComponent implements OnInit {
+  modalAdicionarDia: boolean = false;
+
+  horarioInicio_aula: Date;
+  diaSelecionado: string;
+
   responsavel: Responsavel = new Responsavel('', '', 4123412);
   nome: String;
   dataNascimento: Date;
@@ -31,15 +36,20 @@ export class CadastroContratosComponent implements OnInit {
   autorizacaoDeImagem: boolean = false;
   ressarcimentoEmFeriados: Boolean;
 
-  dias: string[] = [
+  dias: String[] = [
     DiasDaSemana.SEGUNDA,
     DiasDaSemana.TERCA,
     DiasDaSemana.QUARTA,
     DiasDaSemana.QUINTA,
     DiasDaSemana.SEXTA,
   ];
-  diasSelecionados: string[] = [];
-  aulas: Aula[] = [];
+
+
+
+  aulas: Aula[] = [
+    { dia: 'Segunda', horario: new Date() },
+    { dia: 'Terça', horario: new Date('2016-09-23T15:30:00') },
+  ];
 
   isDiasAlternados: boolean;
 
@@ -89,7 +99,40 @@ export class CadastroContratosComponent implements OnInit {
 
   limparDiasSelecionados() {
     if (this.isDiasAlternados) {
-      this.diasSelecionados = [];
+      this.aulas = [];
     }
+  }
+
+  removerDiaDaSemana(index: number) {
+    this.aulas.splice(index, 1);
+  }
+  adicionarDiaDaSemana() {
+    this.aulas.push({
+      dia: this.diaSelecionado,
+      horario: this.horarioInicio_aula,
+    });
+    this.atualizarListaDiasAdicionados();
+    this.fecharModalAdicionarDia();
+  }
+
+  abrirModalAdicionarAula() {
+    this.modalAdicionarDia = true;
+
+  }
+  fecharModalAdicionarDia() {
+    this.diaSelecionado = undefined;
+    this.horarioInicio_aula = undefined;
+    this.modalAdicionarDia = false;
+  }
+
+  diasDisponiveis(): String[]{
+    return this.dias.filter(dia => {
+      const ocupado = this.aulas.some(aula => aula.dia === dia);
+      return !ocupado;
+    });
+  }
+
+  atualizarListaDiasAdicionados(){
+    this.aulas.sort((a, b) => this.dias.indexOf(a.dia) - this.dias.indexOf(b.dia));
   }
 }
