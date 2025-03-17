@@ -44,12 +44,7 @@ export class CadastroContratosComponent implements OnInit {
     DiasDaSemana.SEXTA,
   ];
 
-
-
-  aulas: Aula[] = [
-    { dia: 'Segunda', horario: new Date() },
-    { dia: 'Terça', horario: new Date('2016-09-23T15:30:00') },
-  ];
+  aulas: Aula[] = [];
 
   isDiasAlternados: boolean;
 
@@ -77,23 +72,13 @@ export class CadastroContratosComponent implements OnInit {
       this.dataInicio,
       this.valorContratado,
       this.diaPagamento,
-      this.autorizacaoDeImagem
+      this.autorizacaoDeImagem,
+      this.isDiasAlternados,
+      this.ressarcimentoEmFeriados,
+      this.aulas
     );
-    this.contratoService.cadastrarContrato(novoContrato).subscribe({
-      next: () =>
-        this.messageService.showMessage(
-          'success',
-          'Cadastrado!',
-          'Cadastro realizado com sucesso.'
-        ),
-      error: () =>
-        this.messageService.showMessage(
-          'danger',
-          'Algo deu errado!',
-          'Não foi possível realizar o cadastro.'
-        ),
-    });
 
+    this.cadastrarContrato(novoContrato);
     this.router.navigate(['/contratos']);
   }
 
@@ -116,23 +101,45 @@ export class CadastroContratosComponent implements OnInit {
   }
 
   abrirModalAdicionarAula() {
+    this.limparDadosModal();
     this.modalAdicionarDia = true;
-
   }
   fecharModalAdicionarDia() {
-    this.diaSelecionado = undefined;
-    this.horarioInicio_aula = undefined;
     this.modalAdicionarDia = false;
   }
 
-  diasDisponiveis(): String[]{
-    return this.dias.filter(dia => {
-      const ocupado = this.aulas.some(aula => aula.dia === dia);
+  diasDisponiveis(): String[] {
+    return this.dias.filter((dia) => {
+      const ocupado = this.aulas.some((aula) => aula.dia === dia);
       return !ocupado;
     });
   }
 
-  atualizarListaDiasAdicionados(){
-    this.aulas.sort((a, b) => this.dias.indexOf(a.dia) - this.dias.indexOf(b.dia));
+  atualizarListaDiasAdicionados() {
+    this.aulas.sort(
+      (a, b) => this.dias.indexOf(a.dia) - this.dias.indexOf(b.dia)
+    );
+  }
+
+  limparDadosModal() {
+    this.diaSelecionado = undefined;
+    this.horarioInicio_aula = undefined;
+  }
+
+  cadastrarContrato(novoContrato: Contrato) {
+    this.contratoService.cadastrarContrato(novoContrato).subscribe({
+      next: () =>
+        this.messageService.showMessage(
+          'success',
+          'Cadastrado!',
+          'Cadastro realizado com sucesso.'
+        ),
+      error: () =>
+        this.messageService.showMessage(
+          'danger',
+          'Algo deu errado!',
+          'Não foi possível realizar o cadastro.'
+        ),
+    });
   }
 }

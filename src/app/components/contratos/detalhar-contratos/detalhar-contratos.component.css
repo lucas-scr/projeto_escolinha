@@ -95,13 +95,9 @@ small{
 }
 
 .aluno_section{
-    display: flex;
     padding-bottom: 15px;
 }
 
-.aluno_section h4{
-    flex-grow: 1;
-}
 
 h4{
     margin-top: 15px;
@@ -170,6 +166,7 @@ h4{
 
 
 .item_list_chip{
+    margin-top: 10px;
     height: 25px;
     color:rgb(51, 51, 51);
     margin: 3px;
@@ -230,4 +227,7 @@ h4{
     border: 1px solid;
 }
 
-
+.dias_semana{
+    padding-top: 0.8rem;
+    padding-bottom: 0.2rem;
+}

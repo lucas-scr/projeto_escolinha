@@ -90,25 +90,37 @@
                     </div>
                 </div>
             </div>
-            <div class="div_multiselection">
-                <label class="label_multiselect" for="dias_contrato">Dias da semana:</label>
-                <div class="cadastro_input_multiselecao">
-                    <div class="checkbox" *ngFor="let dia of dias" required name="dias_contrato">
-                        <p-checkbox [inputId]="dia" name="dias_contrato" [value]="dia"
-                            [(ngModel)]="contratoCarregado._dias" #diasModel="ngModel" required  />
-                        <label [for]="dia"> {{ dia }} </label>
-                    </div>
-                </div>
-                <div *ngIf="formContrato.controls['dias_contrato']?.invalid && formContrato.controls['dias_contrato']?.touched">
-                    <small>Selecione ao menos um dia</small>
-                </div>
 
-            </div>
         </div>
         <p-divider />
 
         <h4>Dados do contrato</h4>
         <div class="dados_contrato">
+            <div class="cadastro_input">
+                <p-checkbox [(ngModel)]="contratoCarregado.isDiasAlternados" [binary]="true" inputId="diasAlternados"
+                    name="diasAlternados" />
+                <label for="diasAlternados" style="margin-left: 0.3rem;">As aulas serão realizadas em dias
+                    alternados</label>
+            </div>
+
+            <div class="dias_semana" *ngIf="!contratoCarregado.isDiasAlternados">
+                <div class="chips_dias_aulas">
+                    <div class="dias_semana_header">
+                        <label class="dias_semana_header_titulo" for="dias_contrato">Dias da semana:</label>
+                        <p-button label="Adicionar" (click)="modalAdicionar = true" [disabled]="aulas.length > 4" />
+                    </div>
+                    <div class="horarioAulas">
+                        <p-chip class="item_list_chip" *ngFor="let aula of aulas, let i = index" removable="true"
+                            (onRemove)="removerDiaDaSemana(i)">
+                            <a>{{aula.dia}} às {{aula.horario | date:'HH:MM'}}</a>
+                        </p-chip>
+                    </div>
+                    <div *ngIf="aulas.length < 1">
+                        <small>Insira ao menos um dia</small>
+                    </div>
+                </div>
+            </div>
+
 
             <div class="cadastro_input">
                 <p-floatlabel variant="on">
@@ -121,9 +133,12 @@
                     <small>Este campo é obrigatório</small>
                 </div>
             </div>
-            <div class="cadastro_input">
+
+            
+            <div class="cadastro_input" *ngIf="contratoCarregado.isDiasAlternados">
                 <p-floatlabel variant="on">
-                    <p-datepicker inputId="horarioInicio" [(ngModel)]="contratoCarregado.dataInicio" required [timeOnly]="true" name="horarioInicio" />
+                    <p-datepicker inputId="horarioInicio" [(ngModel)]="contratoCarregado.dataInicio" required
+                        [timeOnly]="true" name="horarioInicio" />
                     <label class="calendar_label" for="horarioInicio">Horário das aulas</label>
                 </p-floatlabel>
                 <div
@@ -147,8 +162,8 @@
 
             <div class="cadastro_input">
                 <p-floatlabel variant="on">
-                    <p-inputnumber [(ngModel)]="contratoCarregado.valor" name="valorContrato"
-                        required inputId="valorContrato" mode="currency" currency="BRL" locale="pt-BR" />
+                    <p-inputnumber [(ngModel)]="contratoCarregado.valor" name="valorContrato" required
+                        inputId="valorContrato" mode="currency" currency="BRL" locale="pt-BR" />
                     <label class="calendar_label" for="valorContrato">Valor</label>
                 </p-floatlabel>
                 <div
@@ -176,7 +191,44 @@
             <p-button label="Cancelar" routerLink="/contratos" severity="secondary" class="w-full" [outlined]="true"
                 styleClass="w-full" />
             <p-button label="Salvar" class="w-full" styleClass="w-full" type="submit"
-                [disabled]="formContrato.invalid" />
+                [disabled]="formContrato.invalid || (!contratoCarregado.isDiasAlternados && aulas.length === 0)" />
         </div>
     </form>
 </p-card>
+
+
+<p-dialog header="Adicionar dia da semana" [modal]="true" [(visible)]="modalAdicionar"
+    [style]="{ width: '25rem', height: '25rem' }">
+    <form #formDiaSemana="ngForm" (ngSubmit)="adicionarDiaDaSemana()">
+        <div class="form_modal">
+            <div class="form_inputs">
+                <div class="cadastro_input_modal">
+                    <p-floatlabel variant="on">
+                        <p-select inputId="diaSemana_select" name="dia_semana" required [options]="diasDisponiveis()"
+                            [(ngModel)]="diaSelecionado" name="diaSemana_select" />
+                        <label for="diaSemana_select">Dia da semana</label>
+                    </p-floatlabel>
+                    <div
+                        *ngIf="formDiaSemana.controls['diaSemana_select']?.invalid && formDiaSemana.controls['diaSemana_select']?.touched">
+                        <small>Este campo é obrigatório</small>
+                    </div>
+                </div>
+                <div class="cadastro_input_modal">
+                    <p-floatlabel variant="on">
+                        <p-datepicker class="cadastro_input_date" required inputId="horarioInicio_aula"
+                            [(ngModel)]="horarioInicio_aula" [timeOnly]="true" name="horarioInicio_aula" />
+                        <label class="calendar_label" for="horarioInicio_aula">Horário das aulas</label>
+                    </p-floatlabel>
+                    <div
+                        *ngIf="formDiaSemana.controls['horarioInicio_aula']?.invalid && formDiaSemana.controls['horarioInicio_aula']?.touched">
+                        <small>Este campo é obrigatório</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <ng-template #footer>
+        <p-button label="Cancelar" severity="secondary" (click)="fecharModalAdicionarDia()" />
+        <p-button label="Adicionar" type="submit" [disabled]="formDiaSemana.invalid " (click)="adicionarDiaDaSemana()" />
+    </ng-template>
+</p-dialog>

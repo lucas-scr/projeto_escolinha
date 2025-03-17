@@ -137,6 +137,7 @@ h4 {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  padding-bottom: 0.7rem;
 }
 
 .cadastro_input_horarios {

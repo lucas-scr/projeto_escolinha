@@ -1,3 +1,4 @@
+import { Aula } from '../interfaces/aula';
 import { Aluno } from './Alunos';
 import { Responsavel } from './Responsavel';
 
@@ -8,10 +9,11 @@ export class Contrato {
   dataCadastro: Date;
   dataInicio: Date;
   dataFim?: Date;
-  _dias: string[];
+  _dias: Aula[];
   valor: Number;
   diaPagamento: Number;
   situacao: String;
+  isDiasAlternados: boolean;
   ressarcimentoEmFeriados: Boolean;
   autorizacaoImagem: Boolean;
 
@@ -23,8 +25,11 @@ export class Contrato {
     valor: Number,
     diaPagamento: Number,
     autorizacaoImagem: Boolean,
-    dias?: string[],
+    isDiasAlternados: boolean,
+    ressarcimentoEmFeriados: Boolean,
+    dias?: Aula[],
     id?: Number
+
 
   ) {
     this.responsavel = responsavel,
@@ -37,15 +42,17 @@ export class Contrato {
     this.situacao = "Iniciado";
     this.id = id;
     this.autorizacaoImagem = autorizacaoImagem;
+    this.isDiasAlternados = isDiasAlternados;
+    this.ressarcimentoEmFeriados = ressarcimentoEmFeriados;
   }
 
 
-  get dias(): String[] {
+  get dias(): Aula[] {
     return this._dias;
   }
 
 
-  set dias(dias: string[]) {
+  set dias(dias: Aula[]) {
     if (dias.length > 5) {
       throw new Error('O número máximo de dias permitidos é 5.');
     }
