@@ -42,6 +42,18 @@
             </div>
         </div>
 
+        <div class="cadastro_input">
+            <p-floatlabel variant="on">
+                <input id="descricao" pInputText [(ngModel)]="descricao" required name="descricao">
+                <label for="descricao">Descrição</label>
+            </p-floatlabel>
+            <div *ngIf="formAtividade.controls['descricao']?.invalid && formAtividade.controls['descricao']?.touched">
+                <small>Este campo é obrigatório</small>
+            </div>
+        </div>
+
+
+
         <div class="cadastro_botoes">
             <p-button label="Cancelar" routerLink="/atividades" severity="secondary" class="w-full" [outlined]="true"
                 styleClass="w-full" />

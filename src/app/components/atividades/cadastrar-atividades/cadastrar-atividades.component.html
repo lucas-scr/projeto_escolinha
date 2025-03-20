@@ -15,7 +15,6 @@
 
 
         <div class="cadastro_input">
-
             <p-floatlabel variant="on">
                 <p-select inputId="materia_select" name="materia" required [options]="listaMaterias"
                     [(ngModel)]="materiaSelecionada" optionLabel="nome" placeholder="Selecione" name="materia" />
@@ -39,6 +38,16 @@
 
             <div *ngIf="formAtividade.submitted && !arquivoUrl ">
                 <small>Insira o arquivo da atividade</small>
+            </div>
+        </div>
+
+        <div class="cadastro_input">
+            <p-floatlabel variant="on">
+                <input id="descricao" pInputText [(ngModel)]="descricao" required name="descricao">
+                <label for="descricao">Descrição</label>
+            </p-floatlabel>
+            <div *ngIf="formAtividade.controls['descricao']?.invalid && formAtividade.controls['descricao']?.touched">
+                <small>Este campo é obrigatório</small>
             </div>
         </div>
 

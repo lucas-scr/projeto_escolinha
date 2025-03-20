@@ -22,6 +22,7 @@ import { PrimengImports } from '../../../shared/primengImports.module';
 export class EditarAtividadesComponent implements OnInit, OnDestroy {
   idAtividade: number;
   codigo: String;
+  descricao: String;
   dataCriacao: Date;
 
   listaMaterias: Materia[] | undefined;
@@ -62,6 +63,7 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
         arquivo: this.arquivoBlob,
         nomeArquivo: this.nomeArquivo,
         dataCriacao: this.dataCriacao,
+        descricao: this.descricao,
         id: new Number(this.idAtividade),
       };
       this.atualizarDados(this.idAtividade, atividadeAtualizada);
@@ -109,10 +111,9 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
           nome: atividade.nomeMateria,
           id: atividade.materia,
         };
+        this.descricao = atividade.descricao;
         this.nomeArquivo = atividade.nomeArquivo || 'Arquivo anexado';
         this.dataCriacao = new Date(atividade.dataCriacao);
-
-
         if (atividade.arquivo) {
           this.tipoArquivo = atividade.tipoArquivo;
           this.arquivoBlob = new Blob([atividade.arquivo]);

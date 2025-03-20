@@ -19,6 +19,7 @@ import { ServiceAtividades } from '../../../services/service_atividades';
 })
 export class DetalharAtividadesComponent implements OnInit {
   idAtividade: number;
+  descricao: String;
   codigo: String;
   dataCriacao: Date;
 
@@ -54,6 +55,7 @@ export class DetalharAtividadesComponent implements OnInit {
         };
         this.nomeArquivo = atividade.nomeArquivo || 'Arquivo anexado';
         this.dataCriacao = new Date(atividade.dataCriacao);
+        this.descricao = atividade.descricao;
 
         if (atividade.arquivo) {
           this.tipoArquivo = atividade.tipoArquivo;

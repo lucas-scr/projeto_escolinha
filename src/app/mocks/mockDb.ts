@@ -219,6 +219,7 @@ export class MockDbService implements InMemoryDbService {
         nomeMateria: 'Ciências',
         nomeArquivo: 'arquivo1.png',
         tipoArquivo: 'pdf',
+        descricao: 'Descrição atividade 1',
         arquivo: new Blob(['Português: Análise sintática'], {
           type: 'text/plain',
         }),
@@ -231,6 +232,7 @@ export class MockDbService implements InMemoryDbService {
         nomeMateria: 'Matemática',
         nomeArquivo: 'arquivo1.png',
         tipoArquivo: 'text/plain',
+        descricao: 'Descrição atividade 2',
         arquivo: new Blob(['Matemática: Cálculo de limites'], {
           type: 'text/plain',
         }),
@@ -243,6 +245,7 @@ export class MockDbService implements InMemoryDbService {
         nomeMateria: 'Geografia',
         nomeArquivo: 'arquivo.123',
         tipoArquivo: 'text/plain',
+        descricao: 'Descrição atividade 3',
         arquivo: new Blob(['História: Idade Média'], { type: 'text/plain' }),
         dataCriacao: new Date('2025-02-17T11:30:00'),
       },
@@ -253,6 +256,7 @@ export class MockDbService implements InMemoryDbService {
         nomeMateria: 'História',
         nomeArquivo: 'arquivo.113',
         tipoArquivo: 'text/plain',
+        descricao: 'Descrição atividade 4',
         arquivo: new Blob(['Geografia: Cartografia e mapas'], {
           type: 'text/plain',
         }),
@@ -265,6 +269,7 @@ export class MockDbService implements InMemoryDbService {
         nomeArquivo: 'arquivo.124',
         nomeMateria: 'Matemática',
         tipoArquivo: 'text/plain',
+        descricao: 'Descrição atividade 5',
         arquivo: new Blob(['Ciências: Ecossistemas'], { type: 'text/plain' }),
         dataCriacao: new Date('2025-02-19T08:20:00'),
       },
@@ -275,6 +280,7 @@ export class MockDbService implements InMemoryDbService {
         nomeMateria: 'Português',
         nomeArquivo: 'arquivo.123',
         tipoArquivo: 'pdf',
+        descricao: 'Descrição atividade 10',
         arquivo: new Blob(['Física: Leis de Newton'], { type: 'text/plain' }),
         dataCriacao: new Date('2025-02-20T15:00:00'),
       },
