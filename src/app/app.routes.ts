@@ -13,6 +13,10 @@ import { ListarAtividadesComponent } from './components/atividades/listar-ativid
 import { EditarAtividadesComponent } from './components/atividades/editar-atividades/editar-atividades.component';
 import { DetalharAtividadesComponent } from './components/atividades/detalhar-atividades/detalhar-atividades.component';
 import { CadastrarAtividadesComponent } from './components/atividades/cadastrar-atividades/cadastrar-atividades.component';
+import { ListarPagamentosComponent } from './components/pagamentos/listar-pagamentos/listar-pagamentos.component';
+import { EditarPagamentosComponent } from './components/pagamentos/editar-pagamentos/editar-pagamentos.component';
+import { DetalharPagamentosComponent } from './components/pagamentos/detalhar-pagamentos/detalhar-pagamentos.component';
+import { CadastrarPagamentosComponent } from './components/pagamentos/cadastrar-pagamentos/cadastrar-pagamentos.component';
 
 
 export const routes: Routes = [
@@ -30,5 +34,8 @@ export const routes: Routes = [
     {path: 'editar-atividade/:id', component: EditarAtividadesComponent},
     {path: 'detalhar-atividade/:id', component: DetalharAtividadesComponent},
     {path: 'cadastrar-atividade', component: CadastrarAtividadesComponent},
-
+    {path: 'pagamentos', component: ListarPagamentosComponent},
+    {path: 'editar-pagamento/:id', component: EditarPagamentosComponent},
+    {path: 'detalhar-pagamento/:id', component: DetalharPagamentosComponent},
+    {path: 'cadastrar-pagamento', component: CadastrarPagamentosComponent}
 ];
