@@ -45,7 +45,7 @@ export class MenuLateralComponent implements OnInit {
           {
             label: 'Atividades',
             icon: 'pi pi-book',
-            route: '/atividades'
+            route: '/atividades',
           },
         ],
       },
@@ -55,6 +55,7 @@ export class MenuLateralComponent implements OnInit {
           {
             label: 'Pagamentos',
             icon: 'pi pi-dollar',
+            route: '/pagamentos',
           },
           {
             label: 'Cronograma',

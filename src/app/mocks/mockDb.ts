@@ -5,6 +5,7 @@ import { Contrato } from '../model/Contrato';
 import { Responsavel } from '../model/Responsavel';
 import { Atividade } from '../interfaces/atividades';
 import { Materia } from '../interfaces/materias';
+import { Pagamento } from '../interfaces/pagamentos';
 
 @Injectable({
   providedIn: 'root',
@@ -295,7 +296,127 @@ export class MockDbService implements InMemoryDbService {
       { id: 6, nome: 'Física' },
     ];
 
-    return { alunos, contratos, atividades, materias };
+    const pagamentos: Pagamento[] = [
+      {
+        id: 1,
+        valor: 160.00,
+        valorPago: 160.00,
+        dataPagamento: new Date('2025-03-10'),
+        dataVencimento: new Date('2025-03-01'),
+        situacao: 'Pago',
+        meioDePagamento: 'Pix',
+        contrato:   new Contrato(
+          new Responsavel('Responsável 2', '12345678901', 12345667111),
+          new Aluno(
+            'Joao',
+            new Date('2001-08-04'),
+            'M',
+            true,
+            true,
+            undefined,
+            1,
+            'J'
+          ),
+          new Date('2024-03-01'),
+          500,
+          20,
+          true,
+          true, true,
+          undefined,
+          1
+        ),
+      },
+      {
+        id: 2,
+        valor: 120.00,
+        valorPago: undefined,
+        dataPagamento: undefined,
+        dataVencimento: new Date('2025-03-10'),
+        situacao: 'Vencido',
+        meioDePagamento: undefined,
+        contrato:       new Contrato(
+          new Responsavel('Responsável 1', '12345678901', 12345667111),
+          new Aluno(
+            'Joao',
+            new Date('2001-08-04'),
+            'M',
+            true,
+            true,
+            undefined,
+            1,
+            'J'
+          ),
+          new Date('2024-03-01'),
+          500,
+          20,
+          true,
+          true, true,
+          undefined,
+          1
+        ),
+      },
+      {
+        id: 3,
+        valor: 170.00,
+        valorPago: undefined,
+        dataPagamento: undefined,
+        dataVencimento: new Date('2025-12-01'),
+        situacao: 'Em aberto',
+        meioDePagamento: undefined,
+        contrato:       new Contrato(
+          new Responsavel('Responsável 3', '12345678901', 12345667111),
+          new Aluno(
+            'Joao',
+            new Date('2001-08-04'),
+            'M',
+            true,
+            true,
+            undefined,
+            1,
+            'J'
+          ),
+          new Date('2024-03-01'),
+          500,
+          20,
+          true,
+          true, true,
+          undefined,
+          1
+        ),
+      },
+      {
+        id: 4,
+        valor: 170.00,
+        valorPago: undefined,
+        dataPagamento: undefined,
+        dataVencimento: new Date('2025-12-01'),
+        situacao: 'Cancelado',
+        meioDePagamento: undefined,
+        contrato:       new Contrato(
+          new Responsavel('Responsável 4', '12345678901', 12345667111),
+          new Aluno(
+            'Joao',
+            new Date('2001-08-04'),
+            'M',
+            true,
+            true,
+            undefined,
+            1,
+            'J'
+          ),
+          new Date('2024-03-01'),
+          500,
+          20,
+          true,
+          true, true,
+          undefined,
+          1
+        ),
+        motivoCancelamento: 'Teste'
+      },
+    ]
+
+    return { alunos, contratos, atividades, materias, pagamentos };
   }
 
   get(reqInfo: RequestInfo) {

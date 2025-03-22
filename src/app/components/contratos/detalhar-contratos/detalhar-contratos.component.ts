@@ -16,12 +16,9 @@ export class DetalharContratosComponent {
   modalAdicionar: boolean = false;
 
     dataLimite: Date = new Date();
-
     contratoId: Number;
     contratoCarregado: Contrato
-    
-
-    
+      
     diasSelecionados: string[] = [];
   
   

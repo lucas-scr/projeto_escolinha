@@ -95,7 +95,7 @@ export class ListarAtividadesComponent implements OnInit {
 
   abrirMenu(event: any, id: number) {
     this.itemId = id;
-    this.menu.toggle(event); // Exibe o menu no local correto
+    this.menu.toggle(event);
   }
 
   carregarAtividades() {
