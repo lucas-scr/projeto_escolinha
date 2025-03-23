@@ -6,7 +6,6 @@ import { Materia } from '../../../interfaces/materias';
 import { ServiceMateria } from '../../../services/service_materias';
 import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
 import { FileUploadEvent } from 'primeng/fileupload';
-import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import { ServiceAtividades } from '../../../services/service_atividades';
 
 @Component({

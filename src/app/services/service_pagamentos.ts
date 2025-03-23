@@ -35,6 +35,8 @@ export class ServicePagamentos {
 
     cancelarPagamento(id: number, pagamento: Pagamento, motivo: string):Observable<Pagamento>{
         pagamento.motivoCancelamento = motivo;
+        pagamento.situacao = 'Cancelado'
+        console.log(motivo)
         return this.http.post<Pagamento>(`${this.url}/${id}`,pagamento)
     }
    
