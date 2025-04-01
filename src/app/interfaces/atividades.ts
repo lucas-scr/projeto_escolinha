@@ -9,5 +9,5 @@ export interface Atividade{
     tipoArquivo: String;
     descricao: String;
     dataCriacao?: Date;
-    id?: Number
+    id?: Number;
 }
