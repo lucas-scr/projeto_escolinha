@@ -17,8 +17,5 @@ export class CadastrarPagamentosComponent {
      
      constructor(private servicePagamento: ServicePagamentos){
      }
-     
-
-
-     
+    
 }
