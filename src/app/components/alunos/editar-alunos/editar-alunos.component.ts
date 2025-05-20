@@ -15,9 +15,7 @@ import { PrimengImports } from '../../../shared/primengImports.module';
 export class EditarAlunosComponent implements OnInit {
   alunoId: Number | undefined;
 
-  nome: String;
   dataNascimentoLimite: Date = new Date();
-  dataNascimento: Date;
   sexo: String;
   autorizacaoDeImagem: boolean;
   isDiasAlternados: boolean;
@@ -65,7 +63,9 @@ export class EditarAlunosComponent implements OnInit {
 
     history.back();
   }
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
   capturarId() {
     this.route.params.subscribe((params) => {
       if (params != undefined) {

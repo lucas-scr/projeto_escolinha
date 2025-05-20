@@ -39,7 +39,7 @@
             </div>
         </div>
 
-        <div class="cadastro_input" *ngIf="!isDiasAlternados">
+        <div class="cadastro_input" *ngIf="!alunoCarregado.isDiasAlternados">
             <label class="label_multiselect" for="dias_aluno">Dias da semana:</label>
             <div class="cadastro_input_multiselecao">
                 <div class="checkbox" *ngFor="let dia of dias" name="dias_aluno">

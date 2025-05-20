@@ -5,6 +5,7 @@ import { Aluno } from '../../../model/Alunos';
 import { PrimengImports } from '../../../shared/primengImports.module';
 import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
 import { DiasDaSemana } from '../../../common/enumDiasDaSemana';
+import { Aula } from '../../../interfaces/aula';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class CadastroAlunosComponent implements OnInit {
     DiasDaSemana.SEXTA,
   ];
 
-  diasSelecionados: [] = [];
+  diasSelecionados: Aula[] = [];
 
   constructor(
     private serviceAlunos: ServiceAlunos,
@@ -45,7 +46,8 @@ export class CadastroAlunosComponent implements OnInit {
       this.nome,
       this.dataNascimento,
       this.sexo,
-      this.autorizacaoDeImagem, this.isDiasAlternados,
+      this.autorizacaoDeImagem, 
+      this.isDiasAlternados,
       this.diasSelecionados
     );
     this.serviceAlunos.adicionarAlunoNaLista(alunoNovo).subscribe({
@@ -57,6 +59,7 @@ export class CadastroAlunosComponent implements OnInit {
         ),
     });
     this.router.navigate(['/alunos']);
+    console.log(alunoNovo)
   }
 
   selecionarDiasAlternados(){
