@@ -6,16 +6,19 @@ import { PrimengImports } from '../../../shared/primengImports.module';
 import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
 import { DiasDaSemana } from '../../../common/enumDiasDaSemana';
 import { Aula } from '../../../interfaces/aula';
+import { ModalAdicionarDiaComponent } from '../../../shared/modal-adicionar-dia/modal-adicionar-dia.component';
 
 
 @Component({
   selector: 'app-cadastro-alunos',
-  imports: [PrimengImports, RouterModule, RouterLink],
+  imports: [PrimengImports, RouterModule, RouterLink, ModalAdicionarDiaComponent],
   templateUrl: './cadastro-alunos.component.html',
   styleUrl: './cadastro-alunos.component.css',
   providers: [ServiceMensagemGlobal],
 })
 export class CadastroAlunosComponent implements OnInit {
+  modalAdicionarDia: boolean = false;
+
   sexo: String = 'M';
   nome: String;
   dataNascimentoLimite: Date = new Date();
@@ -66,5 +69,23 @@ export class CadastroAlunosComponent implements OnInit {
     if(this.isDiasAlternados){
       this.diasSelecionados = [];
     }
+  }
+
+  fecharModalAdicionarDia(){
+    this.modalAdicionarDia = false;
+
+  }
+  abrirModalAdicionarDia(){
+    this.modalAdicionarDia = true;
+  }
+
+  adicionarDiaDaSemana(event:{dia: string, horario: Date }){
+    this.diasSelecionados.push(event)
+    this.ordenarListaPorDiaDaSemana(this.diasSelecionados)
+  }
+    ordenarListaPorDiaDaSemana(lista: Array<Aula>) {
+    lista.sort(
+      (a, b) => this.dias.indexOf(a.dia) - this.dias.indexOf(b.dia)
+    );
   }
 }

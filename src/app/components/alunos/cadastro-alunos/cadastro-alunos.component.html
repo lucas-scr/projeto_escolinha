@@ -80,3 +80,5 @@
 </p-card>
 
 <p-toast />
+
+<app-modal-adicionar-dia [visible]="modalAdicionarDia" [aulasAdicionadas]="diasSelecionados" (fechar)="fecharModalAdicionarDia()" (adicionar)="adicionarDiaDaSemana($event)"></app-modal-adicionar-dia>

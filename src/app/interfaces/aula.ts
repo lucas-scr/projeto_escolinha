@@ -1,4 +1,4 @@
 export interface Aula{
-    dia: String;
+    dia: string;
     horario: Date;
 }

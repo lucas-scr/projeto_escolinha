@@ -1,0 +1,19 @@
+.cadastro_input{
+  margin-top: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.cadastro_input_modal{
+    margin-top: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+
+input {
+  width: 100%;
+}
+
+small {
+  color: red;
+  font-size: 12px;
+}

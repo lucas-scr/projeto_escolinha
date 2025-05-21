@@ -94,8 +94,9 @@ export class MockDbService implements InMemoryDbService {
         500,
         20,
         true,
-        true, true,
-        undefined,
+        true,
+        true,
+        [],
         1
       ),
       new Contrato(
@@ -106,7 +107,7 @@ export class MockDbService implements InMemoryDbService {
           'M',
           true,
           true,
-          undefined,
+          [],
           4,
           'LS'
         ),
@@ -114,8 +115,9 @@ export class MockDbService implements InMemoryDbService {
         400,
         12,
         true,
-        true, false,
-        undefined,
+        true, 
+        false,
+        [],
         2
       ),
       new Contrato(
@@ -126,7 +128,7 @@ export class MockDbService implements InMemoryDbService {
           'M',
           true,
           true,
-          undefined,
+          [],
           4,
           'LS'
         ),
@@ -134,8 +136,9 @@ export class MockDbService implements InMemoryDbService {
         600,
         23,
         true,
-        true,true,
-        undefined,
+        true,
+        true,
+        [],
         3
       ),
       new Contrato(
@@ -144,7 +147,8 @@ export class MockDbService implements InMemoryDbService {
           'Mariana Souza',
           new Date('2016-09-23'),
           'F',
-          true, false,
+          true, 
+          false,
           [
             { dia: 'Quarta', horario: new Date('2016-09-23T10:30:00Z') },
             { dia: 'Quinta', horario: new Date('2016-09-23T10:30:00Z') },
@@ -183,7 +187,8 @@ export class MockDbService implements InMemoryDbService {
         550,
         17,
         false,
-        false,true,
+        false,
+        true,
         [
           { dia: 'Segunda', horario: new Date('2001-08-04T15:30:00Z') },
           { dia: 'Quarta', horario: new Date('2001-08-04T15:30:00Z') },
@@ -206,7 +211,8 @@ export class MockDbService implements InMemoryDbService {
         500,
         25,
         true,
-        false, true,
+        false,
+        true,
         [{ dia: 'Sexta', horario: new Date('1999-10-28T09:30:00Z') }],
         6
       ),
