@@ -119,10 +119,11 @@
                             (onRemove)="removerDiaDaSemana(i)">
                             <a>{{aula.dia}} às {{aula.horario | date:'HH:MM'}}</a>
                         </p-chip>
-                    </div>
-                    <div *ngIf="aulas.length < 1">
+                                            <div *ngIf="aulas.length < 1">
                         <small>Insira ao menos um dia</small>
                     </div>
+                    </div>
+
                 </div>
             </div>
 
