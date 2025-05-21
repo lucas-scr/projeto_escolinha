@@ -15,6 +15,8 @@ import { Menu } from 'primeng/menu';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http'; // Importando o módulo
 import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
+import { ServiceContratos } from '../../../services/service_contratos';
+import { Contrato } from '../../../model/Contrato';
 
 @Component({
   selector: 'app-lista-alunos',
@@ -24,7 +26,7 @@ import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
   providers: [MessageService, ConfirmationService],
 })
 export class ListaAlunosComponent implements OnInit {
-  listaAlunos: Aluno[];
+  listaAlunos: Contrato[];
   filtroNome: String;
 
   @ViewChild('menu') menu!: Menu;
@@ -34,10 +36,9 @@ export class ListaAlunosComponent implements OnInit {
   opcoesDeAcoes: MenuItem[] | undefined;
 
   constructor(
-    private serviceAluno: ServiceAlunos,
+    private serviceContratos: ServiceContratos,
     private router: Router,
     private messageService: ServiceMensagemGlobal,
-    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit() {
@@ -60,28 +61,12 @@ export class ListaAlunosComponent implements OnInit {
   }
 
   carregarDadosNaLista(){
-    this.serviceAluno.obterAlunos().subscribe({
+    this.serviceContratos.listarContratos().subscribe({
       next: (dados) => this.listaAlunos = dados,
       error: (erro) => console.log('Erro:', erro)
     });
   }
 
-  removerAlunoDaLista(id: Number) {
-    this.serviceAluno.removerAluno(id).subscribe(
-      {
-        next: () => 
-          {
-            this.messageService.showMessage("success","Exclusão", "O aluno foi removido com sucesso.");
-            this.carregarDadosNaLista()
-          },
-        error: (erro) => {
-          this.messageService.showMessage("danger","Erro", "Não foi possível excluir o aluno." );
-          console.log(erro)
-        }
-
-      }
-    );
-  }
 
   abrirMenu(event: Event, aluno: any) {
     this.alunoId = aluno;
@@ -90,13 +75,13 @@ export class ListaAlunosComponent implements OnInit {
 
 
   filtrarLista(event: any) {
-    this.serviceAluno.obterAlunos().subscribe((alunos) => {
+    this.serviceContratos.listarContratos().subscribe((contratos) => {
       if (this.filtroNome.length > 0) {
-        this.listaAlunos = alunos.filter((aluno) =>
-          aluno.nome.toLowerCase().startsWith(this.filtroNome.toLowerCase())
+        this.listaAlunos = contratos.filter((aluno) =>
+          aluno.aluno.nome.toLowerCase().startsWith(this.filtroNome.toLowerCase())
         );
       }else{
-        this.listaAlunos = alunos
+        this.listaAlunos = contratos
       }
     });
   }

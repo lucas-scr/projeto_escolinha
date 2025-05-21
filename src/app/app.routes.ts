@@ -1,28 +1,24 @@
 import { Routes } from '@angular/router';
 
-import { CadastroAlunosComponent } from './components/alunos/cadastro-alunos/cadastro-alunos.component';
-import { ListaAlunosComponent } from './components/alunos/lista-alunos/lista-alunos.component';
-import { EditarAlunosComponent } from './components/alunos/editar-alunos/editar-alunos.component';
-import { DetalharAlunosComponent } from './components/alunos/detalhar-alunos/detalhar-alunos.component';
-import { ListaContratosComponent } from './components/contratos/lista-contratos/lista-contratos.component';
-import { CadastroContratosComponent } from './components/contratos/cadastro-contratos/cadastro-contratos.component';
-import { EditarContratosComponent } from './components/contratos/editar-contratos/editar-contratos.component';
-import { DetalharContratosComponent } from './components/contratos/detalhar-contratos/detalhar-contratos.component';
-import { PaginaInicialComponent } from './components/pagina-inicial/pagina-inicial.component';
-import { ListarAtividadesComponent } from './components/atividades/listar-atividades/listar-atividades.component';
-import { EditarAtividadesComponent } from './components/atividades/editar-atividades/editar-atividades.component';
-import { DetalharAtividadesComponent } from './components/atividades/detalhar-atividades/detalhar-atividades.component';
-import { CadastrarAtividadesComponent } from './components/atividades/cadastrar-atividades/cadastrar-atividades.component';
-import { ListarPagamentosComponent } from './components/pagamentos/listar-pagamentos/listar-pagamentos.component';
-import { EditarPagamentosComponent } from './components/pagamentos/editar-pagamentos/editar-pagamentos.component';
-import { DetalharPagamentosComponent } from './components/pagamentos/detalhar-pagamentos/detalhar-pagamentos.component';
-import { CadastrarPagamentosComponent } from './components/pagamentos/cadastrar-pagamentos/cadastrar-pagamentos.component';
+import { ListaAlunosComponent } from './pages/alunos/lista-alunos/lista-alunos.component';
+import { DetalharAlunosComponent } from './pages/alunos/detalhar-alunos/detalhar-alunos.component';
+import { ListaContratosComponent } from './pages/contratos/lista-contratos/lista-contratos.component';
+import { CadastroContratosComponent } from './pages/contratos/cadastro-contratos/cadastro-contratos.component';
+import { EditarContratosComponent } from './pages/contratos/editar-contratos/editar-contratos.component';
+import { DetalharContratosComponent } from './pages/contratos/detalhar-contratos/detalhar-contratos.component';
+import { PaginaInicialComponent } from './pages/pagina-inicial/pagina-inicial.component';
+import { ListarAtividadesComponent } from './pages/atividades/listar-atividades/listar-atividades.component';
+import { EditarAtividadesComponent } from './pages/atividades/editar-atividades/editar-atividades.component';
+import { DetalharAtividadesComponent } from './pages/atividades/detalhar-atividades/detalhar-atividades.component';
+import { CadastrarAtividadesComponent } from './pages/atividades/cadastrar-atividades/cadastrar-atividades.component';
+import { ListarPagamentosComponent } from './pages/pagamentos/listar-pagamentos/listar-pagamentos.component';
+import { EditarPagamentosComponent } from './pages/pagamentos/editar-pagamentos/editar-pagamentos.component';
+import { DetalharPagamentosComponent } from './pages/pagamentos/detalhar-pagamentos/detalhar-pagamentos.component';
+import { CadastrarPagamentosComponent } from './pages/pagamentos/cadastrar-pagamentos/cadastrar-pagamentos.component';
 
 
 export const routes: Routes = [
-    {path:'cadastrar-alunos', component: CadastroAlunosComponent},
     {path: 'alunos', component: ListaAlunosComponent}, 
-    {path: 'editar-aluno/:id', component: EditarAlunosComponent},
     {path: 'detalhar-aluno/:id', component: DetalharAlunosComponent},
     {path: 'contratos', component: ListaContratosComponent},
     {path: 'cadastrar-contratos', component: CadastroContratosComponent},
