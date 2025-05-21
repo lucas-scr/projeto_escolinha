@@ -54,19 +54,6 @@ export class ListaAlunosComponent implements OnInit {
             command: () =>
               this.router.navigate(['/detalhar-aluno', this.alunoId]),
           },
-          {
-            label: 'Editar',
-            icon: 'pi pi-pencil',
-            command: () =>
-              this.router.navigate(['/editar-aluno', this.alunoId]),
-          },
-          {
-            label: 'Remover',
-            icon: 'pi pi-trash',
-            command: () => {
-              this.confirmarRemover()
-            },
-          },
         ],
       },
     ];
@@ -101,28 +88,6 @@ export class ListaAlunosComponent implements OnInit {
     this.menu.toggle(event);
   }
 
-  confirmarRemover() {
-    this.confirmationService.confirm({
-      target: event.target as EventTarget,
-      message: 'Tem certeza que deseja remover o aluno?',
-      header: 'Remover aluno',
-      closable: true,
-      closeOnEscape: true,
-      icon: 'pi pi-exclamation-triangle',
-      rejectButtonProps: {
-        label: 'Não',
-        severity: 'secondary',
-        outlined: true,
-      },
-      acceptButtonProps: {
-        label: 'Sim',
-        severity: 'danger',
-      },
-      accept: () => {
-        this.removerAlunoDaLista(this.alunoId);
-      },
-    });
-  }
 
   filtrarLista(event: any) {
     this.serviceAluno.obterAlunos().subscribe((alunos) => {

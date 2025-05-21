@@ -107,7 +107,7 @@
                 <div class="chips_dias_aulas">
                     <div class="dias_semana_header">
                         <label class="dias_semana_header_titulo" for="dias_contrato">Dias da semana:</label>
-                        <p-button label="Adicionar" (click)="modalAdicionar = true" [disabled]="aulas.length > 4" />
+                        <p-button label="Adicionar" (click)="abrirModalAdicionarAula()" [disabled]="aulas.length > 4" />
                     </div>
                     <div class="horarioAulas">
                         <p-chip class="item_list_chip" *ngFor="let aula of aulas, let i = index" removable="true"
@@ -197,38 +197,4 @@
 </p-card>
 
 
-<p-dialog header="Adicionar dia da semana" [modal]="true" [(visible)]="modalAdicionar"
-    [style]="{ width: '25rem', height: '25rem' }">
-    <form #formDiaSemana="ngForm" (ngSubmit)="adicionarDiaDaSemana()">
-        <div class="form_modal">
-            <div class="form_inputs">
-                <div class="cadastro_input_modal">
-                    <p-floatlabel variant="on">
-                        <p-select inputId="diaSemana_select" name="dia_semana" required [options]="diasDisponiveis()"
-                            [(ngModel)]="diaSelecionado" name="diaSemana_select" />
-                        <label for="diaSemana_select">Dia da semana</label>
-                    </p-floatlabel>
-                    <div
-                        *ngIf="formDiaSemana.controls['diaSemana_select']?.invalid && formDiaSemana.controls['diaSemana_select']?.touched">
-                        <small>Este campo é obrigatório</small>
-                    </div>
-                </div>
-                <div class="cadastro_input_modal">
-                    <p-floatlabel variant="on">
-                        <p-datepicker class="cadastro_input_date" required inputId="horarioInicio_aula"
-                            [(ngModel)]="horarioInicio_aula" [timeOnly]="true" name="horarioInicio_aula" />
-                        <label class="calendar_label" for="horarioInicio_aula">Horário das aulas</label>
-                    </p-floatlabel>
-                    <div
-                        *ngIf="formDiaSemana.controls['horarioInicio_aula']?.invalid && formDiaSemana.controls['horarioInicio_aula']?.touched">
-                        <small>Este campo é obrigatório</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-    <ng-template #footer>
-        <p-button label="Cancelar" severity="secondary" (click)="fecharModalAdicionarDia()" />
-        <p-button label="Adicionar" type="submit" [disabled]="formDiaSemana.invalid " (click)="adicionarDiaDaSemana()" />
-    </ng-template>
-</p-dialog>
+<app-modal-adicionar-dia [visible]="modalAdicionarDia" [aulasAdicionadas]="aulas" (fechar)="fecharModalAdicionarDia()" (adicionar)="adicionarDiaDaSemana($event)"></app-modal-adicionar-dia>

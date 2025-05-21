@@ -3,27 +3,25 @@ import { Contrato } from '../../../model/Contrato';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
 import { ServiceContratos } from '../../../services/service_contratos';
-import { Aluno } from '../../../model/Alunos';
 import { DiasDaSemana } from '../../../common/enumDiasDaSemana';
 import { PrimengImports } from '../../../shared/primengImports.module';
 import { Aula } from '../../../interfaces/aula';
+import { ModalAdicionarDiaComponent } from '../../../shared/modal-adicionar-dia/modal-adicionar-dia.component';
 
 @Component({
   selector: 'app-editar-contratos',
-  imports: [RouterLink, PrimengImports],
+  imports: [RouterLink, PrimengImports, ModalAdicionarDiaComponent],
   templateUrl: './editar-contratos.component.html',
   styleUrl: './editar-contratos.component.css',
 })
 export class EditarContratosComponent implements OnInit {
-  modalAdicionar: boolean = false;
+  modalAdicionarDia: boolean = false;
   contratoId: Number;
   contratoCarregado: Contrato;
   dataLimite: Date = new Date();
 
   diaSelecionado: string;
   horarioInicio_aula: Date = new Date();
-
-
 
 
   dias: String[] = [
@@ -91,11 +89,10 @@ export class EditarContratosComponent implements OnInit {
   }
 
   abrirModalAdicionarAula() {
-    this.limparDadosModal();
-    this.modalAdicionar = true;
+    this.modalAdicionarDia = true;
   }
   fecharModalAdicionarDia() {
-    this.modalAdicionar = false;
+    this.modalAdicionarDia = false;
   }
 
   diasDisponiveis(): String[] {
@@ -110,24 +107,15 @@ export class EditarContratosComponent implements OnInit {
       (a, b) => this.dias.indexOf(a.dia) - this.dias.indexOf(b.dia)
     );
   }
-
-  limparDadosModal() {
-    this.diaSelecionado = undefined;
-    this.horarioInicio_aula = undefined;
-  }
-
-  adicionarDiaDaSemana() {
-    this.aulas.push({
-      dia: this.diaSelecionado,
-      horario: this.horarioInicio_aula,
-    });
-    this.atualizarListaDiasAdicionados();
-    this.fecharModalAdicionarDia();
-  }
-
   
   removerDiaDaSemana(index: number) {
     this.aulas.splice(index, 1);
+  }
+
+    adicionarDiaDaSemana(event: { dia: string, horario: Date }) {
+    this.aulas.push(event);
+    this.atualizarListaDiasAdicionados()
+    this.fecharModalAdicionarDia();
   }
 
   alterarContrato(contratoAtualizado: Contrato){

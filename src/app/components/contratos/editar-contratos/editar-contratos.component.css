@@ -139,13 +139,7 @@
     width: 100%;
     padding-bottom: 0.7rem;
   }
-  
-  .cadastro_input_horarios {
-    border: solid 1px black;
-    margin-right: 0.5rem;
-    margin-bottom: 1.2rem;
-  }
-  
+    
   .item_list_chip {
     height: 25px;
     color: rgb(51, 51, 51);
@@ -164,15 +158,3 @@
   .dias_semana_header_titulo {
     flex-grow: 1;
   }
-  
-  
-  .form_modal{
-      display: flex;
-      flex-direction: column;
-  }
-  
-  
-  .cadastro_input_modal p-select{
-      width: 100%;
-  }
-  
