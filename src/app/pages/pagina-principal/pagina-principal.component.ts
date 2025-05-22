@@ -6,12 +6,12 @@ import { PrimengImports } from '../../shared/primengImports.module';
 
 
 @Component({
-  selector: 'app-pagina-inicial',
+  selector: 'app-pagina-principal',
   imports: [MenuLateralComponent, PrimengImports],
-  templateUrl: './pagina-inicial.component.html',
-  styleUrl: './pagina-inicial.component.css'
+  templateUrl: './pagina-principal.component.html',
+  styleUrl: './pagina-principal.component.css'
 })
-export class PaginaInicialComponent {
+export class PaginaPrincipalComponent {
 
   menuLateral: Boolean = true;
 

@@ -6,7 +6,7 @@ import { ListaContratosComponent } from './pages/contratos/lista-contratos/lista
 import { CadastroContratosComponent } from './pages/contratos/cadastro-contratos/cadastro-contratos.component';
 import { EditarContratosComponent } from './pages/contratos/editar-contratos/editar-contratos.component';
 import { DetalharContratosComponent } from './pages/contratos/detalhar-contratos/detalhar-contratos.component';
-import { PaginaInicialComponent } from './pages/pagina-inicial/pagina-inicial.component';
+import { PaginaPrincipalComponent } from './pages/pagina-principal/pagina-principal.component';
 import { ListarAtividadesComponent } from './pages/atividades/listar-atividades/listar-atividades.component';
 import { EditarAtividadesComponent } from './pages/atividades/editar-atividades/editar-atividades.component';
 import { DetalharAtividadesComponent } from './pages/atividades/detalhar-atividades/detalhar-atividades.component';
@@ -19,7 +19,7 @@ import { CadastrarPagamentosComponent } from './pages/pagamentos/cadastrar-pagam
 
 export const routes: Routes = [
     {
-        path: '', component: PaginaInicialComponent, children: [
+        path: '', component: PaginaPrincipalComponent, children: [
             { path: 'alunos', component: ListaAlunosComponent },
             { path: 'detalhar-aluno/:id', component: DetalharAlunosComponent },
             { path: 'contratos', component: ListaContratosComponent },
@@ -36,7 +36,7 @@ export const routes: Routes = [
             { path: 'cadastrar-pagamento', component: CadastrarPagamentosComponent },
         ]
     },
-    { path: 'autenticacao', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
-    { path: '**', redirectTo: 'autenticacao/login' }
+    { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
+    { path: '**', redirectTo: 'auth/login' }
 ];
 
