@@ -1,0 +1,137 @@
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f4f6fb;
+    }
+
+    .container {
+      display: flex;
+      width: 800px;
+      height: 500px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .left {
+      flex: 1;
+      background: linear-gradient(135deg, #1e81f3, #3abef9);
+      color: white;
+      padding: 50px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .left::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url('https://www.transparenttextures.com/patterns/cubes.png') repeat;
+      opacity: 0.1;
+    }
+
+    .left h1 {
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+
+    .left p {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #d0e6ff;
+    }
+
+    .right {
+      flex: 1;
+      padding: 50px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .right h2 {
+      margin-bottom: 30px;
+      font-size: 24px;
+      color: #333;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 12px;
+      color: #555;
+    }
+
+    .btn {
+      background: #1e81f3;
+      color: #fff;
+      padding: 12px;
+      border: none;
+      width: 100%;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-bottom: 10px;
+    }
+
+    .btn:hover {
+      background: #176dd1;
+    }
+
+    .google-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #fff;
+      color: #555;
+      border: 1px solid #ccc;
+      padding: 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      font-size: 14px;
+      width: 100%;
+    }
+
+    .google-btn:hover {
+      background: #f0f0f0;
+    }
+
+    .google-icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    .company-name {
+      font-weight: bold;
+      margin-bottom: 50px;
+      font-size: 16px;
+    }

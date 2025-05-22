@@ -18,20 +18,25 @@ import { CadastrarPagamentosComponent } from './pages/pagamentos/cadastrar-pagam
 
 
 export const routes: Routes = [
-    {path: 'alunos', component: ListaAlunosComponent}, 
-    {path: 'detalhar-aluno/:id', component: DetalharAlunosComponent},
-    {path: 'contratos', component: ListaContratosComponent},
-    {path: 'cadastrar-contratos', component: CadastroContratosComponent},
-    {path: 'editar-contrato/:id', component: EditarContratosComponent},
-    {path: 'detalhar-contrato/:id', component: DetalharContratosComponent},
-    {path: '', component: PaginaInicialComponent},
-    {path: 'inicio', component: PaginaInicialComponent},
-    {path: 'atividades', component: ListarAtividadesComponent},
-    {path: 'editar-atividade/:id', component: EditarAtividadesComponent},
-    {path: 'detalhar-atividade/:id', component: DetalharAtividadesComponent},
-    {path: 'cadastrar-atividade', component: CadastrarAtividadesComponent},
-    {path: 'pagamentos', component: ListarPagamentosComponent},
-    {path: 'editar-pagamento/:id', component: EditarPagamentosComponent},
-    {path: 'detalhar-pagamento/:id', component: DetalharPagamentosComponent},
-    {path: 'cadastrar-pagamento', component: CadastrarPagamentosComponent}
+    {
+        path: '', component: PaginaInicialComponent, children: [
+            { path: 'alunos', component: ListaAlunosComponent },
+            { path: 'detalhar-aluno/:id', component: DetalharAlunosComponent },
+            { path: 'contratos', component: ListaContratosComponent },
+            { path: 'cadastrar-contratos', component: CadastroContratosComponent },
+            { path: 'editar-contrato/:id', component: EditarContratosComponent },
+            { path: 'detalhar-contrato/:id', component: DetalharContratosComponent },
+            { path: 'atividades', component: ListarAtividadesComponent },
+            { path: 'editar-atividade/:id', component: EditarAtividadesComponent },
+            { path: 'detalhar-atividade/:id', component: DetalharAtividadesComponent },
+            { path: 'cadastrar-atividade', component: CadastrarAtividadesComponent },
+            { path: 'pagamentos', component: ListarPagamentosComponent },
+            { path: 'editar-pagamento/:id', component: EditarPagamentosComponent },
+            { path: 'detalhar-pagamento/:id', component: DetalharPagamentosComponent },
+            { path: 'cadastrar-pagamento', component: CadastrarPagamentosComponent },
+        ]
+    },
+    { path: 'autenticacao', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
+    { path: '**', redirectTo: 'autenticacao/login' }
 ];
+

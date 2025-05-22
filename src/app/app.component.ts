@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Importe o CommonModule
 import { RouterOutlet } from '@angular/router';
-import { MenuLateralComponent } from './components/menu-lateral/menu-lateral.component';
+import { MenuLateralComponent } from './pages/menu-lateral/menu-lateral.component';
 import { AvatarModule } from 'primeng/avatar';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
 import { CardModule } from 'primeng/card';
@@ -15,7 +15,6 @@ import { ServiceAlunos } from './services/service_alunos';
 @Component({
   selector: 'app-root',
   imports: [
-    MenuLateralComponent,
     AvatarModule,
     OverlayBadgeModule,
     CardModule,
@@ -36,10 +35,4 @@ import { ServiceAlunos } from './services/service_alunos';
 export class AppComponent {
   title = 'projeto_escolinha';
 
-
-  menuLateral: Boolean = true;
-
-  menuToggle(){
-    this.menuLateral = !this.menuLateral;
-  }
 }
