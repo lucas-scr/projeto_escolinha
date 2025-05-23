@@ -1,6 +1,6 @@
 declare var google: any;
 import { Component, OnInit } from '@angular/core';
-import { environments } from '../../../environments/environments';
+import { environments } from '../../environments/environments';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +9,7 @@ import { environments } from '../../../environments/environments';
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
-  
+
   clientId = environments.googleClientId;
 
   constructor() {
