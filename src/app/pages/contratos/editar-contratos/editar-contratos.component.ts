@@ -3,7 +3,7 @@ import { Contrato } from '../../../model/Contrato';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
 import { ServiceContratos } from '../../../services/service_contratos';
-import { DiasDaSemana } from '../../../common/enumDiasDaSemana';
+import { DiasDaSemana } from '../../../shared/enumDiasDaSemana';
 import { PrimengImports } from '../../../shared/primengImports.module';
 import { Aula } from '../../../interfaces/aula';
 import { ModalAdicionarDiaComponent } from '../../../shared/modal-adicionar-dia/modal-adicionar-dia.component';

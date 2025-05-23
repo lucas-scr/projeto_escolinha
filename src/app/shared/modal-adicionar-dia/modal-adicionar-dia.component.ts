@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DiasDaSemana } from '../../common/enumDiasDaSemana';
+import { DiasDaSemana } from '../enumDiasDaSemana';
 import { Aula } from '../../interfaces/aula';
 import { PrimengImports } from '../primengImports.module';
 

@@ -9,7 +9,7 @@ import { ServiceContratos } from '../../../services/service_contratos';
 import { Contrato } from '../../../model/Contrato';
 import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
 import { Aula } from '../../../interfaces/aula';
-import { DiasDaSemana } from '../../../common/enumDiasDaSemana';
+import { DiasDaSemana } from '../../../shared/enumDiasDaSemana';
 import { ModalAdicionarDiaComponent } from "../../../shared/modal-adicionar-dia/modal-adicionar-dia.component";
 
 @Component({

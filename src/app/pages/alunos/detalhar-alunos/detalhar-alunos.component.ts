@@ -5,7 +5,7 @@ import { ActivatedRoute, Route, Router, RouterLink } from '@angular/router';
 
 import { Aluno } from '../../../model/Alunos';
 
-import { DiasDaSemana } from '../../../common/enumDiasDaSemana';
+import { DiasDaSemana } from '../../../shared/enumDiasDaSemana';
 import { PrimengImports } from '../../../shared/primengImports.module';
 
 @Component({
