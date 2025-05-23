@@ -1,5 +1,6 @@
 declare var google: any;
 import { Component, OnInit } from '@angular/core';
+import { environments } from '../../../environments/environments';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
-  clientId = '278793748959-a4eo6vaoc9efe8favs0hf01c474c2c9h.apps.googleusercontent.com';
+  
+  clientId = environments.googleClientId;
 
   constructor() {
   }
@@ -20,7 +22,7 @@ export class LoginComponent implements OnInit {
     });
     google.accounts.id.renderButton(
       document.getElementById("google-button"),
-      { theme: "outline", size: "large", width: "100%" }
+      { theme: "filled-blue", size: "large", width: "100%" }
     );
   }
 
