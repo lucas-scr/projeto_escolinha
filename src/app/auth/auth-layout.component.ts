@@ -7,6 +7,7 @@ import { RouterOutlet } from '@angular/router';
   imports: [RouterOutlet],
   template: `
     <div class="auth-layout">
+      <script src="https://accounts.google.com/gsi/client" async defer></script>
       <router-outlet></router-outlet>
     </div>
   `

@@ -5,7 +5,8 @@
       font-family: 'Arial', sans-serif;
     }
 
-    body {
+    .container_1 {
+      margin: 0%;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -103,31 +104,6 @@
 
     .btn:hover {
       background: #176dd1;
-    }
-
-    .google-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: #fff;
-      color: #555;
-      border: 1px solid #ccc;
-      padding: 12px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      font-size: 14px;
-      width: 100%;
-    }
-
-    .google-btn:hover {
-      background: #f0f0f0;
-    }
-
-    .google-icon {
-      width: 18px;
-      height: 18px;
     }
 
     .company-name {
