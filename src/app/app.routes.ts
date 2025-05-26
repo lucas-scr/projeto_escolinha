@@ -15,11 +15,13 @@ import { ListarPagamentosComponent } from './pages/pagamentos/listar-pagamentos/
 import { EditarPagamentosComponent } from './pages/pagamentos/editar-pagamentos/editar-pagamentos.component';
 import { DetalharPagamentosComponent } from './pages/pagamentos/detalhar-pagamentos/detalhar-pagamentos.component';
 import { CadastrarPagamentosComponent } from './pages/pagamentos/cadastrar-pagamentos/cadastrar-pagamentos.component';
+import { PaginaProtegidaComponent } from './pages/pagina-protegida/pagina-protegida.component';
+//import { AuthGuard } from './core/guards/auth.guard';
 
 
 export const routes: Routes = [
     {
-        path: '', component: PaginaPrincipalComponent, children: [
+        path: '', component: PaginaPrincipalComponent, canActivate: [], children: [
             { path: 'alunos', component: ListaAlunosComponent },
             { path: 'detalhar-aluno/:id', component: DetalharAlunosComponent },
             { path: 'contratos', component: ListaContratosComponent },
@@ -34,6 +36,8 @@ export const routes: Routes = [
             { path: 'editar-pagamento/:id', component: EditarPagamentosComponent },
             { path: 'detalhar-pagamento/:id', component: DetalharPagamentosComponent },
             { path: 'cadastrar-pagamento', component: CadastrarPagamentosComponent },
+            { path: 'forbidden', component: PaginaProtegidaComponent }
+
         ]
     },
     { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },

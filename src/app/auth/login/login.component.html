@@ -1,28 +1,6 @@
-<div class="container_1">
-  <div class="container">
-    <div class="left">
-      <div class="company-name">NOME DA EMPRESA</div>
-      <h1>Que bom ver você de volta<br>BEM-VINDO</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua.</p>
+<div id="buttonDiv"></div>
+    <div *ngIf="user">
+      <h3>Bem-vindo, {{ user.name }}</h3>
+      <p>Email: {{ user.email }}</p>
+      <img [src]="user.picture" alt="Foto de perfil">
     </div>
-    <div class="right">
-      <h2>Acessar Conta</h2>
-      <form>
-        <div class="input-group">
-          <input type="email" placeholder="E-mail" required>
-        </div>
-        <div class="input-group">
-          <input type="password" placeholder="Senha" required>
-        </div>
-        <div class="options">
-          <label><input type="checkbox"> Manter-me conectado</label>
-          <a href="#">Recuperar senha</a>
-        </div>
-        <button type="submit" class="btn">ENTRAR</button>
-
-      </form>
-        <div class="" id="google-button"></div>
-    </div>
-  </div>
-</div>

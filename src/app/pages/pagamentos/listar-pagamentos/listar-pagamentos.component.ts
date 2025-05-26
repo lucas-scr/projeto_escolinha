@@ -6,7 +6,7 @@ import { PrimengImports } from '../../../shared/primengImports.module';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { Menu } from 'primeng/menu';
-import { MoedaPipe } from '../../../mascaras.pipe';
+import { MoedaPipe } from '../../../shared/mascaras.pipe';
 import { CancelarPagamentoComponent } from '../cancelar-pagamento/cancelar-pagamento.component';
 
 @Component({

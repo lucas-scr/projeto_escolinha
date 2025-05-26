@@ -3,7 +3,7 @@ import { PrimengImports } from '../../../shared/primengImports.module';
 import { ServicePagamentos } from '../../../services/service_pagamentos';
 import { Pagamento } from '../../../interfaces/pagamentos';
 import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
-import { MoedaPipe } from '../../../mascaras.pipe';
+import { MoedaPipe } from '../../../shared/mascaras.pipe';
 
 @Component({
   selector: 'app-cancelar-pagamento',

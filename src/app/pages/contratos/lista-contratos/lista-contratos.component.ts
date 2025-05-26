@@ -3,7 +3,7 @@ import { Table } from 'primeng/table';
 import { PrimengImports } from '../../../shared/primengImports.module';
 import { ServiceContratos } from '../../../services/service_contratos';
 import { Contrato } from '../../../model/Contrato';
-import { TelefonePipe, MoedaPipe } from '../../../mascaras.pipe';
+import { TelefonePipe, MoedaPipe } from '../../../shared/mascaras.pipe';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Router, RouterLink } from '@angular/router';
 import { Menu } from 'primeng/menu';

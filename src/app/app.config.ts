@@ -12,14 +12,19 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { routes } from './app.routes';
 import {
+  HTTP_INTERCEPTORS,
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { MockDbService } from './mocks/mockDb';
+import { TokenInterceptor } from './core/interceptors/token.interceptos';
+import { provideOAuthClient } from 'angular-oauth2-oidc';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     provideHttpClient(withInterceptorsFromDi()),
+    provideOAuthClient(),
     importProvidersFrom(InMemoryWebApiModule.forRoot(MockDbService)),
     MessageService,
     provideZoneChangeDetection({ eventCoalescing: true }),
