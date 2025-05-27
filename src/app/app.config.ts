@@ -25,7 +25,7 @@ export const appConfig: ApplicationConfig = {
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     provideHttpClient(withInterceptorsFromDi()),
     provideOAuthClient(),
-    importProvidersFrom(InMemoryWebApiModule.forRoot(MockDbService)),
+     importProvidersFrom(InMemoryWebApiModule.forRoot(MockDbService,  { passThruUnknownUrl: true })),
     MessageService,
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),

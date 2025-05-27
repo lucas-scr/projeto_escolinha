@@ -1,10 +1,6 @@
 import {
   Component,
   OnInit,
-  OnChanges,
-  SimpleChanges,
-  Input,
-  OnDestroy,
   ViewChild,
 } from '@angular/core';
 import { PrimengImports } from '../../../shared/primengImports.module';
@@ -13,10 +9,11 @@ import { ServiceAlunos } from '../../../services/service_alunos';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Menu } from 'primeng/menu';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http'; // Importando o módulo
+import { HttpClient } from '@angular/common/http'; // Importando o módulo
 import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
 import { ServiceContratos } from '../../../services/service_contratos';
 import { Contrato } from '../../../model/Contrato';
+
 
 @Component({
   selector: 'app-lista-alunos',
@@ -35,10 +32,12 @@ export class ListaAlunosComponent implements OnInit {
 
   opcoesDeAcoes: MenuItem[] | undefined;
 
+    
+  API_BACKEND: string = 'http://localhost:8080/api/auth/google'
+
   constructor(
     private serviceContratos: ServiceContratos,
     private router: Router,
-    private messageService: ServiceMensagemGlobal,
   ) {}
 
   ngOnInit() {

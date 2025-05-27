@@ -5,23 +5,18 @@ import { AuthService } from '../services/auth.service';
 
 
 @Injectable()
-export class TokenInterceptor implements HttpInterceptor {
+export class TokenInterceptor implements HttpInterceptor 
+{
     constructor(private auth: AuthService) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-        console.log('Interceptando URL:', req.url);
-
         const excludedUrls = [
             '/api/auth/google',
             '/auth/login',
         ];
         if (excludedUrls.some(url => req.url.includes(url))) {
-            console.log("excludedUrls interceptor")
-            console.log(req)
             return next.handle(req);
         }
-
         const token = this.auth.token;
         if (token) {
             console.log("interceptor adicionando Authorization");
