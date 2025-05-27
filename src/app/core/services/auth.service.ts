@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -9,7 +10,7 @@ export class AuthService {
     token$ = this._token.asObservable();
 
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {
         const token = localStorage.getItem('app_token');
         if (token) {
             this._token.next(token);
@@ -22,14 +23,14 @@ export class AuthService {
             'Content-Type': 'application/json'
         };
         let body = { token: tokenGoogle }
-        return this.http.post<{ token: string }>('http://localhost:8080/api/auth/google', body, { headers })
+        return this.http.post<{ token: string }>(this.API, body, { headers })
         .pipe(
             tap(response => {
                 const token = response.token;
                 console.log(response)
                 this._token.next(token);
                 localStorage.setItem('app_token', token);
-                console.log('Token salvo' + token)
+                console.log('Token salvo: ' + token)
             }))
     }
 
@@ -39,7 +40,8 @@ export class AuthService {
 
     logout() {
         this._token.next(null);
-        localStorage.removeItem('app_token')
+        localStorage.removeItem('app_token');
+        this.router.navigate(['auth/login']);
     }
 
     isLoggedIn(): boolean {

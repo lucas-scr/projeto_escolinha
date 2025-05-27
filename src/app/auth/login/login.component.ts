@@ -37,8 +37,6 @@ export class LoginComponent implements OnInit {
 
   handleCredentialResponse(response: any) {
     this.tokenGoogle = response.credential;
-    console.log(this.tokenGoogle)
-
     const payload = this.decodeJwt(this.tokenGoogle);
     this.user = {
       name: payload.name,

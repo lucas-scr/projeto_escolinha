@@ -16,26 +16,26 @@ import { EditarPagamentosComponent } from './pages/pagamentos/editar-pagamentos/
 import { DetalharPagamentosComponent } from './pages/pagamentos/detalhar-pagamentos/detalhar-pagamentos.component';
 import { CadastrarPagamentosComponent } from './pages/pagamentos/cadastrar-pagamentos/cadastrar-pagamentos.component';
 import { PaginaProtegidaComponent } from './pages/pagina-protegida/pagina-protegida.component';
-//import { AuthGuard } from './core/guards/auth.guard';
+import { AuthGuard } from './core/guards/auth.guard';
 
 
 export const routes: Routes = [
     {
-        path: '', component: PaginaPrincipalComponent, canActivate: [], children: [
-            { path: 'alunos', component: ListaAlunosComponent },
-            { path: 'detalhar-aluno/:id', component: DetalharAlunosComponent },
-            { path: 'contratos', component: ListaContratosComponent },
-            { path: 'cadastrar-contratos', component: CadastroContratosComponent },
-            { path: 'editar-contrato/:id', component: EditarContratosComponent },
-            { path: 'detalhar-contrato/:id', component: DetalharContratosComponent },
-            { path: 'atividades', component: ListarAtividadesComponent },
-            { path: 'editar-atividade/:id', component: EditarAtividadesComponent },
-            { path: 'detalhar-atividade/:id', component: DetalharAtividadesComponent },
-            { path: 'cadastrar-atividade', component: CadastrarAtividadesComponent },
-            { path: 'pagamentos', component: ListarPagamentosComponent },
-            { path: 'editar-pagamento/:id', component: EditarPagamentosComponent },
-            { path: 'detalhar-pagamento/:id', component: DetalharPagamentosComponent },
-            { path: 'cadastrar-pagamento', component: CadastrarPagamentosComponent },
+        path: '', component: PaginaPrincipalComponent, canActivate: [AuthGuard], children: [
+            { path: 'alunos', component: ListaAlunosComponent, canActivate: [AuthGuard] },
+            { path: 'detalhar-aluno/:id', component: DetalharAlunosComponent, canActivate: [AuthGuard] },
+            { path: 'contratos', component: ListaContratosComponent, canActivate: [AuthGuard] },
+            { path: 'cadastrar-contratos', component: CadastroContratosComponent, canActivate: [AuthGuard] },
+            { path: 'editar-contrato/:id', component: EditarContratosComponent, canActivate: [AuthGuard] },
+            { path: 'detalhar-contrato/:id', component: DetalharContratosComponent, canActivate: [AuthGuard] },
+            { path: 'atividades', component: ListarAtividadesComponent, canActivate: [AuthGuard] },
+            { path: 'editar-atividade/:id', component: EditarAtividadesComponent, canActivate: [AuthGuard] },
+            { path: 'detalhar-atividade/:id', component: DetalharAtividadesComponent, canActivate: [AuthGuard] },
+            { path: 'cadastrar-atividade', component: CadastrarAtividadesComponent, canActivate: [AuthGuard] },
+            { path: 'pagamentos', component: ListarPagamentosComponent, canActivate: [AuthGuard] },
+            { path: 'editar-pagamento/:id', component: EditarPagamentosComponent, canActivate: [AuthGuard] },
+            { path: 'detalhar-pagamento/:id', component: DetalharPagamentosComponent, canActivate: [AuthGuard] },
+            { path: 'cadastrar-pagamento', component: CadastrarPagamentosComponent, canActivate: [AuthGuard] },
             { path: 'forbidden', component: PaginaProtegidaComponent }
 
         ]
