@@ -1,26 +1,41 @@
 declare var google: any;
 import { Component, OnInit } from '@angular/core';
 import { environments } from '../../environments/environments';
-import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { trigger, style, transition, animate } from '@angular/animations';
+
+
 
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
+  animations: [
+    trigger('fadeSlideIn', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(-20px)' }),
+        animate('600ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
+    ])
+  ]
 })
 export class LoginComponent implements OnInit {
 
+  loginForm: FormGroup;
   user: any = null;
   clientId = environments.googleClientId;
   tokenGoogle: string = '';
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private fb: FormBuilder) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    });
+  }
 
   ngOnInit(): void {
     (window as any).google.accounts.id.initialize({
@@ -37,28 +52,15 @@ export class LoginComponent implements OnInit {
 
   handleCredentialResponse(response: any) {
     this.tokenGoogle = response.credential;
-    const payload = this.decodeJwt(this.tokenGoogle);
-    this.user = {
-      name: payload.name,
-      email: payload.email,
-      picture: payload.picture
-    };
      this.auth.loginWithGoogle(this.tokenGoogle).subscribe({
      next: (res) => console.log('Logado!', res),
      error: (err) => console.error('Erro ao logar:', err)
      })
   }
 
-
-
-  decodeJwt(token: string) {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(atob(base64).split('').map(c =>
-      '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
-    ).join(''));
-
-    return JSON.parse(jsonPayload);
+  onSubmit() {
+    if (this.loginForm.valid) {
+    }
   }
 
 }

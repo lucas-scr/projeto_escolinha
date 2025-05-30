@@ -10,7 +10,7 @@ export class AuthService {
     token$ = this._token.asObservable();
 
 
-    constructor(private http: HttpClient, private router: Router) {
+    constructor(private http: HttpClient) {
         const token = localStorage.getItem('app_token');
         if (token) {
             this._token.next(token);
@@ -41,7 +41,6 @@ export class AuthService {
     logout() {
         this._token.next(null);
         localStorage.removeItem('app_token');
-        this.router.navigate(['auth/login']);
     }
 
     isLoggedIn(): boolean {

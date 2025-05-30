@@ -9,6 +9,7 @@ import { ServiceMensagemGlobal } from './services/mensagens_global';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { ServiceAlunos } from './services/service_alunos';
 import { OAuthModule } from 'angular-oauth2-oidc';
+import { LoadingComponent } from './components/loading/loading.component';
 
 
 
@@ -22,7 +23,8 @@ import { OAuthModule } from 'angular-oauth2-oidc';
     CommonModule,
     ToastModule,
     InMemoryWebApiModule,
-    OAuthModule
+    OAuthModule,
+    LoadingComponent
   
 
   ],
