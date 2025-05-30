@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { ServiceLoading } from '../../services/service-loading.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -27,10 +28,8 @@ export class AuthService {
         .pipe(
             tap(response => {
                 const token = response.token;
-                console.log(response)
                 this._token.next(token);
                 localStorage.setItem('app_token', token);
-                console.log('Token salvo: ' + token)
             }))
     }
 

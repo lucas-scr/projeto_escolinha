@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
+import { ServiceLoading } from '../../services/service-loading.service';
 
 @Component({
   selector: 'app-loading',
@@ -12,18 +13,10 @@ export class LoadingComponent {
 
     isLoading = false;
 
-  constructor(private router: Router) {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationStart) {
-        this.isLoading = true;
-      } else if (
-        event instanceof NavigationEnd ||
-        event instanceof NavigationCancel ||
-        event instanceof NavigationError
-      ) {
-        this.isLoading = false;
-      }
-    });
+  constructor(private loadingService: ServiceLoading) {
+    this.loadingService.loading$.subscribe(state => {
+      this.isLoading = state;
+    })
   }
 
 }
