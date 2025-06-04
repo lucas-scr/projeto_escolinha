@@ -10,14 +10,14 @@ import { ServiceLoading } from '../../services/service-loading.service';
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
     constructor(
-        private auth: AuthService, 
-        private router: Router, 
-        private loading: ServiceLoading) { 
+        private auth: AuthService,
+        private router: Router,
+        private loading: ServiceLoading) {
 
-        }
+    }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-         this.loading.show();       
+        this.loading.show();
         const excludedUrls = [
             '/api/auth/google',
             '/auth/login',
@@ -25,9 +25,10 @@ export class TokenInterceptor implements HttpInterceptor {
         const token = this.auth.token;
 
         if (excludedUrls.some(url => req.url.includes(url))) {
-            return next.handle(req).pipe(finalize(()=>{
-                 this.loading.hide();
-            }));
+            return next.handle(req).pipe(
+                finalize(() => {
+                    this.loading.hide();
+                }));
         }
 
         let clone = req;
@@ -44,15 +45,15 @@ export class TokenInterceptor implements HttpInterceptor {
                 if (error.status === 401 || error.status === 403) {
                     console.log("Token inválido ou expirado, redirecionando para login.");
                     this.auth.logout();
-                     this.loading.hide();
+                    this.loading.hide();
                     this.router.navigate(['auth/login']);
 
                 }
                 return throwError(() => error)
-            }), finalize(()=>{
+            }), finalize(() => {
                 this.loading.hide();
             })
-            
+
         );
     }
 }

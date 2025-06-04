@@ -29,17 +29,17 @@ export class AuthService {
             tap(response => {
                 const token = response.token;
                 this._token.next(token);
-                localStorage.setItem('app_token', token);
+                sessionStorage.setItem('app_token', token);
             }))
     }
 
     get token() {
-        return this._token.value || localStorage.getItem('app_token')
+        return this._token.value || sessionStorage.getItem('app_token')
     }
 
     logout() {
         this._token.next(null);
-        localStorage.removeItem('app_token');
+        sessionStorage.removeItem('app_token');
     }
 
     isLoggedIn(): boolean {
