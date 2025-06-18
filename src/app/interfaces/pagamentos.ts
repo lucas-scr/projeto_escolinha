@@ -1,4 +1,4 @@
-import { Contrato } from "../model/Contrato";
+import { Contrato } from "./contrato";
 
 export interface Pagamento {
     id?: number;

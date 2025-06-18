@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Contrato } from '../../../model/Contrato';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
 import { ServiceContratos } from '../../../services/service_contratos';
@@ -7,6 +6,7 @@ import { DiasDaSemana } from '../../../shared/enumDiasDaSemana';
 import { PrimengImports } from '../../../shared/primengImports.module';
 import { Aula } from '../../../interfaces/aula';
 import { ModalAdicionarDiaComponent } from '../../../shared/modal-adicionar-dia/modal-adicionar-dia.component';
+import { Contrato } from '../../../interfaces/contrato';
 
 @Component({
   selector: 'app-editar-contratos',
@@ -16,7 +16,7 @@ import { ModalAdicionarDiaComponent } from '../../../shared/modal-adicionar-dia/
 })
 export class EditarContratosComponent implements OnInit {
   modalAdicionarDia: boolean = false;
-  contratoId: Number;
+  contratoId: number;
   contratoCarregado: Contrato;
   dataLimite: Date = new Date();
 
@@ -49,20 +49,20 @@ export class EditarContratosComponent implements OnInit {
   }
 
   onSubmit() {
-    if(this.contratoCarregado.isDiasAlternados){
-      this.contratoCarregado._dias = [];
+    if(this.contratoCarregado.diasAlternados){
+      this.contratoCarregado.diasDasAulas = [];
     }else{
-      this.contratoCarregado._dias = this.aulas;
+      this.contratoCarregado.diasDasAulas = this.aulas;
     }
     this.alterarContrato(this.contratoCarregado);
 
   }
 
-  carregarDadosContrato(id: Number) {
+  carregarDadosContrato(id: number) {
     this.contratoService.findById(id).subscribe({
       next: (contrato) => {
         this.contratoCarregado = contrato;
-        this.aulas = contrato._dias;
+        //this.aulas = contrato._dias;
         this.contratoCarregado.dataInicio = new Date(contrato.dataInicio);
         this.contratoCarregado.aluno.dataNascimento = new Date (contrato.aluno.dataNascimento);
         this.contratoCarregado.dataInicio = new Date(contrato.dataInicio.getTime());
@@ -97,14 +97,14 @@ export class EditarContratosComponent implements OnInit {
 
   diasDisponiveis(): String[] {
     return this.dias.filter((dia) => {
-      const ocupado = this.aulas.some((aula) => aula.dia === dia);
+      const ocupado = this.aulas.some((aula) => aula.diaSemana === dia);
       return !ocupado;
     });
   }
 
   atualizarListaDiasAdicionados() {
     this.aulas.sort(
-      (a, b) => this.dias.indexOf(a.dia) - this.dias.indexOf(b.dia)
+      (a, b) => this.dias.indexOf(a.diaSemana) - this.dias.indexOf(b.diaSemana)
     );
   }
   
@@ -113,7 +113,7 @@ export class EditarContratosComponent implements OnInit {
   }
 
     adicionarDiaDaSemana(event: { dia: string, horario: Date }) {
-    this.aulas.push(event);
+   // this.aulas.push(event);
     this.atualizarListaDiasAdicionados()
     this.fecharModalAdicionarDia();
   }

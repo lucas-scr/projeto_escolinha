@@ -16,7 +16,6 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { MockDbService } from './mocks/mockDb';
 import { TokenInterceptor } from './core/interceptors/token.interceptos';
 import { provideOAuthClient } from 'angular-oauth2-oidc';
 
@@ -25,7 +24,6 @@ export const appConfig: ApplicationConfig = {
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     provideHttpClient(withInterceptorsFromDi()),
     provideOAuthClient(),
-     importProvidersFrom(InMemoryWebApiModule.forRoot(MockDbService,  { passThruUnknownUrl: true })),
     MessageService,
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),

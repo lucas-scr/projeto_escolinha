@@ -42,23 +42,23 @@
                 <tr class="item_list" >
                     <td>
                         <div >
-                            <span>{{contrato.responsavel.nome}}</span>
+                            <span>{{contrato.responsavelNome}}</span>
                         </div>
                     </td>
                     <td>
                         <div>
-                            <span> {{ contrato.aluno.nome }} </span>
+                            <span> {{ contrato.responsavelNome }} </span>
                         </div>
                     </td>
 
                     <td>
                         <div >
-                            <span> {{contrato.responsavel.contato.toString() | telefone}} </span>
+                            <span> {{contrato.telefoneResponsavelPrincipal.toString() | telefone}} </span>
                         </div>
                     </td>
                     <td>
                         <div >
-                            <span>{{ contrato.valor | moeda }}</span>
+                            <span>{{ contrato.valorPagamento | moeda }}</span>
                         </div>
                     </td>
                     <td >

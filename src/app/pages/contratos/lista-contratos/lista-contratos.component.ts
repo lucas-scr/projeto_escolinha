@@ -2,12 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
 import { PrimengImports } from '../../../shared/primengImports.module';
 import { ServiceContratos } from '../../../services/service_contratos';
-import { Contrato } from '../../../model/Contrato';
 import { TelefonePipe, MoedaPipe } from '../../../shared/mascaras.pipe';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Router, RouterLink } from '@angular/router';
 import { Menu } from 'primeng/menu';
 import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
+import { Contrato } from '../../../interfaces/contrato';
 
 @Component({
   selector: 'app-lista-contratos',
@@ -77,7 +77,9 @@ export class ListaContratosComponent implements OnInit {
 
   carregarContratos(){
     this.contratosService.listarContratos().subscribe({
-      next: (dados) => this.listaContratos = dados,
+      next: (dados) => {
+        this.listaContratos = dados;
+      },
       error: (erro) => console.log(erro)
     })
   }
@@ -129,7 +131,7 @@ export class ListaContratosComponent implements OnInit {
       case 'Finalizado':
         return 'situacao-inativo';
       default:
-        return ''; // Classe vazia caso não encontre a situação
+        return 'situacao-inativo'; // Classe vazia caso não encontre a situação
     }
   }
 }

@@ -66,7 +66,7 @@ export class ModalAdicionarDiaComponent {
 
   diasDisponiveis(): String[] {
     return this.dias.filter((dia) => {
-      const ocupado = this.aulasAdicionadas.some((aula) => aula.dia === dia);
+      const ocupado = this.aulasAdicionadas.some((aula) => aula.diaSemana === dia);
       return !ocupado;
     });
   }

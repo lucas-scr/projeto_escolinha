@@ -8,7 +8,7 @@
         <div class="dados_responsavel">
             <div class="cadastro_input cadastro_input_primeiro ">
                 <p-floatlabel variant="on">
-                    <input id="nome_responsavel" disabled pInputText [(ngModel)]="contratoCarregado.responsavel.nome"
+                    <input id="nome_responsavel" disabled pInputText [(ngModel)]="contratoCarregado.responsavelNome"
                         required name="nome_responsavel">
                     <label for="nome_responsavel">Nome</label>
                 </p-floatlabel>
@@ -21,7 +21,7 @@
             <div class="cadastro_input" id="documento_input">
                 <p-floatlabel variant="on">
                     <input id="documento_responsavel" disabled pInputText
-                        [(ngModel)]="contratoCarregado.responsavel.documento" required name="documento_responsavel">
+                        [(ngModel)]="contratoCarregado.documentoResponsavel" required name="documento_responsavel">
                     <label for="documento_responsavel">Documento (CPF, RG ou CNH)</label>
                 </p-floatlabel>
                 <div
@@ -33,7 +33,7 @@
             <div class="cadastro_input">
                 <p-floatlabel class="label-fixo" variant="on">
                     <p-inputMask inputId="contato_responsavel" disabled mask="(99) 99999-9999"
-                        [(ngModel)]="contratoCarregado.responsavel.contato" required placeholder="(__) _____-____"
+                        [(ngModel)]="contratoCarregado.telefoneResponsavelPrincipal" required placeholder="(__) _____-____"
                         name="contato_responsavel" />
                     <label for="contato_responsavel">Telefone de contato</label>
                 </p-floatlabel>
@@ -53,7 +53,7 @@
                 <div class="list_item">
                     <div class="list_item_row">
                         <div class="item_avatar">
-                            <p-avatar [label]=contratoCarregado.aluno.iniciaisNome.toString() styleClass="mr-2"
+                            <p-avatar [label]=contratoCarregado.aluno.iniciais.toString() styleClass="mr-2"
                                 [ngClass]="{ 'list_sexo_m': contratoCarregado.aluno.sexo === 'M', 'list_sexo_f': contratoCarregado.aluno.sexo === 'F' }"
                                 size="xlarge" shape="circle" />
                         </div>
@@ -77,21 +77,21 @@
         <h4>Dados do contrato</h4>
         <div class="dados_contrato">
 
-            <div class="cadastro_input"  *ngIf="contratoCarregado.isDiasAlternados">
-                <p-checkbox [(ngModel)]="contratoCarregado.isDiasAlternados" readonly [binary]="true" inputId="diasAlternados"
+            <div class="cadastro_input"  *ngIf="contratoCarregado.diasAlternados">
+                <p-checkbox [(ngModel)]="contratoCarregado.diasAlternados" readonly [binary]="true" inputId="diasAlternados"
                     name="diasAlternados" />
                 <label for="diasAlternados" style="margin-left: 0.3rem;">As aulas serão realizadas em dias
                     alternados</label>
             </div>
 
-            <div class="dias_semana" *ngIf="!contratoCarregado.isDiasAlternados">
+            <div class="dias_semana" *ngIf="!contratoCarregado.diasAlternados">
                 <div class="chips_dias_aulas">
                     <div class="dias_semana_header">
                         <label class="dias_semana_header_titulo" for="dias_contrato">Dias da semana:</label>
                     </div>
                     <div class="horarioAulas">
-                        <p-chip class="item_list_chip" *ngFor="let aula of contratoCarregado._dias, let i = index">
-                            <a>{{aula.dia}} às {{aula.horario | date:'HH:MM'}}</a>
+                        <p-chip class="item_list_chip" *ngFor="let aula of contratoCarregado.diasDasAulas, let i = index">
+                            <a>{{aula.diaSemana}} às {{aula.horario.slice(0,5)}}</a>
                         </p-chip>
                     </div>
                 </div>
@@ -100,13 +100,13 @@
             <div class="cadastro_input">
                 <p-floatlabel variant="on">
                     <p-datepicker id="dataInicio" disabled [(ngModel)]="contratoCarregado.dataInicio" required
-                        name="dataInicio" dateFormat="dd/mm/yy" [iconDisplay]="'input'" [showIcon]="true"
+                        name="dataInicio" Time="dd/mm/yy" [iconDisplay]="'input'" [showIcon]="true"
                         inputId="icondisplay" />
                     <label class="calendar_label" for="dataInicio">Data de início</label>
                 </p-floatlabel>
             </div>
 
-            <div class="cadastro_input" *ngIf="contratoCarregado.isDiasAlternados">
+            <div class="cadastro_input" *ngIf="contratoCarregado.diasAlternados">
                 <p-floatlabel variant="on">
                     <p-datepicker required inputId="horarioInicio" disabled [(ngModel)]="contratoCarregado.dataInicio" [timeOnly]="true"
                         name="horarioInicio" />
@@ -132,7 +132,7 @@
 
             <div class="cadastro_input">
                 <p-floatlabel variant="on">
-                    <p-inputNumber [(ngModel)]="contratoCarregado.valor" [disabled]="true"
+                    <p-inputNumber [(ngModel)]="contratoCarregado.valorPagamento" [disabled]="true"
                         name="contratoCarregado.valor_contrato" required inputId="currency-us" mode="currency"
                         currency="BRL" locale="pt-BR" />
                     <label class="calendar_label" for="dataNascimento">Valor</label>
@@ -144,7 +144,7 @@
             </div>
 
             <div class="cadastro_input_checkbox">
-                <p-checkbox [(ngModel)]="contratoCarregado.autorizacaoImagem" readonly [binary]="true"
+                <p-checkbox [(ngModel)]="contratoCarregado.autorizaUsoDeImagem" readonly [binary]="true"
                     inputId="autorizaocaoImagem" name="usoImagem" />
                 <label for="autorizaocaoImagem" class="ml-2">Autorizado o uso de imagem e video do(s) aluno(s)</label>
             </div>

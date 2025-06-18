@@ -1,27 +1,30 @@
 import { Injectable } from '@angular/core';
-import { Contrato } from '../model/Contrato';
-import { Aluno } from '../model/Alunos';
-import { Responsavel } from '../model/Responsavel';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Contrato } from '../interfaces/contrato';
+import { adaptarContrato } from '../shared/adapters/contrato.adapter';
 
 @Injectable({
   providedIn: 'root', // Torna o serviço disponível globalmente
 })
 export class ServiceContratos {
 
-  private URL = 'api/contratos';
+  private URL = 'http://localhost:8080/api/contratos';
 
   constructor(private http: HttpClient) {
 
   }
 
-  findById(id: Number): Observable<Contrato> {
-    return this.http.get<Contrato>(`${this.URL}/${id}`);
+  findById(id: number): Observable<Contrato> {
+    return this.http.get<Contrato>(`${this.URL}/${id}`).pipe(
+       map(adaptarContrato)
+    );
   }
 
   listarContratos(): Observable<Contrato[]> {
-    return this.http.get<Contrato[]>(this.URL);
+    return this.http.get<Contrato[]>(this.URL).pipe(
+      map(dados => dados.map(adaptarContrato))
+    )
   }
 
   cadastrarContrato(contrato: Contrato): Observable<Contrato> {

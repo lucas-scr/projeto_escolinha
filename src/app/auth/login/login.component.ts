@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   tokenGoogle: string = '';
 
   constructor(
-    private auth: AuthService, 
+    private auth: AuthService,
     private fb: FormBuilder,
     private router: Router
   ) {
@@ -60,15 +60,15 @@ export class LoginComponent implements OnInit {
   handleCredentialResponse(response: any) {
     this.tokenGoogle = response.credential;
     console.log(this.tokenGoogle);
-     this.auth.loginWithGoogle(this.tokenGoogle).subscribe({
-     next: (res) => {
-      console.log(this.tokenGoogle)
-      this.router.navigate(['']);
-    },
-     error: (err) => {
-      console.error('Erro ao logar:', err)
-    }
-     })
+    this.auth.loginWithGoogle(this.tokenGoogle).subscribe({
+      next: (res) => {
+        console.log(this.tokenGoogle)
+        this.router.navigate(['']);
+      },
+      error: (err) => {
+        console.error('Erro ao logar:', err)
+      }
+    })
   }
 
   onSubmit() {

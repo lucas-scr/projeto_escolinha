@@ -1,4 +1,7 @@
+import { DiasDaSemana } from "../shared/enumDiasDaSemana";
+
 export interface Aula{
-    dia: string;
-    horario: Date;
+    id: Number;
+    diaSemana: keyof typeof DiasDaSemana;
+    horario: String;
 }

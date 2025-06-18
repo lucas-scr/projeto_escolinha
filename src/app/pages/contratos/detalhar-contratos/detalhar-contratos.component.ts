@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
 import { ServiceContratos } from '../../../services/service_contratos';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Contrato } from '../../../model/Contrato';
 import { PrimengImports } from '../../../shared/primengImports.module';
+import { Contrato } from '../../../interfaces/contrato';
 
 @Component({
   selector: 'app-detalhar-contratos',
@@ -16,7 +16,7 @@ export class DetalharContratosComponent {
   modalAdicionar: boolean = false;
 
     dataLimite: Date = new Date();
-    contratoId: Number;
+    contratoId: number;
     contratoCarregado: Contrato
       
     diasSelecionados: string[] = [];
@@ -37,11 +37,12 @@ export class DetalharContratosComponent {
 
   
 
-    carregarDadosContrato(id: Number) {
+    carregarDadosContrato(id: number) {
       this.contratoService.findById(id).subscribe({
         next: (contrato) => {
           this.contratoCarregado = contrato;
           this.contratoCarregado.dataInicio = new Date (contrato.dataInicio);
+          console.log(this.contratoCarregado);
         },
         error: (erro) => {
           this.messageService.showMessage(

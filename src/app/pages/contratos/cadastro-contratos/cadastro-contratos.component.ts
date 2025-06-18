@@ -6,11 +6,11 @@ import { PrimengImports } from '../../../shared/primengImports.module';
 import { Aluno } from '../../../model/Alunos';
 import { MessageService } from 'primeng/api';
 import { ServiceContratos } from '../../../services/service_contratos';
-import { Contrato } from '../../../model/Contrato';
 import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
 import { Aula } from '../../../interfaces/aula';
 import { DiasDaSemana } from '../../../shared/enumDiasDaSemana';
 import { ModalAdicionarDiaComponent } from "../../../shared/modal-adicionar-dia/modal-adicionar-dia.component";
+import { Contrato } from '../../../interfaces/contrato';
 
 @Component({
   selector: 'app-cadastro-contratos',
@@ -57,27 +57,8 @@ export class CadastroContratosComponent implements OnInit {
 
   onSubmit() {
     this.limparDiasSelecionados();
-    let aluno = new Aluno(
-      this.nome,
-      this.dataNascimento,
-      this.sexo,
-      this.autorizacaoDeImagem,
-      this.isDiasAlternados,
-      this.aulas
-    );
-    let novoContrato = new Contrato(
-      this.responsavel,
-      aluno,
-      this.dataInicio,
-      this.valorContratado,
-      this.diaPagamento,
-      this.autorizacaoDeImagem,
-      this.isDiasAlternados,
-      this.ressarcimentoEmFeriados,
-      this.aulas
-    );
 
-    this.cadastrarContrato(novoContrato);
+
     this.router.navigate(['/contratos']);
   }
 
@@ -110,9 +91,9 @@ export class CadastroContratosComponent implements OnInit {
   }
 
   adicionarDiaDaSemana(event: { dia: string, horario: Date }) {
-    this.aulas.push(event);
+    //this.aulas.push(event);
     this.aulas.sort(
-      (a, b) => this.dias.indexOf(a.dia) - this.dias.indexOf(b.dia)
+      (a, b) => this.dias.indexOf(a.diaSemana) - this.dias.indexOf(b.diaSemana)
     );
 
     this.fecharModalAdicionarDia();
@@ -130,7 +111,7 @@ export class CadastroContratosComponent implements OnInit {
 
   atualizarListaDiasAdicionados() {
     this.aulas.sort(
-      (a, b) => this.dias.indexOf(a.dia) - this.dias.indexOf(b.dia)
+      (a, b) => this.dias.indexOf(a.diaSemana) - this.dias.indexOf(b.diaSemana)
     );
   }
 }

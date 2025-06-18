@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http'; // Importando o módulo
 import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
 import { ServiceContratos } from '../../../services/service_contratos';
-import { Contrato } from '../../../model/Contrato';
+import { Contrato } from '../../../interfaces/contrato';
 
 
 @Component({
