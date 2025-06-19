@@ -42,7 +42,8 @@ export class DetalharContratosComponent {
         next: (contrato) => {
           this.contratoCarregado = contrato;
           this.contratoCarregado.dataInicio = new Date (contrato.dataInicio);
-          console.log(this.contratoCarregado);
+          console.log(this.contratoCarregado)
+          console.log(contrato)
         },
         error: (erro) => {
           this.messageService.showMessage(

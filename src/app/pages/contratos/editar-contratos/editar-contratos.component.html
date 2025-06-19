@@ -8,7 +8,7 @@
         <div class="dados_responsavel">
             <div class="cadastro_input cadastro_input_primeiro ">
                 <p-floatlabel variant="on">
-                    <input id="nome_responsavel" pInputText [(ngModel)]="contratoCarregado.responsavelNome" required
+                    <input id="nome_responsavel" pInputText [(ngModel)]="contratoCarregado.nomeResponsavel" required
                         name="nome_responsavel">
                     <label for="nome_responsavel">Nome</label>
                 </p-floatlabel>
@@ -32,7 +32,7 @@
 
             <div class="cadastro_input">
                 <p-floatlabel class="label-fixo" variant="on">
-                    <p-inputmask inputId="contato_responsavel" mask="(99) 99999-9999"
+                    <p-inputmask inputId="contato_responsavel" mask="(99) 9999?-9999"
                         [(ngModel)]="contratoCarregado.telefoneResponsavelPrincipal" required placeholder="(__) _____-____"
                         name="contato_responsavel" />
                     <label for="contato_responsavel">Telefone de contato</label>

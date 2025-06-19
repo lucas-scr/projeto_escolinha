@@ -8,7 +8,7 @@ import { MessageService } from 'primeng/api';
 import { ServiceContratos } from '../../../services/service_contratos';
 import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
 import { Aula } from '../../../interfaces/aula';
-import { DiasDaSemana } from '../../../shared/enumDiasDaSemana';
+import { DiasDaSemana } from '../../../shared/Enums/enumDiasDaSemana';
 import { ModalAdicionarDiaComponent } from "../../../shared/modal-adicionar-dia/modal-adicionar-dia.component";
 import { Contrato } from '../../../interfaces/contrato';
 
@@ -20,10 +20,13 @@ import { Contrato } from '../../../interfaces/contrato';
   providers: [MessageService],
 })
 export class CadastroContratosComponent implements OnInit {
+
+  contrato: Contrato;
   
   modalAdicionarDia: boolean = false;
+  nomeResponsavel: String;
 
-  responsavel: Responsavel = new Responsavel('', '', 4123412);
+
   nome: String;
   dataNascimento: Date;
   sexo: String;
@@ -93,7 +96,7 @@ export class CadastroContratosComponent implements OnInit {
   adicionarDiaDaSemana(event: { dia: string, horario: Date }) {
     //this.aulas.push(event);
     this.aulas.sort(
-      (a, b) => this.dias.indexOf(a.diaSemana) - this.dias.indexOf(b.diaSemana)
+      (a, b) => this.dias.indexOf(DiasDaSemana[a.diaSemana]) - this.dias.indexOf(DiasDaSemana[b.diaSemana])
     );
 
     this.fecharModalAdicionarDia();
@@ -111,7 +114,7 @@ export class CadastroContratosComponent implements OnInit {
 
   atualizarListaDiasAdicionados() {
     this.aulas.sort(
-      (a, b) => this.dias.indexOf(a.diaSemana) - this.dias.indexOf(b.diaSemana)
+      (a, b) => this.dias.indexOf(DiasDaSemana[a.diaSemana]) - this.dias.indexOf(DiasDaSemana[b.diaSemana])
     );
   }
 }

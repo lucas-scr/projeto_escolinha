@@ -4,7 +4,7 @@ import { Contato } from "./contato";
 
 export interface Contrato{
       id: Number;  
-      responsavelNome: String;
+      nomeResponsavel: String;
       documentoResponsavel: String;
       telefoneResponsavelPrincipal: String;
       aluno: Aluno;

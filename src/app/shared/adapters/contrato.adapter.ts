@@ -1,11 +1,12 @@
 import { Contrato } from "../../interfaces/contrato";
 import { Aluno } from "../../model/Alunos";
-import { DiasDaSemana } from "../enumDiasDaSemana";
+import { DiasDaSemana } from "../Enums/enumDiasDaSemana";
+import { Situacoes } from "../Enums/enumSituacoes";
 
-export function adaptarContrato(d: any): Contrato {
+export function adaptarContratoParaResponse(d: any): Contrato {
   return {
     id: d.id,
-    responsavelNome: d.nomeResponsavel,
+    nomeResponsavel: d.nomeResponsavel,
     documentoResponsavel: d.documentoResponsavel,
     telefoneResponsavelPrincipal: d.telefoneResponsavelPrincipal,
     listaContatos: d.listaContatos,
@@ -27,8 +28,40 @@ export function adaptarContrato(d: any): Contrato {
     diasAlternados: d.diasAlternados,
     ressarcimentoEmFeriados: d.ressarcimentoEmFeriados,
     autorizaUsoDeImagem: d.autorizaUsoDeImagem,
-    situacao: d.situacao
+    situacao: Situacoes[d.situacao]
   };
+}
+
+
+export function adapterContratoParaRequest(d: Contrato): any{
+  return {
+    documentoResponsavel: d.documentoResponsavel,
+    telefoneResponsavelPrincipal: d.telefoneResponsavelPrincipal,
+    listaContatos: d.listaContatos.map((c: any) => ({
+      id: c.id,
+      telefone: c.telefone,
+      responsavel: c.responsavel,
+      principal: c.principal,
+    })),
+    aluno: {
+      id: d.aluno.id,
+      nome: d.aluno.nome,
+      dataNascimento: d.aluno.dataNascimento.toString().split('T')[0],
+      sexo: d.aluno.sexo
+    },
+    dataInicio: d.dataInicio.toString().split('T')[0],
+    diaPagamento: d.diaPagamento,
+    valorPagamento: d.valorPagamento,
+    autorizaUsoDeImagem: d.autorizaUsoDeImagem,
+    nomeResponsavel: d.nomeResponsavel,
+    ressarcimentoEmFeriados: d.ressarcimentoEmFeriados,
+    diasDasAulas: d.diasDasAulas.map((dia: any) => ({
+      id: dia.id,
+      horario: dia.horario,
+      diaSemana: dia.diaSemana
+    })),
+    diasAlternados: d.diasAlternados
+  }
 }
 
 function gerarIniciais(nome: string):string{

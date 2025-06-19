@@ -1,4 +1,4 @@
-import { DiasDaSemana } from "../shared/enumDiasDaSemana";
+import { DiasDaSemana } from "../shared/Enums/enumDiasDaSemana";
 
 export interface Aula{
     id: Number;

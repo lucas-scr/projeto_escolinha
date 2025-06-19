@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
 import { ServiceContratos } from '../../../services/service_contratos';
-import { DiasDaSemana } from '../../../shared/enumDiasDaSemana';
+import { DiasDaSemana } from '../../../shared/Enums/enumDiasDaSemana';
 import { PrimengImports } from '../../../shared/primengImports.module';
 import { Aula } from '../../../interfaces/aula';
 import { ModalAdicionarDiaComponent } from '../../../shared/modal-adicionar-dia/modal-adicionar-dia.component';
@@ -104,7 +104,7 @@ export class EditarContratosComponent implements OnInit {
 
   atualizarListaDiasAdicionados() {
     this.aulas.sort(
-      (a, b) => this.dias.indexOf(a.diaSemana) - this.dias.indexOf(b.diaSemana)
+      (a, b) => this.dias.indexOf(DiasDaSemana[a.diaSemana]) - this.dias.indexOf(DiasDaSemana[b.diaSemana])
     );
   }
   
@@ -123,6 +123,7 @@ export class EditarContratosComponent implements OnInit {
     .atualizarContrato(this.contratoId, contratoAtualizado)
     .subscribe({
       next: () =>
+  
         this.messageService.showMessage(
           'success',
           'Atualizado!',

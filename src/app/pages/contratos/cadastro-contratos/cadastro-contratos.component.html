@@ -8,7 +8,7 @@
         <div class="dados_responsavel">
             <div class="cadastro_input cadastro_input_primeiro ">
                 <p-floatlabel variant="on">
-                    <input id="nome_responsavel" pInputText [(ngModel)]="responsavel.nome" required
+                    <input id="nome_responsavel" pInputText [(ngModel)]="contrato.nomeResponsavel" required
                         name="nome_responsavel">
                     <label for="nome_responsavel">Nome</label>
                 </p-floatlabel>
@@ -20,7 +20,7 @@
 
             <div class="cadastro_input" id="documento_input">
                 <p-floatlabel variant="on">
-                    <input id="documento_responsavel" pInputText [(ngModel)]="responsavel.documento" required
+                    <input id="documento_responsavel" pInputText [(ngModel)]="contrato.documentoResponsavel" required
                         name="documento_responsavel">
                     <label for="documento_responsavel">Documento (CPF, RG ou CNH)</label>
                 </p-floatlabel>
@@ -32,7 +32,7 @@
 
             <div class="cadastro_input">
                 <p-floatlabel class="label-fixo" variant="on">
-                    <p-inputmask id="contato_responsavel" mask="(99) 99999-9999" [(ngModel)]="responsavel.contato"
+                    <p-inputmask id="contato_responsavel" mask="(99) 99999-9999" [(ngModel)]="contrato.telefoneResponsavelPrincipal"
                         required placeholder="(__) _____-____" name="contato_responsavel" />
                     <label for="contato_responsavel">Telefone de contato</label>
                 </p-floatlabel>
@@ -117,7 +117,7 @@
                     <div class="horarioAulas">
                         <p-chip class="item_list_chip" *ngFor="let aula of aulas, let i = index" removable="true"
                             (onRemove)="removerDiaDaSemana(i)">
-                            <a>{{aula.dia}} às {{aula.horario | date:'HH:MM'}}</a>
+                            <a>{{aula.diaSemana}} às {{aula.horario.slice(0,5)}}</a>
                         </p-chip>
                                             <div *ngIf="aulas.length < 1">
                         <small>Insira ao menos um dia</small>
