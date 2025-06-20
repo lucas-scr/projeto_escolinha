@@ -8,7 +8,7 @@
         <div class="dados_responsavel">
             <div class="cadastro_input cadastro_input_primeiro ">
                 <p-floatlabel variant="on">
-                    <input id="nome_responsavel" pInputText [(ngModel)]="contrato.nomeResponsavel" required
+                    <input id="nome_responsavel" pInputText [(ngModel)]="nomeResponsavel" required
                         name="nome_responsavel">
                     <label for="nome_responsavel">Nome</label>
                 </p-floatlabel>
@@ -20,7 +20,7 @@
 
             <div class="cadastro_input" id="documento_input">
                 <p-floatlabel variant="on">
-                    <input id="documento_responsavel" pInputText [(ngModel)]="contrato.documentoResponsavel" required
+                    <input id="documento_responsavel" pInputText [(ngModel)]="documentoResponsavel" required
                         name="documento_responsavel">
                     <label for="documento_responsavel">Documento (CPF, RG ou CNH)</label>
                 </p-floatlabel>
@@ -32,7 +32,7 @@
 
             <div class="cadastro_input">
                 <p-floatlabel class="label-fixo" variant="on">
-                    <p-inputmask id="contato_responsavel" mask="(99) 99999-9999" [(ngModel)]="contrato.telefoneResponsavelPrincipal"
+                    <p-inputmask id="contato_responsavel" mask="(99) 99999-9999" [(ngModel)]="telefoneResponsavelPrincipal"
                         required placeholder="(__) _____-____" name="contato_responsavel" />
                     <label for="contato_responsavel">Telefone de contato</label>
                 </p-floatlabel>
@@ -52,7 +52,7 @@
 
                 <div class="cadastro_input">
                     <p-floatlabel variant="on">
-                        <input id="nome_aluno" pInputText [(ngModel)]="nome" required name="add_nome_aluno">
+                        <input id="nome_aluno" pInputText [(ngModel)]="nomeAluno" required name="add_nome_aluno">
                         <label for="nome_aluno">Nome do aluno</label>
                     </p-floatlabel>
                     <div
@@ -128,7 +128,6 @@
             </div>
 
 
-
             <div class="cadastro_input">
                 <p-floatlabel variant="on">
                     <p-datepicker id="dataInicio" [(ngModel)]="dataInicio" required name="dataInicio"
@@ -143,7 +142,7 @@
 
             <div class="cadastro_input" *ngIf="isDiasAlternados">
                 <p-floatlabel variant="on">
-                    <p-datepicker required inputId="horarioInicio" [(ngModel)]="dataInicio" [timeOnly]="true"
+                    <p-datepicker required inputId="horarioInicio" [(ngModel)]="horarioAulasAlterndas" [timeOnly]="true"
                         name="horarioInicio" />
                     <label class="calendar_label" for="horarioInicio">Horário das aulas</label>
                 </p-floatlabel>
@@ -165,7 +164,6 @@
                     <small>Este campo é obrigatório</small>
                 </div>
             </div>
-
 
 
             <div class="cadastro_input">

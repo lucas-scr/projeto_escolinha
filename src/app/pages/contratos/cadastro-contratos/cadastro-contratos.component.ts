@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
-import { Responsavel } from '../../../model/Responsavel';
 import { PrimengImports } from '../../../shared/primengImports.module';
-import { Aluno } from '../../../model/Alunos';
 import { MessageService } from 'primeng/api';
 import { ServiceContratos } from '../../../services/service_contratos';
 import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
@@ -21,20 +19,20 @@ import { Contrato } from '../../../interfaces/contrato';
 })
 export class CadastroContratosComponent implements OnInit {
 
-  contrato: Contrato;
-  
   modalAdicionarDia: boolean = false;
+
   nomeResponsavel: String;
-
-
-  nome: String;
+  documentoResponsavel: String;
+  telefoneResponsavelPrincipal: String;
+  nomeAluno: String;
   dataNascimento: Date;
   sexo: String;
-  valorContratado: Number;
+  isDiasAlternados: boolean;
+  horarioAulasAlterndas: Date;
   dataInicio: Date = new Date();
   dataLimite: Date = new Date();
-
   diaPagamento: Number;
+  valorContratado: Number;
   autorizacaoDeImagem: boolean = false;
   ressarcimentoEmFeriados: Boolean;
 
@@ -48,7 +46,7 @@ export class CadastroContratosComponent implements OnInit {
     DiasDaSemana.SEXTA,
   ];
 
-  isDiasAlternados: boolean;
+
 
   constructor(
     private messageService: ServiceMensagemGlobal,
@@ -60,8 +58,6 @@ export class CadastroContratosComponent implements OnInit {
 
   onSubmit() {
     this.limparDiasSelecionados();
-
-
     this.router.navigate(['/contratos']);
   }
 
@@ -93,8 +89,12 @@ export class CadastroContratosComponent implements OnInit {
     });
   }
 
-  adicionarDiaDaSemana(event: { dia: string, horario: Date }) {
-    //this.aulas.push(event);
+  adicionarDiaDaSemana(event: { dia: DiasDaSemana, horario: String }) {
+    const novaAula: Aula = {
+      diaSemana: event.dia,
+      horario: event.horario
+    }
+    this.aulas.push(novaAula)
     this.aulas.sort(
       (a, b) => this.dias.indexOf(DiasDaSemana[a.diaSemana]) - this.dias.indexOf(DiasDaSemana[b.diaSemana])
     );

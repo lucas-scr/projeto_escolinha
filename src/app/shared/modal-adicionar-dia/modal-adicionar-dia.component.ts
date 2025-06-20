@@ -17,11 +17,11 @@ export class ModalAdicionarDiaComponent {
   @Input() aulasAdicionadas: Aula[] = [];
 
   @Output() fechar = new EventEmitter<void>();
-  @Output() adicionar = new EventEmitter<{ dia: string, horario: Date }>();
+  @Output() adicionar = new EventEmitter<{ dia: DiasDaSemana, horario: String }>();
 
 
 
-  diaSelecionado: string;
+  diaSelecionado: DiasDaSemana;
   horarioInicio_aula: Date;
 
 
@@ -40,7 +40,7 @@ export class ModalAdicionarDiaComponent {
     if (this.diaSelecionado && this.horarioInicio_aula) {
       this.adicionar.emit({
         dia: this.diaSelecionado,
-        horario: this.horarioInicio_aula,
+        horario: this.horarioInicio_aula.toString().substring(16, 21),
       })
       this.limparDadosModal()
       this.onFechar();
