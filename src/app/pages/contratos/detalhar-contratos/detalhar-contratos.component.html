@@ -91,7 +91,7 @@
                     </div>
                     <div class="horarioAulas">
                         <p-chip class="item_list_chip" *ngFor="let aula of contratoCarregado.diasDasAulas, let i = index">
-                            <a>{{aula.diaSemana}} às {{aula.horario.slice(0,5)}}</a>
+                            <a>{{descricaoAmigavelDiaSemana[aula.diaSemana]}} às {{aula.horario.slice(0,5)}}</a>
                         </p-chip>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
 
             <div class="cadastro_input" *ngIf="contratoCarregado.diasAlternados">
                 <p-floatlabel variant="on">
-                    <p-datepicker required inputId="horarioInicio" disabled [(ngModel)]="contratoCarregado.dataInicio" [timeOnly]="true"
+                    <p-datepicker required inputId="horarioInicio" disabled [(ngModel)]="contratoCarregado.horarioDiasAlternados" [timeOnly]="true"
                         name="horarioInicio" />
                     <label class="calendar_label" for="horarioInicio">Horário das aulas</label>
                 </p-floatlabel>

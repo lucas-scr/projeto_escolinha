@@ -30,7 +30,7 @@ export class CadastroContratosComponent implements OnInit {
   dataNascimento: Date;
   sexo: string;
   isDiasAlternados: boolean = false;
-  horarioAulasAlternadas: Date;
+  horarioAulasAlternadas: Date = new Date();
   dataInicio: Date = new Date();
   dataLimite: Date = new Date();
   diaPagamento: Number;
@@ -142,7 +142,7 @@ export class CadastroContratosComponent implements OnInit {
     }
 
     if(this.isDiasAlternados){
-       contrato.horarioDiasAlternados = this.horarioAulasAlternadas.toTimeString().substring(0, 5)
+       contrato.horarioDiasAlternados = this.horarioAulasAlternadas.toString()      
     }
 
     return contrato

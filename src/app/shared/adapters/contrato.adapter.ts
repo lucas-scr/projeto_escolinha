@@ -23,6 +23,7 @@ export function adaptarContratoParaResponse(d: any): Contrato {
     })),
     valorPagamento: d.valorPagamento,
     diaPagamento: d.diaPagamento,
+    horarioDiasAlternados: d.horarioDiasAlternados,
     diasAlternados: d.diasAlternados,
     ressarcimentoEmFeriados: d.ressarcimentoEmFeriados,
     autorizaUsoDeImagem: d.autorizaUsoDeImagem,
@@ -48,7 +49,6 @@ export function adapterContratoParaRequest(d: Contrato): any{
     ressarcimentoEmFeriados: d.ressarcimentoEmFeriados,
     diasAlternados: d.diasAlternados,
     telefone: d.telefone,
-    horarioDiasAlternados: d.horarioDiasAlternados
   }
 
   if (d.diasDasAulas && d.diasDasAulas.length > 0) {
@@ -57,6 +57,10 @@ export function adapterContratoParaRequest(d: Contrato): any{
       horario: dia.horario,
       diaSemana: dia.diaSemana
     }));
+  }
+  if(d.diasAlternados){
+    request.horarioDiasAlternados = d.horarioDiasAlternados.toString().slice(16, 21)
+    console.log(request.horarioDiasAlternados)
   }
 
  return request

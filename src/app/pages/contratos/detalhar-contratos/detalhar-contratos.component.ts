@@ -4,6 +4,7 @@ import { ServiceContratos } from '../../../services/service_contratos';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PrimengImports } from '../../../shared/primengImports.module';
 import { Contrato } from '../../../interfaces/contrato';
+import { DiasDaSemanaDescricao } from '../../../shared/Enums/enumDiasDaSemana';
 
 @Component({
   selector: 'app-detalhar-contratos',
@@ -14,6 +15,7 @@ import { Contrato } from '../../../interfaces/contrato';
 export class DetalharContratosComponent {
 
   modalAdicionar: boolean = false;
+  descricaoAmigavelDiaSemana = DiasDaSemanaDescricao;
 
     dataLimite: Date = new Date();
     contratoId: number;
