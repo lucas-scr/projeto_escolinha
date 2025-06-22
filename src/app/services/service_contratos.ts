@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Contrato } from '../interfaces/contrato';
-import { adaptarContratoParaResponse } from '../shared/adapters/contrato.adapter';
+import { adaptarContratoParaResponse, adapterContratoParaRequest } from '../shared/adapters/contrato.adapter';
 
 @Injectable({
   providedIn: 'root', // Torna o serviço disponível globalmente
@@ -28,7 +28,7 @@ export class ServiceContratos {
   }
 
   cadastrarContrato(contrato: Contrato): Observable<Contrato> {
-    return this.http.post<Contrato>(this.URL, contrato);
+    return this.http.post<Contrato>(this.URL, adapterContratoParaRequest(contrato));
   }
   
   atualizarContrato(id: number, contrato: Contrato): Observable<Contrato> {

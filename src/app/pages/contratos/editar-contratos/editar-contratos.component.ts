@@ -112,7 +112,7 @@ export class EditarContratosComponent implements OnInit {
     this.aulas.splice(index, 1);
   }
 
-    adicionarDiaDaSemana(event: { dia: string, horario: Date }) {
+    adicionarDiaDaSemana(event: { dia: string, horario: String }) {
    // this.aulas.push(event);
     this.atualizarListaDiasAdicionados()
     this.fecharModalAdicionarDia();
@@ -123,7 +123,6 @@ export class EditarContratosComponent implements OnInit {
     .atualizarContrato(this.contratoId, contratoAtualizado)
     .subscribe({
       next: () =>
-  
         this.messageService.showMessage(
           'success',
           'Atualizado!',
@@ -131,12 +130,13 @@ export class EditarContratosComponent implements OnInit {
         ),
       error: () =>
         this.messageService.showMessage(
-          'danger',
+          'error',
           'Algo deu errado!',
           'Não foi possível realizar a atualização.'
         ),
     });
+        this.router.navigate(['/contratos']);
 
-  this.router.navigate(['/contratos']);
   }
+  
 }

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DiasDaSemana } from '../Enums/enumDiasDaSemana';
+import { DiasDaSemana, DiasDaSemanaDescricao } from '../Enums/enumDiasDaSemana';
 import { Aula } from '../../interfaces/aula';
 import { PrimengImports } from '../primengImports.module';
 
@@ -17,16 +17,19 @@ export class ModalAdicionarDiaComponent {
   @Input() aulasAdicionadas: Aula[] = [];
 
   @Output() fechar = new EventEmitter<void>();
-  @Output() adicionar = new EventEmitter<{ dia: DiasDaSemana, horario: String }>();
+  @Output() adicionar = new EventEmitter<{ dia: DiasDaSemana, horario: string }>();
+
 
 
 
   diaSelecionado: DiasDaSemana;
+  descricaoAmigavelDias = DiasDaSemanaDescricao;
+
   horarioInicio_aula: Date;
 
 
 
-  dias: String[] = [
+  dias: string[] = [
     DiasDaSemana.SEGUNDA,
     DiasDaSemana.TERCA,
     DiasDaSemana.QUARTA,
@@ -34,7 +37,7 @@ export class ModalAdicionarDiaComponent {
     DiasDaSemana.SEXTA,
   ];
 
-  constructor() {}
+  constructor() { }
 
   onAdicionar() {
     if (this.diaSelecionado && this.horarioInicio_aula) {
@@ -64,10 +67,13 @@ export class ModalAdicionarDiaComponent {
   }
 
 
-  diasDisponiveis(): String[] {
-    return this.dias.filter((dia) => {
-      const ocupado = this.aulasAdicionadas.some((aula) => aula.diaSemana === dia);
-      return !ocupado;
-    });
+  diasDisponiveis(): { valor: DiasDaSemana, descricao: string }[] {
+    return this.dias
+      .filter(dia => !this.aulasAdicionadas.some(a => a.diaSemana === dia))
+      .map(dia => ({
+        valor: dia as DiasDaSemana,
+        descricao: this.descricaoAmigavelDias[dia]
+      }));
   }
+
 }

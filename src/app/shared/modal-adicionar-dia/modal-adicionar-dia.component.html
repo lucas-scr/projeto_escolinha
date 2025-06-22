@@ -6,7 +6,7 @@
                 <div class="cadastro_input_modal">
                     <p-floatlabel variant="on">
                         <p-select inputId="diaSemana_select" name="dia_semana" required [options]="diasDisponiveis()"
-                            [(ngModel)]="diaSelecionado" name="diaSemana_select" />
+                            [(ngModel)]="diaSelecionado" optionValue="valor" optionLabel="descricao" />
                         <label for="diaSemana_select">Dia da semana</label>
                     </p-floatlabel>
                     <div

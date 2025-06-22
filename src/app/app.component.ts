@@ -22,6 +22,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     RouterOutlet,
     CommonModule,
     ToastModule,
+    ToastModule,
     InMemoryWebApiModule,
     OAuthModule,
     LoadingComponent

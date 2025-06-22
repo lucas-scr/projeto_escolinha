@@ -24,7 +24,6 @@ export function adaptarContratoParaResponse(d: any): Contrato {
     })),
     valorPagamento: d.valorPagamento,
     diaPagamento: d.diaPagamento,
-    situacoesContrato: d.situacoesContrato,
     diasAlternados: d.diasAlternados,
     ressarcimentoEmFeriados: d.ressarcimentoEmFeriados,
     autorizaUsoDeImagem: d.autorizaUsoDeImagem,
@@ -34,34 +33,43 @@ export function adaptarContratoParaResponse(d: any): Contrato {
 
 
 export function adapterContratoParaRequest(d: Contrato): any{
-  return {
+  const request: any = {
     documentoResponsavel: d.documentoResponsavel,
     telefoneResponsavelPrincipal: d.telefoneResponsavelPrincipal,
-    listaContatos: d.listaContatos.map((c: any) => ({
-      id: c.id,
-      telefone: c.telefone,
-      responsavel: c.responsavel,
-      principal: c.principal,
-    })),
     aluno: {
       id: d.aluno.id,
       nome: d.aluno.nome,
-      dataNascimento: d.aluno.dataNascimento.toString().split('T')[0],
+      dataNascimento: d.aluno.dataNascimento.toISOString().split('T')[0],
       sexo: d.aluno.sexo
     },
-    dataInicio: d.dataInicio.toString().split('T')[0],
+    dataInicio: d.dataInicio.toISOString().split('T')[0],
     diaPagamento: d.diaPagamento,
     valorPagamento: d.valorPagamento,
     autorizaUsoDeImagem: d.autorizaUsoDeImagem,
     nomeResponsavel: d.nomeResponsavel,
     ressarcimentoEmFeriados: d.ressarcimentoEmFeriados,
-    diasDasAulas: d.diasDasAulas.map((dia: any) => ({
+    diasAlternados: d.diasAlternados,
+    listaContatos: [
+      ...(d.listaContatos || []),
+      {
+       telefone: d.telefoneResponsavelPrincipal,
+       responsavel: d.nomeResponsavel,
+       isPrincipal: true
+      }
+    ],
+    horarioDiasAlternados: d.horarioDiasAlternados
+  }
+
+  if (d.diasDasAulas && d.diasDasAulas.length > 0) {
+    request.diasDasAulas = d.diasDasAulas.map((dia: any) => ({
       id: dia.id,
       horario: dia.horario,
       diaSemana: dia.diaSemana
-    })),
-    diasAlternados: d.diasAlternados
+    }));
   }
+
+
+ return request
 }
 
 function gerarIniciais(nome: string):string{

@@ -6,9 +6,10 @@ import { MessageService } from 'primeng/api';
 import { ServiceContratos } from '../../../services/service_contratos';
 import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
 import { Aula } from '../../../interfaces/aula';
-import { DiasDaSemana } from '../../../shared/Enums/enumDiasDaSemana';
+import { DiasDaSemana, DiasDaSemanaDescricao } from '../../../shared/Enums/enumDiasDaSemana';
 import { ModalAdicionarDiaComponent } from "../../../shared/modal-adicionar-dia/modal-adicionar-dia.component";
 import { Contrato } from '../../../interfaces/contrato';
+
 
 @Component({
   selector: 'app-cadastro-contratos',
@@ -20,21 +21,22 @@ import { Contrato } from '../../../interfaces/contrato';
 export class CadastroContratosComponent implements OnInit {
 
   modalAdicionarDia: boolean = false;
+  descricaoAmigavelDiasSemana =  DiasDaSemanaDescricao;
 
-  nomeResponsavel: String;
-  documentoResponsavel: String;
-  telefoneResponsavelPrincipal: String;
-  nomeAluno: String;
+  nomeResponsavel: string = "nome";
+  documentoResponsavel: string = "12345678901";
+  telefoneResponsavelPrincipal: string = "12345678901";
+  nomeAluno: string = "aluno teste";
   dataNascimento: Date;
-  sexo: String;
-  isDiasAlternados: boolean;
-  horarioAulasAlterndas: Date;
+  sexo: string = "M";
+  isDiasAlternados: boolean = false;
+  horarioAulasAlternadas: Date;
   dataInicio: Date = new Date();
   dataLimite: Date = new Date();
-  diaPagamento: Number;
-  valorContratado: Number;
-  autorizacaoDeImagem: boolean = false;
-  ressarcimentoEmFeriados: Boolean;
+  diaPagamento: Number = 20;
+  valorContratado: Number = 120;
+  autorizacaoDeImagem: boolean = true;
+  ressarcimentoEmFeriados: boolean = true;
 
   aulas: Aula[] = [];
 
@@ -57,8 +59,9 @@ export class CadastroContratosComponent implements OnInit {
   ngOnInit() { }
 
   onSubmit() {
+    let contratoRequest: Contrato = this.atribuirDadosAoContrato()
+    this.cadastrarContrato(contratoRequest);
     this.limparDiasSelecionados();
-    this.router.navigate(['/contratos']);
   }
 
   limparDiasSelecionados() {
@@ -73,7 +76,8 @@ export class CadastroContratosComponent implements OnInit {
 
 
   cadastrarContrato(novoContrato: Contrato) {
-    this.contratoService.cadastrarContrato(novoContrato).subscribe({
+    this.contratoService.cadastrarContrato(novoContrato)
+    .subscribe({
       next: () =>
         this.messageService.showMessage(
           'success',
@@ -82,14 +86,15 @@ export class CadastroContratosComponent implements OnInit {
         ),
       error: () =>
         this.messageService.showMessage(
-          'danger',
+          'error',
           'Algo deu errado!',
           'Não foi possível realizar o cadastro.'
-        ),
+        )
     });
+    this.router.navigate(['/contratos']);
   }
 
-  adicionarDiaDaSemana(event: { dia: DiasDaSemana, horario: String }) {
+  adicionarDiaDaSemana(event: { dia: DiasDaSemana, horario: string }) {
     const novaAula: Aula = {
       diaSemana: event.dia,
       horario: event.horario
@@ -102,13 +107,13 @@ export class CadastroContratosComponent implements OnInit {
     this.fecharModalAdicionarDia();
   }
 
-  fecharModalAdicionarDia(){
+  fecharModalAdicionarDia() {
     this.modalAdicionarDia = false;
     this.atualizarListaDiasAdicionados()
   }
 
-  
-  abrirModalAdicionarDia(){
+
+  abrirModalAdicionarDia() {
     this.modalAdicionarDia = true;
   }
 
@@ -116,5 +121,31 @@ export class CadastroContratosComponent implements OnInit {
     this.aulas.sort(
       (a, b) => this.dias.indexOf(DiasDaSemana[a.diaSemana]) - this.dias.indexOf(DiasDaSemana[b.diaSemana])
     );
+  }
+
+  atribuirDadosAoContrato(): Contrato {
+    let contrato: Contrato = {
+      nomeResponsavel: this.nomeResponsavel,
+      documentoResponsavel: this.documentoResponsavel,
+      telefoneResponsavelPrincipal: this.telefoneResponsavelPrincipal,
+      diasAlternados: this.isDiasAlternados,
+      dataInicio: this.dataInicio,
+      diaPagamento: this.diaPagamento,
+      valorPagamento: this.valorContratado,
+      autorizaUsoDeImagem: this.autorizacaoDeImagem,
+      ressarcimentoEmFeriados: this.ressarcimentoEmFeriados,
+      diasDasAulas: this.aulas,
+      aluno: {
+        nome: this.nomeAluno,
+        dataNascimento: this.dataNascimento,
+        sexo: this.sexo
+      }
+    }
+
+    if(this.isDiasAlternados){
+       contrato.horarioDiasAlternados = this.horarioAulasAlternadas.toTimeString().substring(0, 5)
+    }
+
+    return contrato
   }
 }
