@@ -8,8 +8,7 @@ export function adaptarContratoParaResponse(d: any): Contrato {
     id: d.id,
     nomeResponsavel: d.nomeResponsavel,
     documentoResponsavel: d.documentoResponsavel,
-    telefoneResponsavelPrincipal: d.telefoneResponsavelPrincipal,
-    listaContatos: d.listaContatos,
+    telefone: d.telefone,
     aluno: {
         ...d.aluno,
         iniciais: gerarIniciais(d.aluno?.nome || '')
@@ -35,7 +34,6 @@ export function adaptarContratoParaResponse(d: any): Contrato {
 export function adapterContratoParaRequest(d: Contrato): any{
   const request: any = {
     documentoResponsavel: d.documentoResponsavel,
-    telefoneResponsavelPrincipal: d.telefoneResponsavelPrincipal,
     aluno: {
       id: d.aluno.id,
       nome: d.aluno.nome,
@@ -49,14 +47,7 @@ export function adapterContratoParaRequest(d: Contrato): any{
     nomeResponsavel: d.nomeResponsavel,
     ressarcimentoEmFeriados: d.ressarcimentoEmFeriados,
     diasAlternados: d.diasAlternados,
-    listaContatos: [
-      ...(d.listaContatos || []),
-      {
-       telefone: d.telefoneResponsavelPrincipal,
-       responsavel: d.nomeResponsavel,
-       isPrincipal: true
-      }
-    ],
+    telefone: d.telefone,
     horarioDiasAlternados: d.horarioDiasAlternados
   }
 
@@ -67,7 +58,6 @@ export function adapterContratoParaRequest(d: Contrato): any{
       diaSemana: dia.diaSemana
     }));
   }
-
 
  return request
 }

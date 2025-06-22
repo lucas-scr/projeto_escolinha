@@ -62,7 +62,6 @@ export class LoginComponent implements OnInit {
     console.log(this.tokenGoogle);
     this.auth.loginWithGoogle(this.tokenGoogle).subscribe({
       next: (res) => {
-        console.log(this.tokenGoogle)
         this.router.navigate(['']);
       },
       error: (err) => {

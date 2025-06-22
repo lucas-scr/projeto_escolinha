@@ -63,7 +63,6 @@ export class ListaContratosComponent implements OnInit {
           {
             label: 'Remover',
             icon: 'pi pi-trash',
-            // command: () => this.removerAlunoDaLista(this.itemId),
             command: () => this.confirmarRemover(),
           },
         ],
@@ -124,7 +123,7 @@ export class ListaContratosComponent implements OnInit {
     });
   }
 
-  getSituacaoClass(situacao: String): String {
+  getSituacaoClass(situacao: string): string {
     switch (situacao) {
       case 'Iniciado':
         return 'situacao-ativo';

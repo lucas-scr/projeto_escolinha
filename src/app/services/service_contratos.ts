@@ -32,8 +32,8 @@ export class ServiceContratos {
   }
   
   atualizarContrato(id: number, contrato: Contrato): Observable<Contrato> {
-    console.log(contrato);
-    return this.http.put<Contrato>(`${this.URL}/${id}`, adaptarContratoParaResponse(contrato));
+    console.log(adapterContratoParaRequest(contrato));
+    return this.http.put<Contrato>(`${this.URL}/${id}`, adapterContratoParaRequest(contrato));
   }
   
   removerContrato(id: Number): Observable<Contrato> {

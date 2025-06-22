@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'telefone',
 })
 export class TelefonePipe implements PipeTransform {
-  transform(value: string): String {
+  transform(value: string): string {
     if (!value) return '';
 
     let cleaned = value.replace(/\D/g, '');

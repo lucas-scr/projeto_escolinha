@@ -1,12 +1,11 @@
 import { Aluno } from "./aluno";
 import { Aula } from "./aula";
-import { Contato } from "./contato";
 
 export interface Contrato{
       id?: Number;  
-      nomeResponsavel: String;
-      documentoResponsavel: String;
-      telefoneResponsavelPrincipal: String;
+      nomeResponsavel: string;
+      documentoResponsavel: string;
+      telefone: string;
       aluno: Aluno;
       dataCriacao?: Date;
       dataInicio: Date;
@@ -14,11 +13,11 @@ export interface Contrato{
       diasDasAulas?: Aula[];
       valorPagamento: Number;
       diaPagamento: Number;
-      situacao?: String;
+      situacao?: string;
       diasAlternados: boolean;
       ressarcimentoEmFeriados: Boolean;
       autorizaUsoDeImagem: Boolean;
-      listaContatos?: Contato[]
+
       horarioDiasAlternados?: string;
 }
 

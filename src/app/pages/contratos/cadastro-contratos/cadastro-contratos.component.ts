@@ -25,7 +25,7 @@ export class CadastroContratosComponent implements OnInit {
 
   nomeResponsavel: string;
   documentoResponsavel: string;
-  telefoneResponsavelPrincipal: string ;
+  telefone: string ;
   nomeAluno: string;
   dataNascimento: Date;
   sexo: string;
@@ -126,7 +126,7 @@ export class CadastroContratosComponent implements OnInit {
     let contrato: Contrato = {
       nomeResponsavel: this.nomeResponsavel,
       documentoResponsavel: this.documentoResponsavel,
-      telefoneResponsavelPrincipal: this.telefoneResponsavelPrincipal,
+      telefone: this.telefone,
       diasAlternados: this.isDiasAlternados,
       dataInicio: this.dataInicio,
       diaPagamento: this.diaPagamento,

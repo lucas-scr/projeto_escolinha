@@ -69,7 +69,7 @@ export class ModalAdicionarDiaComponent {
 
   diasDisponiveis(): { valor: DiasDaSemana, descricao: string }[] {
     return this.dias
-      .filter(dia => !this.aulasAdicionadas.some(a => a.diaSemana === dia))
+      .filter(dia => !this.aulasAdicionadas?.some(a => a.diaSemana === dia))
       .map(dia => ({
         valor: dia as DiasDaSemana,
         descricao: this.descricaoAmigavelDias[dia]
