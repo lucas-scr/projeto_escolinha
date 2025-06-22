@@ -1,13 +1,13 @@
 import { Materia } from "./materias";
 
 export interface Atividade{
-    codigo: String;
-    materia: number;
-    nomeMateria: String;
-    nomeArquivo: String;
-    arquivo: Blob;
-    tipoArquivo: String;
-    descricao: String;
+    codigo: string;
+    materia: Materia;
+    nomeArquivo: string;
+    arquivo?: Blob;
+    url?: string;
+    tipoArquivo: string;
+    descricao: string;
     dataCriacao?: Date;
     id?: Number;
 }

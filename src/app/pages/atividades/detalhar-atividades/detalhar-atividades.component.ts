@@ -49,10 +49,7 @@ export class DetalharAtividadesComponent implements OnInit {
     this.serviceAtividade.findById(id).subscribe({
       next: (atividade) => {
         this.codigo = atividade.codigo;
-        this.materiaSelecionada = {
-          nome: atividade.nomeMateria,
-          id: atividade.materia,
-        };
+        this.materiaSelecionada = atividade.materia;
         this.nomeArquivo = atividade.nomeArquivo || 'Arquivo anexado';
         this.dataCriacao = new Date(atividade.dataCriacao);
         this.descricao = atividade.descricao;

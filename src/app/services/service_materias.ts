@@ -7,7 +7,7 @@ import { Materia } from '../interfaces/materias';
   providedIn: 'root',
 })
 export class ServiceMateria {
-    private URL = 'api/materias';
+    private URL = 'http://localhost:8080/api/materias';
 
     constructor( private http: HttpClient){
     }

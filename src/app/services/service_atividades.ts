@@ -9,8 +9,8 @@ import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 })
 
 export class ServiceAtividades {
-    private URL = 'api/atividades';
-
+  private URL = 'http://localhost:8080/api/atividades';
+  
     constructor( private http: HttpClient){
         
     }

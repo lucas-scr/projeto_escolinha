@@ -21,17 +21,17 @@ import { PrimengImports } from '../../../shared/primengImports.module';
 })
 export class EditarAtividadesComponent implements OnInit, OnDestroy {
   idAtividade: number;
-  codigo: String;
-  descricao: String;
+  codigo: string;
+  descricao: string;
   dataCriacao: Date;
 
   listaMaterias: Materia[] | undefined;
   materiaSelecionada: Materia | undefined;
 
-  nomeArquivo: String;
+  nomeArquivo: string;
   isImage: boolean = false;
   arquivoUrl: string | null = null;
-  tipoArquivo: String;
+  tipoArquivo: string;
   arquivoBlob: Blob;
 
   constructor(
@@ -58,8 +58,7 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
       let atividadeAtualizada: Atividade = {
         tipoArquivo: this.tipoArquivo,
         codigo: this.codigo,
-        materia: this.materiaSelecionada.id,
-        nomeMateria: this.materiaSelecionada.nome,
+        materia: this.materiaSelecionada,
         arquivo: this.arquivoBlob,
         nomeArquivo: this.nomeArquivo,
         dataCriacao: this.dataCriacao,
@@ -108,8 +107,8 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
       next: (atividade) => {
         this.codigo = atividade.codigo;
         this.materiaSelecionada = {
-          nome: atividade.nomeMateria,
-          id: atividade.materia,
+          nome: atividade.materia.nome,
+          id: atividade.materia.id,
         };
         this.descricao = atividade.descricao;
         this.nomeArquivo = atividade.nomeArquivo || 'Arquivo anexado';

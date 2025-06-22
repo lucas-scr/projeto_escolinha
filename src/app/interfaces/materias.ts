@@ -1,4 +1,4 @@
 export interface Materia{
     id: number;
-    nome: String;
+    nome: string;
 }

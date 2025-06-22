@@ -142,7 +142,7 @@ export class EditarContratosComponent implements OnInit {
             'Não foi possível realizar a atualização.'
           ),
       });
-   // this.router.navigate(['/contratos']);
+    this.router.navigate(['/contratos']);
   }
 
   limparDiasSelecionados() {

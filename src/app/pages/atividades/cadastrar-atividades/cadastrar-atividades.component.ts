@@ -16,17 +16,17 @@ import { ServiceAtividades } from '../../../services/service_atividades';
 })
 export class CadastrarAtividadesComponent implements OnInit, OnDestroy {
   materiaSelecaoPadrao: Materia = { nome: 'Selecione', id: null };
-  codigo: String;
-  descricao: String;
+  codigo: string;
+  descricao: string;
   dataCadastro: Date = new Date();
 
   listaMaterias: Materia[] | undefined;
   materiaSelecionada: Materia | undefined;
 
-  nomeArquivo: String;
+  nomeArquivo: string;
   isImage: boolean = false;
   arquivoUrl: string | null = null;
-  tipoArquivo: String;
+  tipoArquivo: string;
   arquivoBlob: Blob;
   
 
@@ -59,8 +59,7 @@ export class CadastrarAtividadesComponent implements OnInit, OnDestroy {
       let atividadeCadastrada: Atividade = {
         tipoArquivo: this.tipoArquivo,
         codigo: this.codigo,
-        materia: this.materiaSelecionada.id,
-        nomeMateria: this.materiaSelecionada.nome,
+        materia: this.materiaSelecionada,
         dataCriacao: new Date(),
         arquivo: this.arquivoBlob,
         descricao: this.descricao,
