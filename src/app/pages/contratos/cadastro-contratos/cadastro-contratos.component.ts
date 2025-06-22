@@ -23,20 +23,20 @@ export class CadastroContratosComponent implements OnInit {
   modalAdicionarDia: boolean = false;
   descricaoAmigavelDiasSemana =  DiasDaSemanaDescricao;
 
-  nomeResponsavel: string = "nome";
-  documentoResponsavel: string = "12345678901";
-  telefoneResponsavelPrincipal: string = "12345678901";
-  nomeAluno: string = "aluno teste";
+  nomeResponsavel: string;
+  documentoResponsavel: string;
+  telefoneResponsavelPrincipal: string ;
+  nomeAluno: string;
   dataNascimento: Date;
-  sexo: string = "M";
+  sexo: string;
   isDiasAlternados: boolean = false;
   horarioAulasAlternadas: Date;
   dataInicio: Date = new Date();
   dataLimite: Date = new Date();
-  diaPagamento: Number = 20;
-  valorContratado: Number = 120;
-  autorizacaoDeImagem: boolean = true;
-  ressarcimentoEmFeriados: boolean = true;
+  diaPagamento: Number;
+  valorContratado: Number;
+  autorizacaoDeImagem: boolean = false;
+  ressarcimentoEmFeriados: boolean = false;
 
   aulas: Aula[] = [];
 
@@ -59,8 +59,7 @@ export class CadastroContratosComponent implements OnInit {
   ngOnInit() { }
 
   onSubmit() {
-    let contratoRequest: Contrato = this.atribuirDadosAoContrato()
-    this.cadastrarContrato(contratoRequest);
+    this.cadastrarContrato(this.atribuirDadosAoContrato());
     this.limparDiasSelecionados();
   }
 
