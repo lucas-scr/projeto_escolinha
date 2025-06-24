@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Atividade } from '../../../interfaces/atividades';
 import { PrimengImports } from '../../../shared/primengImports.module';
 import { Router, RouterLink, RouterModule } from '@angular/router';
@@ -15,27 +15,28 @@ import { ServiceAtividades } from '../../../services/service_atividades';
   styleUrl: './cadastrar-atividades.component.css',
 })
 export class CadastrarAtividadesComponent implements OnInit, OnDestroy {
+
+  @ViewChild('fileUpload') fileUpload!: any;
+
   materiaSelecaoPadrao: Materia = { nome: 'Selecione', id: null };
   codigo: string;
   descricao: string;
-  dataCadastro: Date = new Date();
+  url: string | null = null;;
 
   listaMaterias: Materia[] | undefined;
   materiaSelecionada: Materia | undefined;
-
-  nomeArquivo: string;
   isImage: boolean = false;
-  arquivoUrl: string | null = null;
   tipoArquivo: string;
   arquivoBlob: Blob;
-  
+  arquivoUrl: string;
+  nomeArquivo: string;
 
   constructor(
     private serviceMaterias: ServiceMateria,
     private serviceMensagemGlobal: ServiceMensagemGlobal,
     private serviceAtividade: ServiceAtividades,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.materiaSelecionada = this.materiaSelecaoPadrao;
@@ -49,37 +50,31 @@ export class CadastrarAtividadesComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if (this.arquivoBlob == null || this.arquivoUrl == null) {
+    if (this.arquivoBlob == null && this.url == null) {
       this.serviceMensagemGlobal.showMessage(
         'error',
         'Erro',
-        'Informe todos os campos obrigatórios'
+        'Informe uma URL ou o arquivo para a atividade.'
       );
     } else {
       let atividadeCadastrada: Atividade = {
-        tipoArquivo: this.tipoArquivo,
         codigo: this.codigo,
         materia: this.materiaSelecionada,
-        dataCriacao: new Date(),
         arquivo: this.arquivoBlob,
         descricao: this.descricao,
-        nomeArquivo: this.nomeArquivo
+        url: this.url
       };
       this.cadastrarAtividade(atividadeCadastrada);
-    
-
     }
   }
-
-  onUpload(event: FileUploadEvent) {}
 
   onFileSelect(event: any) {
     if (event.files && event.files.length > 0) {
       const file = event.files[0];
 
       this.isImage = file.type.startsWith('image/');
+      this.nomeArquivo = file.name
 
-      this.nomeArquivo = file.name;
 
       if (file.type === 'application/pdf') {
         if (this.arquivoUrl) {
@@ -107,7 +102,7 @@ export class CadastrarAtividadesComponent implements OnInit, OnDestroy {
     }
   }
 
-  cadastrarAtividade(atividade: Atividade){
+  cadastrarAtividade(atividade: Atividade) {
     this.serviceAtividade.cadastrarAtividade(atividade).subscribe({
       next: () => {
         this.serviceMensagemGlobal.showMessage(
@@ -121,9 +116,8 @@ export class CadastrarAtividadesComponent implements OnInit, OnDestroy {
         this.serviceMensagemGlobal.showMessage(
           'error',
           'Erro',
-          'Não foi possível realizar o cadastro.'
+          `Não foi possível realizar o cadastro. ${erro.error.erro}`
         );
-        console.log(erro);
       },
     });
   }
@@ -132,4 +126,5 @@ export class CadastrarAtividadesComponent implements OnInit, OnDestroy {
       URL.revokeObjectURL(this.arquivoUrl);
     }
   }
+
 }

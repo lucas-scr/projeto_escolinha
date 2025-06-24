@@ -19,8 +19,21 @@ export class ServiceAtividades {
         return this.http.get<Atividade[]>(this.URL);
     }
 
-    cadastrarAtividade(atividade: Atividade):Observable<Atividade>{
-      return this.http.post<Atividade>(this.URL, atividade)
+    cadastrarAtividade(atividade: Atividade):Observable<string>{
+      const formData = new FormData();
+      const dados = {
+        codigo: atividade.codigo,
+        materia: atividade.materia,
+        descricao: atividade.descricao,
+        url: atividade.url     
+      }
+
+      formData.append('dados', new Blob([JSON.stringify(dados)], {type: 'application/json'}));
+      if(atividade.arquivo){
+        formData.append('arquivo', atividade.arquivo);
+      }
+
+      return this.http.post<string>(this.URL, formData)
     }
 
     async adicionarTextoRodapePDF(pdfBytes: Uint8Array): Promise<Uint8Array> {

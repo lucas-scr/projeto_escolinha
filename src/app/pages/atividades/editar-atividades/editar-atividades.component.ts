@@ -56,14 +56,12 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
       );
     } else {
       let atividadeAtualizada: Atividade = {
-        tipoArquivo: this.tipoArquivo,
         codigo: this.codigo,
         materia: this.materiaSelecionada,
         arquivo: this.arquivoBlob,
-        nomeArquivo: this.nomeArquivo,
         dataCriacao: this.dataCriacao,
         descricao: this.descricao,
-        id: new Number(this.idAtividade),
+        id: this.idAtividade,
       };
       this.atualizarDados(this.idAtividade, atividadeAtualizada);
     }
@@ -111,10 +109,8 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
           id: atividade.materia.id,
         };
         this.descricao = atividade.descricao;
-        this.nomeArquivo = atividade.nomeArquivo || 'Arquivo anexado';
         this.dataCriacao = new Date(atividade.dataCriacao);
         if (atividade.arquivo) {
-          this.tipoArquivo = atividade.tipoArquivo;
           this.arquivoBlob = new Blob([atividade.arquivo]);
           this.arquivoUrl = URL.createObjectURL(this.arquivoBlob);
         }

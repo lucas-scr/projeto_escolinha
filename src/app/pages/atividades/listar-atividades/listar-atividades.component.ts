@@ -43,6 +43,7 @@ export class ListarAtividadesComponent implements OnInit {
     this.loading = false;
 
     this.carregarAtividades();
+    
 
     this.opcoesDeAcoes = [
       {
@@ -102,7 +103,8 @@ export class ListarAtividadesComponent implements OnInit {
     this.serviceAtividades
       .getAtividades()
       .subscribe({
-        next: (atividades) => (this.listaAtividades = atividades),
+        next: (atividades) => {this.listaAtividades = atividades;
+        },
         error: (erro) => console.log(erro),
       });
   }

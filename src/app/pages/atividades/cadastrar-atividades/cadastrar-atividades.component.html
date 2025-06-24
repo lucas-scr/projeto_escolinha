@@ -27,18 +27,16 @@
 
         <div class="cadastro_input">
             <label>Arquivo da atividade</label>
-            <p-fileupload #fu required class="p-fileupload p-component" [multiple]="false" id="arquivo_select" mode="basic"
+            <p-fileupload #fileUpload  type="file" class="p-fileupload p-component" [multiple]="false" required="false" id="arquivo_select" mode="basic"
                 chooseLabel="Escolha" chooseIcon="pi pi-upload" (onSelect)="onFileSelect($event)" name="arquivo"
-                accept="image/*, .pdf" maxFileSize="1000000">
+                accept="image/*, .pdf" maxFileSize="500000">
             
                 <ng-template pTemplate="filelabel">
                     {{ nomeArquivo || 'Nenhum arquivo selecionado' }}
                 </ng-template>
+
             </p-fileupload>
 
-            <div *ngIf="formAtividade.submitted && !arquivoUrl ">
-                <small>Insira o arquivo da atividade</small>
-            </div>
         </div>
 
         <div class="cadastro_input">
@@ -50,6 +48,14 @@
                 <small>Este campo é obrigatório</small>
             </div>
         </div>
+
+                <div class="cadastro_input">
+            <p-floatlabel variant="on">
+                <input id="url" pInputText [(ngModel)]="url"  name="url">
+                <label for="url">URL</label>
+            </p-floatlabel>
+        </div>
+
 
 
         <div class="cadastro_botoes">
