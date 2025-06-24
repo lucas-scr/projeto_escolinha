@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FileUploadEvent } from 'primeng/fileupload';
 import { Atividade } from '../../../interfaces/atividades';
 import { ServiceMensagemGlobal } from '../../../services/mensagens_global';
@@ -20,10 +20,14 @@ import { PrimengImports } from '../../../shared/primengImports.module';
   styleUrl: './editar-atividades.component.css',
 })
 export class EditarAtividadesComponent implements OnInit, OnDestroy {
+
+
+  @ViewChild ('fileUpload') fileUpload!: any;
+
   idAtividade: number;
   codigo: string;
   descricao: string;
-  dataCriacao: Date;
+  url: string;
 
   listaMaterias: Materia[] | undefined;
   materiaSelecionada: Materia | undefined;
@@ -48,19 +52,19 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if (this.arquivoBlob == null || this.arquivoUrl == null) {
+     if (this.arquivoBlob == null && this.url == null) {
       this.serviceMensagemGlobal.showMessage(
         'error',
         'Erro',
-        'Informe todos os campos obrigatórios'
+        'Informe uma URL ou o arquivo para a atividade.'
       );
     } else {
       let atividadeAtualizada: Atividade = {
         codigo: this.codigo,
         materia: this.materiaSelecionada,
         arquivo: this.arquivoBlob,
-        dataCriacao: this.dataCriacao,
         descricao: this.descricao,
+        url: this.url,
         id: this.idAtividade,
       };
       this.atualizarDados(this.idAtividade, atividadeAtualizada);
@@ -103,13 +107,11 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
   carregarDadosAtividade(id: Number) {
     this.serviceAtividade.findById(id).subscribe({
       next: (atividade) => {
+        this.idAtividade = atividade.id;
         this.codigo = atividade.codigo;
-        this.materiaSelecionada = {
-          nome: atividade.materia.nome,
-          id: atividade.materia.id,
-        };
+        this.materiaSelecionada = atividade.materia;
         this.descricao = atividade.descricao;
-        this.dataCriacao = new Date(atividade.dataCriacao);
+        this.url = atividade.url;
         if (atividade.arquivo) {
           this.arquivoBlob = new Blob([atividade.arquivo]);
           this.arquivoUrl = URL.createObjectURL(this.arquivoBlob);
@@ -160,9 +162,8 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
         this.serviceMensagemGlobal.showMessage(
           'error',
           'Erro!',
-          'Ocorreu um erro ao atualizar os dados da atividade.'
+          `Ocorreu um erro ao atualizar os dados da atividade. ${error.erro.error}`
         );
-        this.router.navigate(['/atividades']);
         console.log(error);
       },
     });
@@ -171,5 +172,13 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
     if (this.arquivoUrl) {
       URL.revokeObjectURL(this.arquivoUrl);
     }
+  }
+
+    limparArquivos() {
+    this.arquivoBlob = null;
+    this.nomeArquivo = null;
+    this.arquivoUrl = null;
+    this.isImage =false;
+    this.fileUpload.clear(); 
   }
 }

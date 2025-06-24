@@ -69,6 +69,7 @@ export class CadastrarAtividadesComponent implements OnInit, OnDestroy {
   }
 
   onFileSelect(event: any) {
+
     if (event.files && event.files.length > 0) {
       const file = event.files[0];
 
@@ -127,4 +128,11 @@ export class CadastrarAtividadesComponent implements OnInit, OnDestroy {
     }
   }
 
+  limparArquivos() {
+    this.arquivoBlob = null;
+    this.nomeArquivo = null;
+    this.arquivoUrl = null;
+    this.isImage =false;
+    this.fileUpload.clear(); 
+  }
 }
