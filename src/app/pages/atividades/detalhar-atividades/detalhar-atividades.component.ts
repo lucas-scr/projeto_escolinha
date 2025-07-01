@@ -19,18 +19,19 @@ import { ServiceAtividades } from '../../../services/service_atividades';
 })
 export class DetalharAtividadesComponent implements OnInit {
   idAtividade: number;
-  descricao: String;
-  codigo: String;
+  descricao: string;
+  codigo: string;
   dataCriacao: Date;
+  url: string;
 
   listaMaterias: Materia[] | undefined;
   materiaSelecionada: Materia | undefined;
 
-  nomeArquivo: String;
+  nomeArquivo: string = "Nenhum arquivo anexado";
   isImage: boolean = false;
   arquivoUrl: string | null = null;
   arquivoBlob: Blob;
-  tipoArquivo: String;
+  tipoArquivo: string;
 
   constructor(
     private serviceMaterias: ServiceMateria,
@@ -38,22 +39,25 @@ export class DetalharAtividadesComponent implements OnInit {
     private serviceAtividade: ServiceAtividades,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.capturarId();
     this.carregarMaterias();
   }
 
-  carregarDadosAtividade(id: Number) {
+  carregarDadosAtividade(id: number) {
     this.serviceAtividade.findById(id).subscribe({
       next: (atividade) => {
         this.codigo = atividade.codigo;
         this.materiaSelecionada = atividade.materia;
         this.dataCriacao = new Date(atividade.dataCriacao);
         this.descricao = atividade.descricao;
+        this.url = atividade.url;
         if (atividade.arquivo) {
-          this.carregarArquivoBlob(atividade.id);
+          this.nomeArquivo = atividade.codigo + atividade.extensao;
+          this.carregarArquivoBlob(this.idAtividade);
+
         }
       },
       error: () => {
@@ -86,13 +90,11 @@ export class DetalharAtividadesComponent implements OnInit {
     });
   }
 
-  carregarArquivoBlob(id: Number) {
+  carregarArquivoBlob(id: number) {
     this.serviceAtividade.findArquivoByAtividade(id).subscribe({
       next: (blob) => {
-        if (blob instanceof Blob) {
-          this.arquivoBlob = blob;
-          this.arquivoUrl = URL.createObjectURL(this.arquivoBlob);
-        }
+        this.arquivoBlob = blob;
+        this.arquivoUrl = URL.createObjectURL(blob);
       },
       error: (err) => {
         console.log(err);
@@ -106,12 +108,7 @@ export class DetalharAtividadesComponent implements OnInit {
   }
   abrirArquivo() {
     if (this.arquivoUrl) {
-      const novaGuia = window.open(this.arquivoUrl, '_blank');
-      if (!novaGuia) {
-        console.error('Não foi possível abrir a nova guia');
-      }
-    } else {
-      console.error('URL do arquivo não disponível');
+      window.open(this.arquivoUrl, '_blank');
     }
   }
 }

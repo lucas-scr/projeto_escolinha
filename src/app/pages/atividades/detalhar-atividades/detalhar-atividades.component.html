@@ -1,11 +1,11 @@
 <p-card header="Detallhes da Atividade">
     <ng-template #title>
-        Alterar Atividade
+        Detalhar Atividade
     </ng-template>
     <form #formAtividade="ngForm">
         <div class="cadastro_input">
             <p-floatlabel variant="on">
-                <input id="username" pInputText readonly [(ngModel)]="codigo" required name="nome">
+                <input id="username" pInputText readonly [(ngModel)]="codigo" [readOnly]="true" [disabled]="true"   name="nome">
                 <label for="username">Código da Atividade</label>
             </p-floatlabel>
         </div>
@@ -14,7 +14,7 @@
         <div class="cadastro_input" *ngIf="materiaSelecionada">
 
             <p-floatlabel variant="on">
-                <p-select inputId="materia_select" name="materia" readonly required [options]="listaMaterias"
+                <p-select inputId="materia_select" name="materia" readOnly [disabled]="true" [options]="listaMaterias"
                     [(ngModel)]="materiaSelecionada" optionLabel="nome" placeholder="Selecione" name="materia" />
                 <label for="materia_select">Materia</label>
             </p-floatlabel>
@@ -24,20 +24,25 @@
         <div class="cadastro_input">
             <p-floatlabel variant="on">
                 <label>Arquivo da atividade</label>
-                <input id="fileName" pInputText readonly [(ngModel)]="nomeArquivo" required name="nomeArquivo">
-                <p-button label="Download" class="w-full" [outlined]="true" (click)="abrirArquivo()"></p-button>
+                <input id="fileName" pInputText readonly [(ngModel)]="nomeArquivo" [readOnly]="true" [disabled]="true"  name="nomeArquivo">
+                <p-button *ngIf="arquivoBlob" label="Download" class="w-full" [outlined]="true" (click)="abrirArquivo()"></p-button>
             </p-floatlabel>
         </div>
 
         <div class="cadastro_input">
             <p-floatlabel variant="on">
-                <input id="descricao" pInputText [(ngModel)]="descricao" readonly name="descricao">
+                <input id="descricao" pInputText [(ngModel)]="descricao" [readOnly]="true" [disabled]="true"  name="descricao">
                 <label for="descricao">Descrição</label>
             </p-floatlabel>
-            <div *ngIf="formAtividade.controls['descricao']?.invalid && formAtividade.controls['descricao']?.touched">
-                <small>Este campo é obrigatório</small>
-            </div>
         </div>
+
+                <div class="cadastro_input">
+            <p-floatlabel variant="on">
+                <input id="url" pInputText [(ngModel)]="url" [readOnly]="true" [disabled]="true"  name="url">
+                <label for="url">URL</label>
+            </p-floatlabel>
+        </div>
+
 
 
 

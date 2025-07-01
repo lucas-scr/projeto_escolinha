@@ -8,4 +8,6 @@ export interface Atividade{
     descricao: string;
     dataCriacao?: Date;
     id?: number;
+    nomeArquivo?: string;
+    extensao?: string;
 }

@@ -27,8 +27,7 @@ export class CadastrarAtividadesComponent implements OnInit, OnDestroy {
   materiaSelecionada: Materia | undefined;
   isImage: boolean = false;
   tipoArquivo: string;
-  arquivoBlob: Blob;
-  arquivoUrl: string;
+  arquivoBlob: Blob = null;
   nomeArquivo: string;
 
   constructor(
@@ -60,10 +59,12 @@ export class CadastrarAtividadesComponent implements OnInit, OnDestroy {
       let atividadeCadastrada: Atividade = {
         codigo: this.codigo,
         materia: this.materiaSelecionada,
-        arquivo: this.arquivoBlob,
         descricao: this.descricao,
         url: this.url
       };
+      if(this.arquivoBlob != null || undefined) {
+        atividadeCadastrada.arquivo = this.arquivoBlob
+      }
       this.cadastrarAtividade(atividadeCadastrada);
     }
   }
@@ -78,15 +79,11 @@ export class CadastrarAtividadesComponent implements OnInit, OnDestroy {
 
 
       if (file.type === 'application/pdf') {
-        if (this.arquivoUrl) {
-          URL.revokeObjectURL(this.arquivoUrl);
-        }
         this.tipoArquivo = 'application/pdf';
         const reader = new FileReader();
         reader.onload = () => {
           const pdfBytes = new Uint8Array(reader.result as ArrayBuffer);
           this.arquivoBlob = new Blob([pdfBytes], { type: 'application/pdf' });
-          this.arquivoUrl = URL.createObjectURL(file);
         };
         reader.readAsArrayBuffer(file);
       } else {
@@ -96,7 +93,6 @@ export class CadastrarAtividadesComponent implements OnInit, OnDestroy {
           this.arquivoBlob = new Blob([reader.result as ArrayBuffer], {
             type: file.type,
           });
-          this.arquivoUrl = URL.createObjectURL(file);
         };
         reader.readAsArrayBuffer(file);
       }
@@ -123,15 +119,11 @@ export class CadastrarAtividadesComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy() {
-    if (this.arquivoUrl) {
-      URL.revokeObjectURL(this.arquivoUrl);
-    }
   }
 
   limparArquivos() {
     this.arquivoBlob = null;
     this.nomeArquivo = null;
-    this.arquivoUrl = null;
     this.isImage =false;
     this.fileUpload.clear(); 
   }

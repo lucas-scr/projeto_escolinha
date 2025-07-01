@@ -38,6 +38,11 @@
             [outlined]="true" />
         </ng-template>
       </p-fileupload>
+
+       <label>Arquivo anexado atualmente</label>
+       <br>
+       <a>{{nomeArquivo+tipoArquivo}}</a>
+
     </div>
 
     <div class="cadastro_input">
@@ -52,8 +57,8 @@
 
     <div class="cadastro_input">
       <p-floatlabel variant="on">
-        <input id="url" pInputText [(ngModel)]="url" required name="url">
-        <label for="url">Url</label>
+        <input id="url" pInputText [(ngModel)]="url"  name="url">
+        <label for="url">URL</label>
       </p-floatlabel>
     </div>
 

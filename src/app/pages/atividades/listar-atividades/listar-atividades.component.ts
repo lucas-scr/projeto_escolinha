@@ -109,7 +109,7 @@ export class ListarAtividadesComponent implements OnInit {
       });
   }
 
-  removerAtividade(id: Number) {
+  removerAtividade(id: number) {
     this.serviceAtividades.removerAtividadeById(id).subscribe({
       next: () => {
         this.serviceMensagemGlobal.showMessage('success','Removido!', 'O registro foi excluído com sucesso.');

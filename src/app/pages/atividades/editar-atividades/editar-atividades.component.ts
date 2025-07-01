@@ -27,7 +27,7 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
   idAtividade: number;
   codigo: string;
   descricao: string;
-  url: string;
+  url: string = null;
 
   listaMaterias: Materia[] | undefined;
   materiaSelecionada: Materia | undefined;
@@ -72,7 +72,9 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
   }
 
   onFileSelect(event: any) {
+  
     if (event.files && event.files.length > 0) {
+      this.arquivoBlob = null;
       const file = event.files[0];
 
       this.isImage = file.type.startsWith('image/');
@@ -104,7 +106,7 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
     }
   }
 
-  carregarDadosAtividade(id: Number) {
+  carregarDadosAtividade(id: number) {
     this.serviceAtividade.findById(id).subscribe({
       next: (atividade) => {
         this.idAtividade = atividade.id;
@@ -112,8 +114,11 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
         this.materiaSelecionada = atividade.materia;
         this.descricao = atividade.descricao;
         this.url = atividade.url;
+        this.nomeArquivo = atividade.codigo;
+        this.tipoArquivo = atividade.extensao;
+    
         if (atividade.arquivo) {
-          this.arquivoBlob = new Blob([atividade.arquivo]);
+          this.arquivoBlob = atividade.arquivo;
           this.arquivoUrl = URL.createObjectURL(this.arquivoBlob);
         }
       },
@@ -148,7 +153,7 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
     });
   }
 
-  atualizarDados(id: Number, atividade: Atividade) {
+  atualizarDados(id: number, atividade: Atividade) {
     this.serviceAtividade.atualizarAtividade(id, atividade).subscribe({
       next: () => {
         this.serviceMensagemGlobal.showMessage(
@@ -162,7 +167,7 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
         this.serviceMensagemGlobal.showMessage(
           'error',
           'Erro!',
-          `Ocorreu um erro ao atualizar os dados da atividade. ${error.erro.error}`
+          `Ocorreu um erro ao atualizar os dados da atividade. ${error.erro}`
         );
         console.log(error);
       },
@@ -180,5 +185,7 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
     this.arquivoUrl = null;
     this.isImage =false;
     this.fileUpload.clear(); 
+    this.arquivoUrl = null;
+    this.tipoArquivo = null;
   }
 }

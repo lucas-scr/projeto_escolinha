@@ -25,7 +25,7 @@ export class ServiceAtividades {
       codigo: atividade.codigo,
       materia: atividade.materia,
       descricao: atividade.descricao,
-      url: atividade.url
+      url: atividade.url === "" ? null : atividade.url
     }
 
     formData.append('dados', new Blob([JSON.stringify(dados)], { type: 'application/json' }));
@@ -66,6 +66,7 @@ export class ServiceAtividades {
       url: atividade.url
     }
 
+
     formData.append('dados', new Blob([JSON.stringify(dados)], { type: 'application/json' }));
     if (atividade.arquivo) {
       formData.append('arquivo', atividade.arquivo);
@@ -77,11 +78,13 @@ export class ServiceAtividades {
     return this.http.get<Atividade>(`${this.URL}/${id}`)
   }
 
-  findArquivoByAtividade(id: Number): Observable<Blob> {
-    return this.http.get<Blob>(`${this.URL}/${id}/arquivo`, { responseType: 'blob' as 'json', })
+  findArquivoByAtividade(id: number): Observable<Blob> {
+    return this.http.get(`${this.URL}/${id}/arquivo`, { responseType: 'blob' })
 
   }
-  removerAtividadeById(id: Number): Observable<Atividade> {
-    return this.http.delete<Atividade>(`${this.URL}/${id}`)
+  removerAtividadeById(id: number): Observable<string> {
+    return this.http.delete<string>(`${this.URL}/${id}`)
   }
+
+  
 }
