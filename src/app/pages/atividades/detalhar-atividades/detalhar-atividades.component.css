@@ -27,3 +27,18 @@ small{
 ::ng-deep p-button{
     margin-left: 10px;
 }
+
+.conteudo_fieldset{
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.conteudo_fieldset p-button{
+    flex-grow: 0;
+    margin: 0px 3px 0px 3px;
+}
+.conteudo_fieldset label{
+    flex-grow: 1;
+    margin: 0px 5px 0px 5px;
+}

@@ -4,7 +4,7 @@
 }
 
 input{
-    width: 60%;
+    width: 65%;
 }
 
 small{
@@ -26,20 +26,21 @@ small{
 
 
 
-.cadastro_input_multiselecao {
-    display: flex;
-    width: 60%;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    flex-direction: row;
-    justify-content: space-between;
-
-}
-
-::ng-deep p-checkbox    {
-margin-right: 1rem;
-}  
-
 ::ng-deep p-fileupload{
     display: flex;
+}
+
+.conteudo_fieldset{
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.conteudo_fieldset p-button{
+    flex-grow: 0;
+    margin: 0px 3px 0px 3px;
+}
+.conteudo_fieldset label{
+    flex-grow: 1;
+    margin: 0px 5px 0px 5px;
 }

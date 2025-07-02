@@ -21,13 +21,16 @@
 
         </div>
 
-        <div class="cadastro_input">
-            <p-floatlabel variant="on">
-                <label>Arquivo da atividade</label>
-                <input id="fileName" pInputText readonly [(ngModel)]="nomeArquivo" [readOnly]="true" [disabled]="true"  name="nomeArquivo">
-                <p-button *ngIf="arquivoBlob" label="Download" class="w-full" [outlined]="true" (click)="abrirArquivo()"></p-button>
-            </p-floatlabel>
-        </div>
+    <p-fieldset class="fieldset" legend="Arquivo anexado">
+      <div *ngIf="!arquivoBlob">
+<label>{{nomeArquivo}}</label>
+      </div>
+        <div class="conteudo_fieldset" *ngIf="arquivoBlob">
+      <i [class]="capturarTipoArquivo(tipoArquivo)" style="font-size: 1.5rem"></i>
+      <label>{{nomeArquivo}}</label>
+      <p-button icon="pi pi-download" [rounded]="true" [outlined]="true" (onClick)="abrirArquivo()" severity="info" />
+      </div>
+    </p-fieldset>
 
         <div class="cadastro_input">
             <p-floatlabel variant="on">

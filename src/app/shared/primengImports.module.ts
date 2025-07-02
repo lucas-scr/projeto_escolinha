@@ -29,6 +29,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { InputMaskModule } from 'primeng/inputmask';
 import { DialogModule } from 'primeng/dialog';
 import { FileUploadModule } from 'primeng/fileupload';
+import { FieldsetModule } from 'primeng/fieldset';
 
 
 
@@ -64,7 +65,8 @@ import { FileUploadModule } from 'primeng/fileupload';
     InputNumberModule,
     InputMaskModule,
     DialogModule,
-    FileUploadModule
+    FileUploadModule,
+    FieldsetModule
 
   ],
   exports: [
@@ -95,7 +97,8 @@ import { FileUploadModule } from 'primeng/fileupload';
     InputNumberModule,
     InputMaskModule,
     DialogModule,
-    FileUploadModule
+    FileUploadModule,
+    FieldsetModule
     
   ]
 })

@@ -15,7 +15,6 @@
 
 
     <div class="cadastro_input" *ngIf="materiaSelecionada">
-
       <p-floatlabel variant="on">
         <p-select inputId="materia_select" name="materia" required [options]="listaMaterias"
           [(ngModel)]="materiaSelecionada" optionLabel="nome" placeholder="Selecione" name="materia" />
@@ -26,23 +25,27 @@
       </div>
     </div>
 
-    <div class="cadastro_input">
+    <p-fieldset class="fieldset" legend="Arquivo anexado" *ngIf="arquivoBlob">
+      <div class="conteudo_fieldset">
+      <i [class]="capturarTipoArquivo(tipoArquivo)" style="font-size: 1.5rem"></i>
+      <label>{{nomeArquivo}}</label>
+      <p-button icon="pi pi-download" [rounded]="true" [outlined]="true" (onClick)="abrirArquivo()" severity="info" />
+      <p-button icon="pi pi-times" [rounded]="true" (onClick)="limparArquivo()" severity="danger" [outlined]="true" />
+      </div>
+    </p-fieldset>
+
+    <div class="cadastro_input" *ngIf="!arquivoBlob">
       <label>Arquivo da atividade</label>
-      <p-fileupload #fileUpload class="p-fileupload p-component" [multiple]="false" id="arquivo_select" mode="basic"
-        chooseLabel="Escolha" chooseIcon="pi pi-upload" (onSelect)="onFileSelect($event)" name="demo[]"
-        accept="image/*, .pdf" maxFileSize="500000">
+      <p-fileupload *ngIf="!arquivoBlob" #fileUpload class="p-fileupload p-component" [multiple]="false"
+        id="arquivo_select" mode="basic" chooseLabel="Escolha" chooseIcon="pi pi-upload"
+        (onSelect)="onFileSelect($event)" name="demo[]" accept="image/*, .pdf" maxFileSize="500000">
 
         <ng-template pTemplate="filelabel">
           {{ nomeArquivo || 'Nenhum arquivo selecionado' }}
-          <p-button *ngIf="arquivoBlob" type="button" label="Limpar" (click)="limparArquivos()" class="w-full"
-            [outlined]="true" />
         </ng-template>
       </p-fileupload>
-
-       <label>Arquivo anexado atualmente</label>
-       <br>
-       <a>{{nomeArquivo+tipoArquivo}}</a>
-
+      <p-button *ngIf="arquivoBlob" type="button" label="Remover" (onClick)="limparSelecaoArquivo()" class="w-full"
+        [outlined]="true" />
     </div>
 
     <div class="cadastro_input">
@@ -57,11 +60,10 @@
 
     <div class="cadastro_input">
       <p-floatlabel variant="on">
-        <input id="url" pInputText [(ngModel)]="url"  name="url">
+        <input id="url" pInputText [(ngModel)]="url" name="url">
         <label for="url">URL</label>
       </p-floatlabel>
     </div>
-
 
 
     <div class="cadastro_botoes">

@@ -22,7 +22,7 @@ import { PrimengImports } from '../../../shared/primengImports.module';
 export class EditarAtividadesComponent implements OnInit, OnDestroy {
 
 
-  @ViewChild ('fileUpload') fileUpload!: any;
+  @ViewChild('fileUpload') fileUpload!: any;
 
   idAtividade: number;
   codigo: string;
@@ -44,7 +44,7 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
     private serviceAtividade: ServiceAtividades,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.capturarId();
@@ -52,7 +52,7 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-     if (this.arquivoBlob == null && this.url == null) {
+    if (this.arquivoBlob == null && this.url == null) {
       this.serviceMensagemGlobal.showMessage(
         'error',
         'Erro',
@@ -67,14 +67,16 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
         url: this.url,
         id: this.idAtividade,
       };
+      if (this.arquivoBlob != null || undefined) {
+        atividadeAtualizada.arquivo = this.arquivoBlob;
+      }
       this.atualizarDados(this.idAtividade, atividadeAtualizada);
     }
   }
 
   onFileSelect(event: any) {
-  
+
     if (event.files && event.files.length > 0) {
-      this.arquivoBlob = null;
       const file = event.files[0];
 
       this.isImage = file.type.startsWith('image/');
@@ -90,7 +92,7 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
         reader.onload = () => {
           const pdfBytes = new Uint8Array(reader.result as ArrayBuffer);
           this.arquivoBlob = new Blob([pdfBytes], { type: 'application/pdf' });
-          this.arquivoUrl = URL.createObjectURL(file);
+          this.arquivoUrl = URL.createObjectURL(this.arquivoBlob);
         };
         reader.readAsArrayBuffer(file);
       } else {
@@ -99,10 +101,11 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
           this.arquivoBlob = new Blob([reader.result as ArrayBuffer], {
             type: file.type,
           });
-          this.arquivoUrl = URL.createObjectURL(file);
+          this.arquivoUrl = URL.createObjectURL(this.arquivoBlob);
         };
         reader.readAsArrayBuffer(file);
       }
+
     }
   }
 
@@ -114,12 +117,10 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
         this.materiaSelecionada = atividade.materia;
         this.descricao = atividade.descricao;
         this.url = atividade.url;
-        this.nomeArquivo = atividade.codigo;
-        this.tipoArquivo = atividade.extensao;
-    
         if (atividade.arquivo) {
-          this.arquivoBlob = atividade.arquivo;
-          this.arquivoUrl = URL.createObjectURL(this.arquivoBlob);
+          this.carregarArquivoBlob(this.idAtividade)
+          this.nomeArquivo = atividade.codigo + atividade.extensao;
+          this.tipoArquivo = atividade.extensao;
         }
       },
       error: () => {
@@ -179,13 +180,52 @@ export class EditarAtividadesComponent implements OnInit, OnDestroy {
     }
   }
 
-    limparArquivos() {
+  limparArquivo() {
     this.arquivoBlob = null;
     this.nomeArquivo = null;
-    this.arquivoUrl = null;
-    this.isImage =false;
-    this.fileUpload.clear(); 
+    this.isImage = false;
     this.arquivoUrl = null;
     this.tipoArquivo = null;
+  }
+
+
+  limparSelecaoArquivo(){
+    this.fileUpload.clear();
+    this.limparArquivo();
+  }
+
+  carregarArquivoBlob(id: number) {
+    this.serviceAtividade.findArquivoByAtividade(id).subscribe({
+      next: (blob) => {
+        this.arquivoBlob = blob;
+        this.arquivoUrl = URL.createObjectURL(blob);
+      },
+      error: (err) => {
+        console.log(err);
+        this.serviceMensagemGlobal.showMessage(
+          'error',
+          'Erro',
+          'Não conseguimos identificar o arquivo'
+        );
+      },
+    });
+  }
+  abrirArquivo() {
+    if (this.arquivoUrl) {
+      window.open(this.arquivoUrl, '_blank');
+    }
+  }
+
+  capturarTipoArquivo(tipo: string) {
+    switch (tipo) {
+      case '.pdf':
+        return 'pi pi-file-pdf';
+      case '.png':
+        return 'pi pi-image';
+      case '.jpeg':
+        return 'pi pi-image';
+      default:
+        return 'pi pi-file';
+    }
   }
 }

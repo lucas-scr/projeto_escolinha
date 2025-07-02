@@ -57,7 +57,7 @@ export class DetalharAtividadesComponent implements OnInit {
         if (atividade.arquivo) {
           this.nomeArquivo = atividade.codigo + atividade.extensao;
           this.carregarArquivoBlob(this.idAtividade);
-
+          this.tipoArquivo = atividade.extensao;
         }
       },
       error: () => {
@@ -109,6 +109,19 @@ export class DetalharAtividadesComponent implements OnInit {
   abrirArquivo() {
     if (this.arquivoUrl) {
       window.open(this.arquivoUrl, '_blank');
+    }
+  }
+
+    capturarTipoArquivo(tipo: string) {
+    switch (tipo) {
+      case '.pdf':
+        return 'pi pi-file-pdf';
+      case '.png':
+        return 'pi pi-image';
+      case '.jpeg':
+        return 'pi pi-image';
+      default:
+        return 'pi pi-file';
     }
   }
 }
